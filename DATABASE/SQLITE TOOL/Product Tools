@@ -16,10 +16,10 @@ public class ProductTools {
             String createTableProduct = """
                    CREATE TABLE IF NOT EXISTS PRODUCT (
                         PRODUCT_ID INT PRIMARY KEY,
-                        PRODUCT_TYPE VARCHAR(20),
-                        PRODUCT_NAME VARCHAR(20),
-                        PRODUCT_PRICE DOUBLE,
-                        PRODUCT_QUANTITY INT
+                        PRODUCT_TYPE VARCHAR(20) NOT NULL,
+                        PRODUCT_NAME VARCHAR(20) NOT NULL,
+                        PRODUCT_PRICE DOUBLE NOT NULL, 
+                        PRODUCT_QUANTITY INT NOT NULL
                    );
                   """;
             stmt.executeUpdate(createTableProduct);
