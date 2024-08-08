@@ -61,7 +61,7 @@ public class InventoryManagerTools {
     public static List<InventoryManager> checkLogin(int id, String password) {
         List<InventoryManager> inventoryManagers = new ArrayList<>();
         Connection conn = SQLConnection.instance.getConnection();
-
+       System.out.println("hello");
         try (
              PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM InventoryManager WHERE ID = ? AND PASSWORD = ?;")) {
 
