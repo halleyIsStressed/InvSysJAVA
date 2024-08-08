@@ -9,12 +9,11 @@ import java.util.List;
 
 public class InventoryManagerTools {
     public static void insertInventoryManager (InventoryManager inventoryManager){
-        SQLConnection sqlConnection = new SQLConnection();
+        Connection conn = SQLConnection.instance.getConnection();
         String insertDataSQL = "INSERT INTO InventoryManager (ID,PASSWORD,NAME,AGE ,GENDER,PHONE ,POSITION) VALUES (?,?, ?, ?, ?,?,?)";
 
         try (
-                Connection connection = sqlConnection.getConnection();
-                PreparedStatement pstmt = connection.prepareStatement(insertDataSQL)
+                PreparedStatement pstmt = conn.prepareStatement(insertDataSQL)
         ){
             pstmt.setInt(1,inventoryManager.getId());
             pstmt.setString(2,inventoryManager.getPassword());
@@ -34,11 +33,10 @@ public class InventoryManagerTools {
     }
 
     public static void createTableInventoryManager (){
-        SQLConnection sqlConnection = new SQLConnection();
+        Connection conn = SQLConnection.instance.getConnection();
 
         try {
-            Connection connection = sqlConnection.getConnection();
-            Statement stmt = connection.createStatement();
+            Statement stmt = conn.createStatement();
                 String createTableStaff = """
                    CREATE TABLE IF NOT EXISTS InventoryManager (
                         ID INT PRIMARY KEY,   
