@@ -1,4 +1,4 @@
-package SQLTools;
+package DAO;
 
 import Database.SQLConnection;
 import Entity.InventoryManager;

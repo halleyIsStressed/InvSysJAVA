@@ -12,5 +12,4 @@ public class Staff {
     private String address;
     private String phone;
     private String position;
-
 }
