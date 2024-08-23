@@ -1,4 +1,4 @@
-import Service.InventoryManagerDAO;
+import Session.InventoryManagerFunction;
 import Design.Design;
 
 import java.util.Scanner;
@@ -14,18 +14,18 @@ public class Main {
             Design.DesignLOGO();
             System.out.println("""
                 1) Sign Up
-                2) Log In 
-                3) Exit      
+                2) Log In
+                3) Exit
                 Enter your option: """);
             int option = sc.nextInt();
             sc.nextLine(); // Consume newline
 
             switch (option) {
                 case 1:
-                    InventoryManagerDAO.signUp();
+                    InventoryManagerFunction.signUp();
                     break;
                 case 2:
-                    InventoryManagerDAO.loginFunction();
+                    InventoryManagerFunction.loginFunction();
                     break;
                 case 3:
                     System.out.println("Exiting the program...");

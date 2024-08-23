@@ -9,13 +9,13 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="org.sqlite.JDBC"/>
-                <property name="url" value="jdbc:sqlite:database.db"/>
+                <property name="url" value="jdbc:sqlite:Assigment.db"/>
             </dataSource>
         </environment>
     </environments>
 
     <mappers>
-        <mapper resource="mappers/UserMapper.xml"/>
+        <mapper resource="Mapper/CreateTableMapper.xml"/>
         <mapper resource="mappers/ProductMapper.xml"/>
         <mapper resource="mappers/OrderMapper.xml"/>
         <!-- Add additional mappers here -->

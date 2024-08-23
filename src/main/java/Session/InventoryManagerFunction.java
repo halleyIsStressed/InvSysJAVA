@@ -1,20 +1,18 @@
-package Service;
+package Session;
 
-import Entity.InventoryManager;
+import DAO.CreateTableDAO;
 import DAO.InventoryManagerTools;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class InventoryManagerDAO {
+public class InventoryManagerFunction {
 
 
-    public static InventoryManager getInput(){
+    public static Entity.InventoryManager getInput(){
 
             String position = "";
             Scanner in = new Scanner(System.in);
-            System.out.println("Enter Inventory ID: ");
-            int id = in.nextInt();
             System.out.println("Enter Password: ");
             String password = in.next();
             System.out.println("Enter name: ");
@@ -38,12 +36,12 @@ public class InventoryManagerDAO {
                 position="Staff";
             }
 
-            return new InventoryManager(id,name,password, age, gender, phone, position);
+            return new Entity.InventoryManager(password,name, age, gender, phone, position);
     }
 
     public static void signUp(){
-        InventoryManagerTools.createTableInventoryManager();
-        InventoryManager insertInventoryM=getInput();
+        CreateTableDAO.createTable();
+        Entity.InventoryManager insertInventoryM=getInput();
         InventoryManagerTools.insertInventoryManager(insertInventoryM);
     }
 
@@ -57,10 +55,10 @@ public class InventoryManagerDAO {
     }
 
     public static void information(int id, String password){
-        List<InventoryManager> inventoryManagers = InventoryManagerTools.checkLogin(id,password);
+        List<Entity.InventoryManager> inventoryManagers = InventoryManagerTools.checkLogin(id,password);
 
         if (!inventoryManagers.isEmpty()) {
-            for (InventoryManager inventoryManager : inventoryManagers) {
+            for (Entity.InventoryManager inventoryManager : inventoryManagers) {
             System.out.println("Name: " + inventoryManager.getName());
             System.out.println("Age: " + inventoryManager.getAge());
             System.out.println("Gender: " + inventoryManager.getGender());

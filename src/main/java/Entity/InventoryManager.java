@@ -1,7 +1,7 @@
 package Entity;
 
 public class InventoryManager {
-     private int id;
+
      private String password;
      private String name;
      private int age;
@@ -9,8 +9,7 @@ public class InventoryManager {
      private String phone;
      private String position;
 
-     public InventoryManager(int id, String password, String name, int age, String gender, String phone, String position) {
-          this.id = id;
+     public InventoryManager(String password, String name, int age, String gender, String phone, String position) {
           this.password = password;
           this.name = name;
           this.age = age;
@@ -24,14 +23,6 @@ public class InventoryManager {
 
      public void setAge(int age) {
           this.age = age;
-     }
-
-     public int getId() {
-          return id;
-     }
-
-     public void setId(int id) {
-          this.id = id;
      }
 
      public String getName() {
