@@ -27,9 +27,12 @@ public class ProductMenuFunction {
         List<Product> productList=mapper.selectALLProduct();
 
         System.out.printf("%-5s | %-10s | %-8s | %-7s | %-5s\n\n", "ID", "Type", "Name", "Price", "Qty");
-        for (Product product: ) {
-            System.out.printf("%-5d | %-10s | %-8s | %-7.2f | %-5d\n", product.product_id, product.product_type.name(),
-                    product.product_name, product.product_price, product.product_qty);
+        for (Product product: productList) {
+            System.out.printf("%-5d | %-10s | %-8s | %-7.2f | %-5d\n", product.getProduct_id(),
+                    product.getProduct_type().name(),
+                    product.getProduct_name(),
+                    product.getProduct_price(),
+                    product.getProduct_qty());
         }
 
         System.out.println("Choose Option:");

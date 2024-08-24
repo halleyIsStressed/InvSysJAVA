@@ -17,6 +17,8 @@ public class Product {
         this.product_qty = product_qty;
     }
 
+
+
     public Product() {
 
     }
