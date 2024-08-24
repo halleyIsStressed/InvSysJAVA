@@ -1,31 +1,31 @@
-import Service.InventoryManagerDAO;
+import Service.InventoryManagerFunction;
 import Design.Design;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         boolean keepRunning = true;
 
         while (keepRunning) {
             Design.DesignLOGO();
-            System.out.println("""
+            System.out.print("""
                 1) Sign Up
-                2) Log In 
-                3) Exit      
-                Enter your option: """);
+                2) Log In
+                3) Exit
+                Enter your option:
+                """);
             int option = sc.nextInt();
-            sc.nextLine(); // Consume newline
-
             switch (option) {
                 case 1:
-                    InventoryManagerDAO.signUp();
+                    InventoryManagerFunction.signUp();
                     break;
                 case 2:
-                    InventoryManagerDAO.loginFunction();
+                    InventoryManagerFunction.getLogin();
                     break;
                 case 3:
                     System.out.println("Exiting the program...");
@@ -37,4 +37,5 @@ public class Main {
             }
         }
     }
+
 }

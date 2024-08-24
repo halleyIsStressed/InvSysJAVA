@@ -1,18 +1,33 @@
-package Entity;
+package Service;
 
-import DAO.ProductTools;
+import DAO.ProductDao;
+import Entity.Product;
+import Entity.productType;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import javax.swing.text.html.parser.Entity;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class ProductMenu {
-
-
-    public static void productListing() {
+public class ProductMenuFunction {
+    public static void productListing() throws IOException {
 
         Scanner productMenuOptions = new Scanner(System.in);
 
+        String resource = "mybatis-config.xml";
+        Reader reader = Resources.getResourceAsReader(resource);
+        SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
+        sessionFactory.getConfiguration().addMapper(ProductDao.class);
+        ProductDao mapper = sessionFactory.openSession().getMapper(ProductDao.class);
+        List<Product> productList=mapper.selectALLProduct();
+
         System.out.printf("%-5s | %-10s | %-8s | %-7s | %-5s\n\n", "ID", "Type", "Name", "Price", "Qty");
-        for (Product product: ProductTools.getAllProducts()) {
+        for (Product product: ) {
             System.out.printf("%-5d | %-10s | %-8s | %-7.2f | %-5d\n", product.product_id, product.product_type.name(),
                     product.product_name, product.product_price, product.product_qty);
         }
@@ -91,5 +106,4 @@ public class ProductMenu {
     public static void deleteProduct() {
 
     }
-
 }
