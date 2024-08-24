@@ -1,7 +1,7 @@
 package Service;
 
 import DAO.CreateTableDAO;
-import DAO.InventoryManagerDao;
+import DAO.InventoryManagerMapper;
 import Entity.InventoryManager;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -58,9 +58,10 @@ public class InventoryManagerFunction {
         Reader reader = Resources.getResourceAsReader(resource);
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory sessionFactory = builder.build(reader);
-        sessionFactory.getConfiguration().addMapper(InventoryManagerDao.class);
+        sessionFactory.getConfiguration().addMapper(InventoryManagerMapper.class);
         SqlSession session = sessionFactory.openSession();
-        InventoryManagerDao mapper = session.getMapper(InventoryManagerDao.class);
+
+        InventoryManagerMapper mapper = session.getMapper(InventoryManagerMapper.class);
         mapper.insert(insertInventoryM);
         session.commit();
 
@@ -79,10 +80,9 @@ public class InventoryManagerFunction {
         String resource = "mybatis-config.xml";
         Reader reader = Resources.getResourceAsReader(resource);
         SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
-        sessionFactory.getConfiguration().addMapper(InventoryManagerDao.class);
-        InventoryManagerDao mapper = sessionFactory.openSession().getMapper(InventoryManagerDao.class);
-        InventoryManager inventoryManager = new InventoryManager(id, password);
-        InventoryManager currentInventoryManager = mapper.selectByIdAndPassword(inventoryManager);
+        sessionFactory.getConfiguration().addMapper(InventoryManagerMapper.class);
+        InventoryManagerMapper mapper = sessionFactory.openSession().getMapper(InventoryManagerMapper.class);
+        InventoryManager currentInventoryManager = mapper.selectByIdAndPassword(id, password);
 
 
         System.out.println("Name:" + currentInventoryManager.getName());
