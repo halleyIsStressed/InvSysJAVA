@@ -15,8 +15,9 @@
     </environments>
 
     <mappers>
-        <!--        <mapper resource="inventoryManagerMapper.xml"/>-->
-
+        <mapper resource="Mapper/CreateTableMapper.xml"/>
+        <mapper resource="mappers/ProductMapper.xml"/>
+        <mapper resource="mappers/OrderMapper.xml"/>
         <!-- Add additional mappers here -->
     </mappers>
 </configuration>
