@@ -60,7 +60,6 @@ public class InventoryManagerFunction {
         SqlSessionFactory sessionFactory = builder.build(reader);
         sessionFactory.getConfiguration().addMapper(InventoryManagerDao.class);
         SqlSession session = sessionFactory.openSession();
-
         InventoryManagerDao mapper = session.getMapper(InventoryManagerDao.class);
         mapper.insert(insertInventoryM);
         session.commit();
