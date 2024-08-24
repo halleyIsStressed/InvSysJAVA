@@ -1,5 +1,12 @@
 package Entity;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
 public class InventoryManager {
 
      private int id;
@@ -32,61 +39,5 @@ public class InventoryManager {
      public InventoryManager(int id, String password) {
           this.id = id;
           this.password = password;
-     }
-
-     public int getAge() {
-          return age;
-     }
-
-     public void setAge(int age) {
-          this.age = age;
-     }
-
-     public int getId() {
-          return id;
-     }
-
-     public void setId(int id) {
-          this.id = id;
-     }
-
-     public String getName() {
-          return name;
-     }
-
-     public void setName(String name) {
-          this.name = name;
-     }
-
-     public String getPassword() {
-          return password;
-     }
-
-     public void setPassword(String password) {
-          this.password = password;
-     }
-
-     public String getGender() {
-          return gender;
-     }
-
-     public void setGender(String gender) {
-          this.gender = gender;
-     }
-
-     public String getPhone() {
-          return phone;
-     }
-
-     public void setPhone(String phone) {
-          this.phone = phone;
-     }
-
-     public String getPosition() {
-          return position;
-     }
-
-     public void setPosition(String position) {
-          this.position = position;
      }
 }
