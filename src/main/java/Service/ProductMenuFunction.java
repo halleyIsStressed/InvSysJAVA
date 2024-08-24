@@ -85,12 +85,10 @@ public class ProductMenuFunction {
         // More akin to a searching function.
         Scanner sortingOptions = new Scanner(System.in);
 
-        System.out.println("Choose Sorting Method:");
-        System.out.println("1 > Add Product");
-        System.out.println("2 > Search Product");
-        System.out.println("3 > Edit Product");
-        System.out.println("4 > Delete Product");
-        System.out.println("5 > Return");
+        System.out.println("Choose Filter Method:");
+        System.out.println("1 > Type");
+        System.out.println("2 > Price");
+        System.out.println("3 > Return");
 
 
         switch (sortingOptions.nextInt()) {
@@ -101,12 +99,6 @@ public class ProductMenuFunction {
                 System.out.println("lol");
                 break;
             case 3:
-                System.out.println("lol");
-                break;
-            case 4:
-                System.out.println("lol");
-                break;
-            case 5:
                 System.out.println("lol");
                 break;
         }
