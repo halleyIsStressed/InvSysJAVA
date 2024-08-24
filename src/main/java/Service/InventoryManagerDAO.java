@@ -1,7 +1,7 @@
-package DAO;
+package Service;
 
 import Entity.InventoryManager;
-import SQLTools.InventoryManagerTools;
+import DAO.InventoryManagerTools;
 
 import java.util.List;
 import java.util.Scanner;
