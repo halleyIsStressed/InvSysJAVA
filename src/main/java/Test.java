@@ -1,12 +1,11 @@
-import Service.InventoryManagerFunction;
 import Design.Design;
+import Service.InventoryManagerFunction;
+import Service.ProductMenuFunction;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-
-public class Main {
-
+public class Test {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         boolean keepRunning = true;
@@ -14,18 +13,18 @@ public class Main {
         while (keepRunning) {
             Design.DesignLOGO();
             System.out.print("""
-                1) Sign Up
-                2) Log In
-                3) Exit
-                Enter your option:
-                """);
+                    1) Add
+                    2) Listing
+                    3) Exit
+                    Enter your option:
+                    """);
             int option = sc.nextInt();
             switch (option) {
                 case 1:
-                    InventoryManagerFunction.signUp();
+                    ProductMenuFunction.addProduct();
                     break;
                 case 2:
-                    InventoryManagerFunction.getLogin();
+                    ProductMenuFunction.productListing();
                     break;
                 case 3:
                     System.out.println("Exiting the program...");
@@ -37,5 +36,4 @@ public class Main {
             }
         }
     }
-
 }
