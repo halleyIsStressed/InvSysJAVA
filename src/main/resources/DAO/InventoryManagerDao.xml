@@ -14,6 +14,10 @@
         VALUES (#{password}, #{name}, #{age}, #{gender}, #{phone}, #{position})
     </insert>
 
+    <select id="selectAll" resultType="Entity.InventoryManager">
+        SELECT * FROM InventoryManager
+    </select>
+
     <select id="selectByIdAndPassword" resultType="Entity.InventoryManager">
         SELECT * FROM InventoryManager WHERE ID = #{param1} AND PASSWORD = #{param2}
     </select>

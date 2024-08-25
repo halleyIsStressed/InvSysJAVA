@@ -9,6 +9,8 @@
         INSERT INTO PRODUCT (PRODUCT_TYPE,PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_QUANTITY) VALUES (#{product_type},#{product_name},#{product_price},#{product_qty})
     </insert>
 
+
+
     <select id="selectALLProduct" resultType="Entity.Product">
         SELECT * FROM PRODUCT
     </select>

@@ -19,4 +19,14 @@ public class Supplier {
         this.supplierAddress = address;
         this.supplierEmail = email;
     }
+
+    public Supplier(String supplierName, String supplierTel, String supplierAddress, String supplierEmail) {
+        this.supplierName = supplierName;
+        this.supplierTel = supplierTel;
+        this.supplierAddress = supplierAddress;
+        this.supplierEmail = supplierEmail;
+    }
+
+
+
 }

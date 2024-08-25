@@ -72,30 +72,31 @@ public class InventoryManagerFunction {
     }
 
     public static InventoryManager information(int id, String password)  {
-        InventoryManager currentInventoryManager;
+        InventoryManager currentInventoryManager = null;
         try (SqlSession conn = Database.getInstance().openSession()) {
-            InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);
-            inventoryManagerMapper.selectByIdAndPassword(id, password);
-            currentInventoryManager = inventoryManagerMapper.selectByIdAndPassword(id, password);
+             InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);
+             currentInventoryManager = inventoryManagerMapper.selectByIdAndPassword(id, password);
         }
 
 
         if (currentInventoryManager != null) {
-                if (currentInventoryManager.getId()!=id) {
-                    System.out.println("No user found with the given ID .");
-
-                } else if (currentInventoryManager.getPassword().equals(password)) {
-                    System.out.println("No user found with the given Password .");
-                }else{
-                    System.out.println("Name:" + currentInventoryManager.getName());
-                    System.out.println("Gender:" + currentInventoryManager.getGender());
-                    System.out.println("Age:" + currentInventoryManager.getAge());
-                    System.out.println("Phone:" + currentInventoryManager.getPhone());
-                    System.out.println("Position:" + currentInventoryManager.getPosition());
-                }
+            if (currentInventoryManager.getId() != id) {
+                System.out.println("No user found with the given ID.");
+            }
+            else if (!currentInventoryManager.getPassword().equals(password)) {
+                System.out.println("No user found with the given Password.");
+            }
+            else {
+                System.out.println("Name:" + currentInventoryManager.getName());
+                System.out.println("Gender:" + currentInventoryManager.getGender());
+                System.out.println("Age:" + currentInventoryManager.getAge());
+                System.out.println("Phone:" + currentInventoryManager.getPhone());
+                System.out.println("Position:" + currentInventoryManager.getPosition());
+            }
         } else {
-            System.out.println("No user found with the given ID and password.");
+            System.out.println("No user found.");
         }
+
 
         return  currentInventoryManager;
     }

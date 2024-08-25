@@ -21,7 +21,7 @@ public class SupplierMenuFunction {
         String telephone = sc.nextLine();
         System.out.print("Supplier email: ");
         String email = sc.nextLine();
-        Supplier supplier = new Supplier(nextID++, name, telephone, address, email);
+        Supplier supplier = new Supplier(name, telephone, address, email);
         suppliers.add(supplier);
         System.out.println("Supplier added successfully!");
     }
