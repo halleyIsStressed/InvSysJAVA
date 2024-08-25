@@ -1,7 +1,6 @@
 package DAO;
 
 import Entity.InventoryManager;
-import Entity.Product;
 
 import java.util.List;
 
@@ -11,5 +10,5 @@ public interface InventoryManagerMapper {
 
     List<InventoryManager> selectALL();
 
-    InventoryManager selectByIdAndPassword(int id, String password);
+    InventoryManager selectByIdAndPassword(int id);
 }

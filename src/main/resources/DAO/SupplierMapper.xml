@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DAO.SupplierMapper">
+
+    <insert id="insertAddSuplier" parameterType="Entity.Supplier">
+        INSERT INTO SUPPLIER (SUPPLIER_NAME,CONTACT_NO,ADDRESS,EMAIL) VALUES (#{supplierName},#{supplierAddress},#{supplierTel},#{supplierEmail})
+    </insert>
+
+    <select id="selectAllSuppliers" resultMap="supplierResultMap">
+        SELECT SUPPLIER_ID, SUPPLIER_NAME, CONTACT_NO , ADDRESS , EMAIL  FROM SUPPLIER
+    </select>
+
+    <resultMap id="supplierResultMap" type="Entity.Supplier">
+        <id property="supplierID" column="SUPPLIER_ID"/>
+        <result property="supplierName" column="SUPPLIER_NAME"/>
+        <result property="supplierTel" column="CONTACT_NO"/>
+        <result property="supplierAddress" column="ADDRESS"/>
+        <result property="supplierEmail" column="EMAIL"/>
+    </resultMap>
+
+
+</mapper>

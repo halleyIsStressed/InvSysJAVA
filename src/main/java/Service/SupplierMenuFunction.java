@@ -1,39 +1,57 @@
 package Service;
 
+import DAO.SupplierMapper;
+import Database.Database;
 import Entity.Supplier;
+import org.apache.ibatis.session.SqlSession;
 
+import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class SupplierMenuFunction {
-    static ArrayList<Supplier> suppliers = new ArrayList<>();
-    Scanner sc = new Scanner(System.in);
-    int nextID = 1;
+    //Add supplier(change to getter form to essay store and insert data to database)
+    public static Supplier getaddSupplier() {
+        Supplier addSupplier =new Supplier();
+        Scanner newProductScanner = new Scanner(System.in);
 
-    //Add supplier
-    public void addSupplier() {
         System.out.println("Please enter the details of the supplier:");
         System.out.print("Supplier name: ");
-        String name = sc.nextLine();
+        addSupplier.setSupplierName(newProductScanner.next());
         System.out.print("Supplier address: ");
-        String address = sc.nextLine();
+        addSupplier.setSupplierAddress(newProductScanner.next());
         System.out.print("Supplier telephone number: ");
-        String telephone = sc.nextLine();
+        addSupplier.setSupplierTel(newProductScanner.next());
         System.out.print("Supplier email: ");
-        String email = sc.nextLine();
-        Supplier supplier = new Supplier(name, telephone, address, email);
-        suppliers.add(supplier);
+        addSupplier.setSupplierEmail(newProductScanner.next());
         System.out.println("Supplier added successfully!");
+        return addSupplier;
+    }
+
+    //Database connection
+    public static void addSupplier() {
+     Supplier insertSupplier = getaddSupplier();
+        try (SqlSession conn = Database.getInstance().openSession()) {
+            SupplierMapper supplierMapper = conn.getMapper(SupplierMapper.class);
+            supplierMapper.insertAddSuplier(insertSupplier);
+            conn.commit();
+        }
     }
 
     //Display all suppliers
-    public void displaySuppliers(){
-        if(suppliers.isEmpty()){
+    public static void displaySuppliers(){
+        //Database connection
+        List<Supplier> supplierList;
+        try (SqlSession conn = Database.getInstance().openSession()) {
+            SupplierMapper supplierMapper = conn.getMapper(SupplierMapper.class);
+            supplierList = supplierMapper.selectAllSuppliers();
+        }
+        if(supplierList.isEmpty()){
             System.out.println("No supplier found!");
         }
         else{
-            for(Supplier s: suppliers){
-                System.out.println(s);
+            for(Supplier s: supplierList){
+                System.out.printf("%-5s | %-10s | %-20s | %-7s | %-5s\n\n", "ID", "Name", "Tel", "Address", "Email");
+                System.out.println(s.getSupplierID()  +  s.getSupplierName() +  s.getSupplierAddress() +  s.getSupplierTel() +  s.getSupplierEmail());
             }
         }
     }

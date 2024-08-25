@@ -14,7 +14,6 @@ public class poMenuFunction {
 
         Scanner poMenuOptions = new Scanner(System.in);
         List<Purchase_Order> poList;
-
         // TODO - Check if this try statement is correct
         try (SqlSession conn = Database.getInstance().openSession()) {
             PurchaseOrderMapper poMapper = conn.getMapper(PurchaseOrderMapper.class);

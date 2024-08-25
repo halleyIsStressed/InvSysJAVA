@@ -17,5 +17,7 @@
     <mappers>
         <mapper resource="DAO/InventoryManagerDao.xml"/>
         <mapper resource="DAO/ProductMapper.xml"/>
+        <mapper resource="DAO/PurchaseOrderMapper.xml"/>
+        <mapper resource="DAO/SupplierMapper.xml"/>
     </mappers>
 </configuration>

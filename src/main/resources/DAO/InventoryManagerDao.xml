@@ -19,7 +19,7 @@
     </select>
 
     <select id="selectByIdAndPassword" resultType="Entity.InventoryManager">
-        SELECT * FROM InventoryManager WHERE ID = #{param1} AND PASSWORD = #{param2}
+        SELECT * FROM InventoryManager WHERE ID = #{param1}
     </select>
 
 </mapper>

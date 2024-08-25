@@ -1,6 +1,8 @@
 import Design.Design;
 import Service.InventoryManagerFunction;
 import Service.ProductMenuFunction;
+import Service.SupplierMenuFunction;
+import Service.poMenuFunction;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -15,9 +17,11 @@ public class Test {
             System.out.print("""
                     1) Add
                     2) Listing
-                    3) Exit
-                    Enter your option:
-                    """);
+                    3) Product Listing
+                    4) addSupplier
+                    5) displaySuppliers
+                    6) Exit
+                    Enter your option: """);
             int option = sc.nextInt();
             switch (option) {
                 case 1:
@@ -27,6 +31,15 @@ public class Test {
                     ProductMenuFunction.productListing();
                     break;
                 case 3:
+                    poMenuFunction.productListing();
+                    break;
+                case 4:
+                    SupplierMenuFunction.addSupplier();
+                    break;
+                case 5:
+                    SupplierMenuFunction.displaySuppliers();
+                    break;
+                case 6:
                     System.out.println("Exiting the program...");
                     keepRunning = false;
                     break;
