@@ -40,4 +40,6 @@ public class InventoryManager {
           this.id = id;
           this.password = password;
      }
+
+
 }

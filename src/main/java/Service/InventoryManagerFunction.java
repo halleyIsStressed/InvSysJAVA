@@ -1,7 +1,8 @@
 package Service;
 
-import DAO.CreateTableDAO;
 import DAO.InventoryManagerMapper;
+import DAO.ProductMapper;
+import Database.Database;
 import Entity.InventoryManager;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -50,20 +51,14 @@ public class InventoryManagerFunction {
         return new InventoryManager(password, name, age, gender, phone, position);
     }
 
-    public static void signUp() throws IOException {
-        CreateTableDAO.createTable();
+    public static void signUp(){
         InventoryManager insertInventoryM = getInput();
 
-        String resource = "mybatis-config.xml";
-        Reader reader = Resources.getResourceAsReader(resource);
-        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-        SqlSessionFactory sessionFactory = builder.build(reader);
-        sessionFactory.getConfiguration().addMapper(InventoryManagerMapper.class);
-        SqlSession session = sessionFactory.openSession();
-
-        InventoryManagerMapper mapper = session.getMapper(InventoryManagerMapper.class);
-        mapper.insert(insertInventoryM);
-        session.commit();
+        try (SqlSession conn = Database.getInstance().openSession()) {
+            InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);
+            inventoryManagerMapper.insert(insertInventoryM);
+            conn.commit();
+        }
 
     }
 
@@ -76,20 +71,23 @@ public class InventoryManagerFunction {
         information(id, password);
     }
 
-    public static InventoryManager information(int id, String password) throws IOException {
-        String resource = "mybatis-config.xml";
-        Reader reader = Resources.getResourceAsReader(resource);
-        SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
-        sessionFactory.getConfiguration().addMapper(InventoryManagerMapper.class);
-        InventoryManagerMapper mapper = sessionFactory.openSession().getMapper(InventoryManagerMapper.class);
-        InventoryManager currentInventoryManager = mapper.selectByIdAndPassword(id, password);
+    public static InventoryManager information(int id, String password)  {
+        InventoryManager currentInventoryManager;
+        try (SqlSession conn = Database.getInstance().openSession()) {
+            InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);
+            inventoryManagerMapper.selectByIdAndPassword(id, password);
+            currentInventoryManager = inventoryManagerMapper.selectByIdAndPassword(id, password);
+        }
 
-
-        System.out.println("Name:" + currentInventoryManager.getName());
-        System.out.println("Gender:" + currentInventoryManager.getGender());
-        System.out.println("Age:" + currentInventoryManager.getAge());
-        System.out.println("Phone:" + currentInventoryManager.getPhone());
-        System.out.println("Position:" + currentInventoryManager.getPosition());
+        if (currentInventoryManager != null) {
+            System.out.println("Name:" + currentInventoryManager.getName());
+            System.out.println("Gender:" + currentInventoryManager.getGender());
+            System.out.println("Age:" + currentInventoryManager.getAge());
+            System.out.println("Phone:" + currentInventoryManager.getPhone());
+            System.out.println("Position:" + currentInventoryManager.getPosition());
+        } else {
+            System.out.println("No user found with the given ID and password.");
+        }
         return  currentInventoryManager;
     }
 
