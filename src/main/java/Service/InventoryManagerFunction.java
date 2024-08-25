@@ -79,15 +79,24 @@ public class InventoryManagerFunction {
             currentInventoryManager = inventoryManagerMapper.selectByIdAndPassword(id, password);
         }
 
+
         if (currentInventoryManager != null) {
-            System.out.println("Name:" + currentInventoryManager.getName());
-            System.out.println("Gender:" + currentInventoryManager.getGender());
-            System.out.println("Age:" + currentInventoryManager.getAge());
-            System.out.println("Phone:" + currentInventoryManager.getPhone());
-            System.out.println("Position:" + currentInventoryManager.getPosition());
+                if (currentInventoryManager.getId()!=id) {
+                    System.out.println("No user found with the given ID .");
+
+                } else if (currentInventoryManager.getPassword().equals(password)) {
+                    System.out.println("No user found with the given Password .");
+                }else{
+                    System.out.println("Name:" + currentInventoryManager.getName());
+                    System.out.println("Gender:" + currentInventoryManager.getGender());
+                    System.out.println("Age:" + currentInventoryManager.getAge());
+                    System.out.println("Phone:" + currentInventoryManager.getPhone());
+                    System.out.println("Position:" + currentInventoryManager.getPosition());
+                }
         } else {
             System.out.println("No user found with the given ID and password.");
         }
+
         return  currentInventoryManager;
     }
 
