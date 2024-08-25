@@ -5,13 +5,18 @@ import lombok.Data;
 @Data
 @Builder
 public class Supplier {
-    private int supplier_id;
-    private String supplier_name;
-    private String contact_no;
+    private int supplierID;
+    private String supplierName;
+    private String supplierTel;
+    private String supplierAddress;
+    private String supplierEmail;
 
-    public Supplier(int supplier_id, String supplier_name, String contact_no) {
-        this.supplier_id = supplier_id;
-        this.supplier_name = supplier_name;
-        this.contact_no = contact_no;
+    //Constructor
+    public Supplier(int id, String name, String tel, String address, String email){
+        this.supplierID = id;
+        this.supplierName = name;
+        this.supplierTel = tel;
+        this.supplierAddress = address;
+        this.supplierEmail = email;
     }
 }
