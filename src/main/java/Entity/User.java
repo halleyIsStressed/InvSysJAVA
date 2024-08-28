@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @NoArgsConstructor
-public class InventoryManager {
+public class User {
 
-     private int id;
+     private String id;
      private String password;
      private String name;
      private int age;
@@ -17,7 +17,7 @@ public class InventoryManager {
      private String phone;
      private String position;
 
-     public InventoryManager(int id, String password, String name, int age, String gender, String phone, String position) {
+     public User(String id, String password, String name, int age, String gender, String phone, String position) {
           this.id = id;
           this.password = password;
           this.name = name;
@@ -27,7 +27,7 @@ public class InventoryManager {
           this.position = position;
      }
 
-     public InventoryManager(String password, String name, int age, String gender, String phone, String position) {
+     public User(String password, String name, int age, String gender, String phone, String position) {
           this.password = password;
           this.name = name;
           this.age = age;
@@ -36,7 +36,7 @@ public class InventoryManager {
           this.position = position;
      }
 
-     public InventoryManager(int id, String password) {
+     public User(String id, String password) {
           this.id = id;
           this.password = password;
      }

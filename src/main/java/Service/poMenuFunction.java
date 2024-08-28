@@ -22,7 +22,7 @@ public class poMenuFunction {
 
         System.out.printf("%-10s | %-11s | %-10s | %-5s | %-12s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID");
         for (Purchase_Order po : poList) {
-            System.out.printf("%-10d | %-11d | %-10d | %-5f | %-12d\n",
+            System.out.printf("%-10s | %-11s | %-10d | %-5f | %-12s\n",
                     po.getPo_number(),
                     po.getProduct_id(),
                     po.getPurchase_qty(),

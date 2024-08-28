@@ -9,16 +9,15 @@
 
 <mapper namespace="DAO.InventoryManagerMapper">
 
-    <insert id="insert" parameterType="Entity.InventoryManager">
-        INSERT INTO InventoryManager (PASSWORD, NAME, AGE, GENDER, PHONE, POSITION)
-        VALUES (#{password}, #{name}, #{age}, #{gender}, #{phone}, #{position})
+    <insert id="insert" parameterType="Entity.User">
+        INSERT INTO InventoryManager (PASSWORD, NAME, AGE, GENDER, PHONE, POSITION)VALUES (#{password}, #{name}, #{age}, #{gender}, #{phone}, #{position})
     </insert>
 
-    <select id="selectAll" resultType="Entity.InventoryManager">
+    <select id="selectAll" resultType="Entity.User">
         SELECT * FROM InventoryManager
     </select>
 
-    <select id="selectByIdAndPassword" resultType="Entity.InventoryManager">
+    <select id="selectByIdAndPassword" resultType="Entity.User">
         SELECT * FROM InventoryManager WHERE ID = #{param1}
     </select>
 

@@ -1,14 +1,14 @@
 package DAO;
 
-import Entity.InventoryManager;
+import Entity.User;
 
 import java.util.List;
 
 public interface InventoryManagerMapper {
 
-    void insert(InventoryManager inventoryManager);
+    void insert(User inventoryManager);
 
-    List<InventoryManager> selectALL();
+    List<User> selectALL();
 
-    InventoryManager selectByIdAndPassword(int id);
+    User selectByIdAndPassword( String id);
 }

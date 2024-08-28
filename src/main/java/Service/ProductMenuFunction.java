@@ -22,7 +22,7 @@ public class ProductMenuFunction {
 
         System.out.printf("%-5s | %-10s | %-20s | %-7s | %-5s\n\n", "ID", "Type", "Name", "Price", "Qty");
         for (Product product : productList) {
-            System.out.printf("%-5d | %-10s | %-20s | %-7.2f | %-5d\n",
+            System.out.printf("%-5s | %-10s | %-20s | %-7.2f | %-5d\n",
                     product.getProduct_id(),
                     product.getProduct_type(),
                     product.getProduct_name(),

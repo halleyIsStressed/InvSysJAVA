@@ -1,20 +1,15 @@
 package Service;
 
 import DAO.InventoryManagerMapper;
-import DAO.ProductMapper;
 import Database.Database;
-import Entity.InventoryManager;
-import org.apache.ibatis.io.Resources;
+import Entity.User;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
-import java.io.Reader;
 import java.util.Scanner;
 
-public class InventoryManagerFunction {
-    public static InventoryManager getInput() {
+public class UserMenuFunction {
+    public static User getInput() {
 
         String position = "";
         String gender = "";
@@ -48,11 +43,11 @@ public class InventoryManagerFunction {
         } else if (option == 2) {
             position = "Staff";
         }
-        return new InventoryManager(password, name, age, gender, phone, position);
+        return new User(password, name, age, gender, phone, position);
     }
 
     public static void signUp(){
-        InventoryManager insertInventoryM = getInput();
+        User insertInventoryM = getInput();
 
         try (SqlSession conn = Database.getInstance().openSession()) {
             InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);
@@ -65,14 +60,14 @@ public class InventoryManagerFunction {
     public static void getLogin() throws IOException {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter your id: ");
-        int id = in.nextInt();
+        String id = in.next();
         System.out.println("Enter your password: ");
         String password = in.next();
         information(id, password);
     }
 
-    public static InventoryManager information(int id, String password)  {
-        InventoryManager currentInventoryManager = null;
+    public static User information( String id, String password)  {
+        User currentInventoryManager = null;
         try (SqlSession conn = Database.getInstance().openSession()) {
              InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);
              currentInventoryManager = inventoryManagerMapper.selectByIdAndPassword(id);

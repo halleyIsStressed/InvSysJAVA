@@ -1,4 +1,4 @@
-import Service.InventoryManagerFunction;
+import Service.UserMenuFunction;
 import Design.Design;
 
 import java.io.IOException;
@@ -22,10 +22,10 @@ public class Main {
             int option = sc.nextInt();
             switch (option) {
                 case 1:
-                    InventoryManagerFunction.signUp();
+                    UserMenuFunction.signUp();
                     break;
                 case 2:
-                    InventoryManagerFunction.getLogin();
+                    UserMenuFunction.getLogin();
                     break;
                 case 3:
                     System.out.println("Exiting the program...");
