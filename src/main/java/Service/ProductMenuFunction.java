@@ -84,8 +84,8 @@ public class ProductMenuFunction {
 
     public static void searchProduct() {
         // More akin to a searching function.
-        Scanner sortingOptions = new Scanner(System.in);
-
+        Scanner filterOptions = new Scanner(System.in);
+        
         System.out.println("Choose Filter Method:");
         System.out.println("1 > Type");
         System.out.println("2 > Price");
@@ -94,7 +94,44 @@ public class ProductMenuFunction {
 
         switch (sortingOptions.nextInt()) {
             case 1:
-                System.out.println("lol");
+                Scanner typeSorter = new Scanner(System.in);
+                String targetType;
+                    
+                System.out.println("Choose Type:");
+                System.out.println("1 > Rod");
+                System.out.println("2 > Reel");
+                System.out.println("3 > Hook");
+                System.out.println("4 > Line");
+                System.out.println("5 > Lure");
+                System.out.println("6 > Return");
+
+
+                // TODO Ahdan - Use a singular function, receive "targetType" as a parameter for query using WHERE. Display all products that fit that condition.
+                switch(typeSorter.nextInt()) {
+                    case 1:
+                        targetType = "Rod";
+                        break;
+                    case 2:
+                        targetType = "Reel";
+                        break;
+                    case 3:
+                        targetType = "Hook";
+                        break;
+                    case 4:
+                        targetType = "Line";
+                        break;
+                    case 5:
+                        targetType = "Lure";
+                        break;
+                    case 6:
+                        System.out.println("TODO AhLee - Put this in a loop, use boolean true to return to the previous stage.");
+                        break; 
+                    default：
+                        System.out.println("TODO AhLee - Put this in a loop, use boolean false to reprint the prompt, and receive input again.");
+                        break；
+                }
+
+                
                 break;
             case 2:
                 System.out.println("lol");
