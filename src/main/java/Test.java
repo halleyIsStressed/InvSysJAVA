@@ -1,5 +1,6 @@
 import Design.Design;
 import Service.ProductMenuFunction;
+import Service.SupplierManagementFunction;
 import Service.SupplierMenuFunction;
 import Service.poMenuFunction;
 
@@ -33,10 +34,11 @@ public class Test {
                     poMenuFunction.productListing();
                     break;
                 case 4:
-                    SupplierMenuFunction.addSupplier();
+                    SupplierMenuFunction.supplierManagement();
+                    //SupplierMenuFunction.addSupplier();
                     break;
                 case 5:
-                    SupplierMenuFunction.displaySuppliers();
+                    SupplierManagementFunction.displaySuppliers();
                     break;
                 case 6:
                     System.out.println("Exiting the program...");
