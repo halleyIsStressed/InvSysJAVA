@@ -9,17 +9,43 @@
         INSERT INTO SUPPLIER (SUPPLIER_NAME,CONTACT_NO,ADDRESS,EMAIL) VALUES (#{supplierName},#{supplierAddress},#{supplierTel},#{supplierEmail})
     </insert>
 
-    <select id="selectAllSuppliers" resultMap="supplierResultMap">
-        SELECT SUPPLIER_ID, SUPPLIER_NAME, CONTACT_NO , ADDRESS , EMAIL  FROM SUPPLIER
+    <select id="selectAllSuppliers" resultType="Entity.Supplier">
+        SELECT
+            supplier_id AS supplierId,
+            supplier_name AS supplierName,
+            contact_no AS supplierTel,
+            address AS supplierAddress,
+            email AS supplierEmail,
+            create_date AS dateTimeCreated
+        FROM SUPPLIER
     </select>
 
-    <resultMap id="supplierResultMap" type="Entity.Supplier">
-        <id property="supplierID" column="SUPPLIER_ID"/>
-        <result property="supplierName" column="SUPPLIER_NAME"/>
-        <result property="supplierTel" column="CONTACT_NO"/>
-        <result property="supplierAddress" column="ADDRESS"/>
-        <result property="supplierEmail" column="EMAIL"/>
-    </resultMap>
+    <select id="selectById" resultType="Entity.Supplier">
+        SELECT
+            supplier_id AS supplierId,
+            supplier_name AS supplierName,
+            contact_no AS supplierTel,
+            address AS supplierAddress,
+            email AS supplierEmail,
+            create_date AS dateTimeCreated
+        FROM SUPPLIER
+        WHERE SUPPLIER_ID = #{param1}
+    </select>
 
+    <select id="selectByName" resultType="Entity.Supplier">
+        SELECT
+            supplier_id   AS supplierId,
+           supplier_name AS supplierName,
+           contact_no    AS supplierTel,
+           address       AS supplierAddress,
+           email         AS supplierEmail,
+           create_date   AS dateTimeCreated
+        FROM SUPPLIER
+        WHERE SUPPLIER_NAME = #{param1} COLLATE NOCASE
+    </select>
+
+    <delete id="deleteSupplierById">
+        DELETE FROM SUPPLIER WHERE SUPPLIER_ID = #{param1}
+    </delete>
 
 </mapper>
