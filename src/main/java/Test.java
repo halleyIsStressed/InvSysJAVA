@@ -1,6 +1,5 @@
 import Design.Design;
 import Service.ProductMenuFunction;
-import Service.SupplierManagementFunction;
 import Service.SupplierMenuFunction;
 import Service.poMenuFunction;
 
@@ -20,7 +19,7 @@ public class Test {
                     3) Product Listing
                     4) Supplier Menu
                     5) Exit
-                    Enter your option: """);
+                    Enter your option:""");
             int option = sc.nextInt();
             switch (option) {
                 case 1:
