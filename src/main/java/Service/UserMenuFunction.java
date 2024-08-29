@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class UserMenuFunction {
-    public static User getInput() {
+    public static User getInventoryMInput() {
 
-        String position = "";
+        String position = "Inventory Manager";
         String gender = "";
         Scanner in = new Scanner(System.in);
         int option;
@@ -33,21 +33,38 @@ public class UserMenuFunction {
         }
         System.out.print("Enter phone: ");
         String phone = in.next();
-        System.out.print("""
-                1) Inventory Manager
-                2) Staff
-                Enter your position :""");
-        option = in.nextInt();
-        if (option == 1) {
-            position = "Inventory Manager";
-        } else if (option == 2) {
-            position = "Staff";
-        }
         return new User(password, name, age, gender, phone, position);
     }
 
+    public static User getStaffInput(){
+        String position = "Staff";
+        String gender = "";
+        Scanner in = new Scanner(System.in);
+        int option;
+        System.out.print("Enter Password: ");
+        String password = in.next();
+        System.out.print("Enter name: ");
+        String name = in.next();
+        System.out.print("Enter age: ");
+        int age = in.nextInt();
+        System.out.print("""
+                1) Male
+                2) Female
+                Enter gender:""");
+        option = in.nextInt();
+        if (option == 1) {
+            gender = "Male";
+        } else if (option == 2) {
+            gender = "Female";
+        }
+        System.out.print("Enter phone: ");
+        String phone = in.next();
+        return new User(password, name, age, gender, phone, position);
+    }
+
+
     public static void signUp(){
-        User insertInventoryM = getInput();
+        User insertInventoryM = getInventoryMInput();
 
         try (SqlSession conn = Database.getInstance().openSession()) {
             InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);

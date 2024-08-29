@@ -6,7 +6,7 @@ public class SupplierMenuFunction {
     public static void supplierManagement() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
-        SupplierManagementFunction sm = new SupplierManagementFunction();
+
         int choice;
         do {
             System.out.println("\n************************************");
@@ -24,19 +24,19 @@ public class SupplierMenuFunction {
 
             switch (choice) {
                 case 1:
-                    sm.createSupplier();
+                    SupplierManagementFunction.createSupplier();
                     break;
                 case 2:
-                    sm.readSupplier();
+                    SupplierManagementFunction.readSupplier();
                     break;
                 case 3:
-                    sm.updateSupplier();
+                    SupplierManagementFunction.updateSupplier();
                     break;
                 case 4:
-                    sm.deleteSupplier();
+                    SupplierManagementFunction.deleteSupplier();
                     break;
                 case 5:
-                    sm.displaySuppliers();
+                    SupplierManagementFunction.displaySuppliers();
                     break;
                 case 6:
                     //Main.main(null);
