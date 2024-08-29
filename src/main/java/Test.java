@@ -1,6 +1,5 @@
 import Design.Design;
 import Service.ProductMenuFunction;
-import Service.SupplierManagementFunction;
 import Service.SupplierMenuFunction;
 import Service.poMenuFunction;
 
@@ -18,10 +17,9 @@ public class Test {
                     1) Add
                     2) Listing
                     3) Product Listing
-                    4) addSupplier
-                    5) displaySuppliers
-                    6) Exit
-                    Enter your option: """);
+                    4) Supplier Menu
+                    5) Exit
+                    Enter your option:""");
             int option = sc.nextInt();
             switch (option) {
                 case 1:
@@ -38,9 +36,6 @@ public class Test {
                     //SupplierMenuFunction.addSupplier();
                     break;
                 case 5:
-                    SupplierManagementFunction.displaySuppliers();
-                    break;
-                case 6:
                     System.out.println("Exiting the program...");
                     keepRunning = false;
                     break;
