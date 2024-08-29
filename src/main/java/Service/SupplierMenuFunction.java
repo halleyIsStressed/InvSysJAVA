@@ -1,59 +1,50 @@
 package Service;
 
-import DAO.SupplierMapper;
-import Database.Database;
-import Entity.Supplier;
-import org.apache.ibatis.session.SqlSession;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class SupplierMenuFunction {
-    //Add supplier(change to getter form to essay store and insert data to database)
-    public static Supplier getaddSupplier() {
-        Supplier addSupplier =new Supplier();
-        Scanner newProductScanner = new Scanner(System.in);
+    public static void supplierManagement() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        SupplierManagementFunction sm = new SupplierManagementFunction();
+        int choice;
+        do {
+            System.out.println("\n************************************");
+            System.out.println("\t\tSuppliers Management");
+            System.out.println("************************************");
+            System.out.println("1. Add Supplier");
+            System.out.println("2. Search Supplier");
+            System.out.println("3. Modify Supplier");
+            System.out.println("4. Remove Supplier");
+            System.out.println("5. Display All Suppliers");
+            System.out.println("6. Exit Suppliers Management");
+            System.out.print("Please enter your choice: ");
+            Scanner sc = new Scanner(System.in);
+            choice = sc.nextInt();
 
-        System.out.println("Please enter the details of the supplier:");
-        System.out.print("Supplier name: ");
-        addSupplier.setSupplierName(newProductScanner.next());
-        System.out.print("Supplier address: ");
-        addSupplier.setSupplierAddress(newProductScanner.next());
-        System.out.print("Supplier telephone number: ");
-        addSupplier.setSupplierTel(newProductScanner.next());
-        System.out.print("Supplier email: ");
-        addSupplier.setSupplierEmail(newProductScanner.next());
-        System.out.println("Supplier added successfully!");
-        return addSupplier;
-    }
-
-    //Database connection
-    public static void addSupplier() {
-     Supplier insertSupplier = getaddSupplier();
-        try (SqlSession conn = Database.getInstance().openSession()) {
-            SupplierMapper supplierMapper = conn.getMapper(SupplierMapper.class);
-            supplierMapper.insertAddSuplier(insertSupplier);
-            conn.commit();
-        }
-    }
-
-    //Display all suppliers
-    public static void displaySuppliers(){
-        //Database connection
-        List<Supplier> supplierList;
-        try (SqlSession conn = Database.getInstance().openSession()) {
-            SupplierMapper supplierMapper = conn.getMapper(SupplierMapper.class);
-            supplierList = supplierMapper.selectAllSuppliers();
-        }
-        if(supplierList.isEmpty()){
-            System.out.println("No supplier found!");
-        }
-        else{
-            for(Supplier s: supplierList){
-                System.out.printf("%-5s | %-10s | %-20s | %-7s | %-5s\n\n", "ID", "Name", "Tel", "Address", "Email");
-                System.out.println(s.getSupplierID()  +  s.getSupplierName() +  s.getSupplierAddress() +  s.getSupplierTel() +  s.getSupplierEmail());
+            switch (choice) {
+                case 1:
+                    sm.createSupplier();
+                    break;
+                case 2:
+                    sm.readSupplier();
+                    break;
+                case 3:
+                    sm.updateSupplier();
+                    break;
+                case 4:
+                    sm.deleteSupplier();
+                    break;
+                case 5:
+                    sm.displaySuppliers();
+                    break;
+                case 6:
+                    //Main.main(null);
+                    break;
+                default:
+                    System.out.println("***Invalid choice! Please try again...***");
             }
-        }
-    }
+        } while (choice != 6);
 
+    }
 }

@@ -92,7 +92,7 @@ public class ProductMenuFunction {
         System.out.println("3 > Return");
 
 
-        switch (sortingOptions.nextInt()) {
+        switch (filterOptions.nextInt()) {
             case 1:
                 Scanner typeSorter = new Scanner(System.in);
                 String targetType;
@@ -126,9 +126,9 @@ public class ProductMenuFunction {
                     case 6:
                         System.out.println("TODO AhLee - Put this in a loop, use boolean true to return to the previous stage.");
                         break; 
-                    default：
+                    default:
                         System.out.println("TODO AhLee - Put this in a loop, use boolean false to reprint the prompt, and receive input again.");
-                        break；
+                        break;
                 }
 
                 
