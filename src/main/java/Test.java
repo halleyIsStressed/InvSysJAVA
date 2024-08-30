@@ -15,8 +15,8 @@ public class Test {
             Design.DesignLOGO();
             System.out.print("""
                     1) Add
-                    2) Listing
-                    3) Product Listing
+                    2) Product Listing
+                    3) Purchase Order Listing
                     4) Supplier Menu
                     5) Exit
                     Enter your option:""");

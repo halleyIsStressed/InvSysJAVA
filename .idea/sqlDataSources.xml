@@ -1,28 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DdlMappings">
-    <mapping uuid="ae671ce6-8732-4fb0-aa60-bbd1f8d7ad24" name="Assignment.db Mapping">
-      <data-sources db="cd948e20-fd6f-4db2-af1e-39fec23fe8fa" ddl="5204e993-7a7c-4ae9-8071-d5017a7454d5" />
+    <mapping uuid="09a6f46b-e9a8-4fce-8d07-85fb46017a3e" name="DDL Mapping">
+      <data-sources db="b0e6f681-9793-45f0-8ce9-472a4c9328ff" ddl="5204e993-7a7c-4ae9-8071-d5017a7454d5" />
       <scope>
-        <node kind="schema" qname="main" />
-      </scope>
-    </mapping>
-    <mapping uuid="ae671ce6-8732-4fb0-aa60-bbd1f8d7ad24" name="Assignment.db Mapping">
-      <data-sources db="cd948e20-fd6f-4db2-af1e-39fec23fe8fa" ddl="5204e993-7a7c-4ae9-8071-d5017a7454d5" />
-      <scope>
-        <node kind="schema" qname="main" />
-      </scope>
-    </mapping>
-    <mapping uuid="ae671ce6-8732-4fb0-aa60-bbd1f8d7ad24" name="Assignment.db Mapping">
-      <data-sources db="cd948e20-fd6f-4db2-af1e-39fec23fe8fa" ddl="5204e993-7a7c-4ae9-8071-d5017a7454d5" />
-      <scope>
-        <node kind="schema" qname="main" />
-      </scope>
-    </mapping>
-    <mapping uuid="ae671ce6-8732-4fb0-aa60-bbd1f8d7ad24" name="Assignment.db Mapping">
-      <data-sources db="cd948e20-fd6f-4db2-af1e-39fec23fe8fa" ddl="5204e993-7a7c-4ae9-8071-d5017a7454d5" />
-      <scope>
-        <node kind="schema" qname="main" />
+        <node negative="1">
+          <node kind="schema" qname="main" />
+          <node kind="database" qname="@" />
+        </node>
       </scope>
     </mapping>
   </component>
@@ -36,18 +21,6 @@
           <option name="urls">
             <array>
               <option value="file://$PROJECT_DIR$/src/main/resources" />
-            </array>
-          </option>
-          <option name="outLayout" value="File per object by schema.groovy" />
-        </State>
-        <State>
-          <option name="id" value="b25efa47-a678-4c5d-ae47-f86ec31f3d8a" />
-          <option name="name" value="DDL data source" />
-          <option name="dbmsName" value="SQLITE" />
-          <option name="urls">
-            <array>
-              <option value="file://$PROJECT_DIR$/src/main/resources/Database/sqlitedb-schema.sql" />
-              <option value="file://$PROJECT_DIR$/src/main/resources/Database/.sql" />
             </array>
           </option>
           <option name="outLayout" value="File per object by schema.groovy" />
