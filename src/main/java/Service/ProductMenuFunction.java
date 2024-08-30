@@ -180,7 +180,7 @@ public class ProductMenuFunction {
 
 
 
-    public static void updateProduct() {
+    public static void updateProduct() throws IOException {
 
         Product targetProduct = new Product();
         int targetID;
@@ -218,6 +218,9 @@ public class ProductMenuFunction {
                     break;
                 case 4:
                     break;
+                default:
+                    System.out.println("Invalid Input. Try Again.");
+                    System.in.read();
             }
         } while (choice != 4);
 
