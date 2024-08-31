@@ -205,13 +205,22 @@ public class SupplierManagementFunction {
                 System.out.println(supplier);
                 System.out.print("CONFIRM to UPDATE these changes?: ");
                 confirm = sc.nextLine().toUpperCase();
-
                 if (confirm.equals("Y") || confirm.equals("YES")) {
-                    try (SqlSession sqlSession = Database.getInstance().openSession()){
-                        SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
-//                        mapper.update(supplier);  TODO: dodo
-                        sqlSession.commit();
+                    if(choice==1){
+                        try (SqlSession sqlSession = Database.getInstance().openSession()){
+                            SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
+                            mapper.updateSupplierById(supplier);
+                            sqlSession.commit();
+                        }
                     }
+                    else{
+                        try (SqlSession sqlSession = Database.getInstance().openSession()){
+                            SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
+                            mapper.updateSupplierByName(supplier);
+                            sqlSession.commit();
+                        }
+                    }
+
                     System.out.println("***Changes saved successfully!***");
                 } else {
                     System.out.println("***Changes DISCARDED! Supplier details reverted to original.***");

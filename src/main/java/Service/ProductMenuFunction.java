@@ -7,7 +7,6 @@ import Entity.Product;
 import org.apache.ibatis.session.SqlSession;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,7 +30,7 @@ public class ProductMenuFunction {
                     product.getProduct_type(),
                     product.getProduct_name(),
                     product.getProduct_price(),
-                    product.getProduct_qty());
+                    product.getProduct_quantity());
             }
             System.out.print("\n\n");
             System.out.println("Choose Option:");
@@ -106,7 +105,7 @@ public class ProductMenuFunction {
             switch (filterOptions) {
             case 1:
                 Scanner typeSc = new Scanner(System.in);
-                String targetType;
+                String targetType = "";
                 int typeSorter;
                 do {
                     System.out.println("Choose Type:");
@@ -119,31 +118,32 @@ public class ProductMenuFunction {
                     typeSorter = typeSc.nextInt();
 
                     // TODO Ahdan - Use a singular function, receive "targetType" as a parameter for query using WHERE. Display all products that fit that condition.
+                    //done
                     switch (typeSorter) {
                         case 1:
                             targetType = "Rod";
                             // Here
-
+                            selectProductType(targetType);
                             break;
                         case 2:
                             targetType = "Reel";
                             // Here
-
+                            selectProductType(targetType);
                             break;
                         case 3:
                             targetType = "Line";
                             // Here
-
+                            selectProductType(targetType);
                             break;
                         case 4:
                             targetType = "Lure";
                             // Here
-
+                            selectProductType(targetType);
                             break;
                         case 5:
                             targetType = "Accessory";
                             // Here
-
+                            selectProductType(targetType);
                             break;
                         case 6:
                             break;
@@ -152,6 +152,7 @@ public class ProductMenuFunction {
                             System.in.read();
                             break;
                     }
+
                 } while(typeSorter != 6);
                 break;
 
@@ -164,6 +165,16 @@ public class ProductMenuFunction {
                         maxPrice = priceSc.nextDouble();
 
                         // TODO AhDan - Use minPrice and maxPrice to SELECT products using WHERE product_price BETWEEN statement.
+                        // TODO DONE PLEASE TEST
+                    List<Product> productsPrice;
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        ProductMapper productMapper = conn.getMapper( ProductMapper.class);
+                        productsPrice = productMapper.selectMaxandMinPrice(minPrice, maxPrice);
+                    }
+
+                    for (Product product : productsPrice) {
+                        System.out.println(product);
+                    }
                 break;
 
                 case 3:
@@ -178,12 +189,26 @@ public class ProductMenuFunction {
         } while (filterOptions != 3);
     }
 
+    private static void selectProductType(String targetType) throws IOException {
+
+        List<Product> productList;
+        try (SqlSession conn = Database.getInstance().openSession()) {
+            ProductMapper productMapper = conn.getMapper( ProductMapper.class);
+            productList=productMapper.selectTargetType(targetType);
+        }
+
+        for (Product product : productList) {
+            System.out.println(product);
+        }
+    }
+
+
 
 
     public static void updateProduct() throws IOException {
 
         Product targetProduct = new Product();
-        int targetID;
+        String targetID;
         int choice;
         double newPrice;
         String newValue;
@@ -191,61 +216,88 @@ public class ProductMenuFunction {
         Scanner choiceScanner = new Scanner(System.in);
 
         System.out.print("Enter Target Product ID: ");
-        targetID = targetProductScanner.nextInt();
+        targetID = targetProductScanner.next();
 
         // TODO Ahdan : Search PRODUCT table for matching ID using WHERE statement. Return the whole row into targetProduct.
+        // TODO - Done please test
+        try (SqlSession conn = Database.getInstance().openSession()) {
+            ProductMapper productMapper = conn.getMapper( ProductMapper.class);
+            targetProduct=productMapper.selectById(targetID);
+        }
+        if(targetProduct==null){
+            System.out.println("Target Product Not Found");
+        }
+        else {
+            do {
+                System.out.println("Choose value to modify:");
+                System.out.println("1 > Type");
+                System.out.println("2 > Name");
+                System.out.println("3 > Price");
+                System.out.println("4 > Return");
 
-        do {
-            System.out.println("Choose value to modify:");
-            System.out.println("1 > Type");
-            System.out.println("2 > Name");
-            System.out.println("3 > Price");
-            System.out.println("4 > Return");
+                //bug at case 1 and case 2 cannot key in please be debug case 3 is normal
+                choice = choiceScanner.nextInt();
+                choiceScanner.nextLine();
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter new Type (Rod, Reel, Line, Lure, Accessory): ");
+                        targetProduct.setProduct_type(choiceScanner.next());
+                        choiceScanner.nextLine();//clear the bug
+                        break;
+                    case 2:
+                        System.out.print("Enter new Name: ");
+                        targetProduct.setProduct_name(choiceScanner.next());
+                        choiceScanner.nextLine();//clear input bug
+                        break;
+                    case 3:
+                        System.out.print("Enter new Price: ");
+                        targetProduct.setProduct_price(choiceScanner.nextDouble());
+                        choiceScanner.nextLine();
+                        break;
+                    case 4:
+                        break;
+                    default:
+                        System.out.println("Invalid Input. Try Again.");
+                        System.in.read();
+                        break;
+                }
+                // update modify function
+                try (SqlSession conn = Database.getInstance().openSession()) {
+                    ProductMapper productMapper = conn.getMapper(ProductMapper.class);
+                    productMapper.updateModifyData(targetProduct);
+                    conn.commit();
+                }
+            } while (choice != 4);
+            System.out.println("Item Successfully Modified!");
+        }
 
-            choice = choiceScanner.nextInt();
-            switch (choice) {
-                case 1:
-                    System.out.print("Enter new Type (Rod, Reel, Line, Lure, Accessory): ");
-                    targetProduct.setProduct_type(choiceScanner.nextLine());
-                    break;
-                case 2:
-                    System.out.print("Enter new Name: ");
-                    targetProduct.setProduct_name(choiceScanner.nextLine());
-                    break;
-                case 3:
-                    System.out.print("Enter new Price: ");
-                    targetProduct.setProduct_price(choiceScanner.nextDouble());
-                    break;
-                case 4:
-                    break;
-                default:
-                    System.out.println("Invalid Input. Try Again.");
-                    System.in.read();
-            }
-        } while (choice != 4);
 
-        System.out.println("Item Successfully Modified!");
     }
 
     public static void deleteProduct() {
         int confirmation;
-        int targetID;
+        String targetID = "";
         Scanner targetProductScanner = new Scanner(System.in);
         Scanner confirmationScanner = new Scanner(System.in);
 
         //  TODO Ahdan : Find product using targetID, save row into targetProduct, display contents and check quantity.
+       // TODO - Done please test
         System.out.print("Enter Product ID: ");
-        targetID = targetProductScanner.nextInt();
+        targetID = targetProductScanner.next();
         Product targetProduct = new Product();
+        try (SqlSession conn = Database.getInstance().openSession()) {
+            ProductMapper productMapper = conn.getMapper( ProductMapper.class);
+            targetProduct=productMapper.selectById(targetID);
+        }
 
         System.out.printf("%-6s | %-10s | %-20s | %-7.2f | %-5d\n",
                 targetProduct.getProduct_id(),
                 targetProduct.getProduct_type(),
                 targetProduct.getProduct_name(),
                 targetProduct.getProduct_price(),
-                targetProduct.getProduct_qty());
+                targetProduct.getProduct_quantity());
 
-        if (targetProduct.getProduct_qty() > 0) {
+        if (targetProduct.getProduct_quantity() > 0) {
             System.out.print("\nWARNING: STOCK RECORD PRESENT FOR THE TARGETED ITEM. ARE YOU SURE YOU WOULD LIKE TO REMOVE THIS PRODUCT FROM THE DATABASE?\n");
         }
         else
@@ -257,8 +309,16 @@ public class ProductMenuFunction {
 
         if (confirmation == 1) {
             // TODO - Ahdan: Logic for deleting item is to be placed here
+            // TODO - Done please test
+            try (SqlSession sqlSession = Database.getInstance().openSession()){
+                ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+                mapper.deleteProductById(targetProduct.getProduct_id());
+                sqlSession.commit();
+            }
             System.out.println("Item deleted successfully.");
         }
 
     }
+
+
 }

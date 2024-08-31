@@ -14,28 +14,19 @@ public class Test {
         while (keepRunning) {
             Design.DesignLOGO();
             System.out.print("""
-                    1) Add
+                    1) Supplier Menu
                     2) Product Listing
-                    3) Purchase Order Listing
-                    4) Supplier Menu
-                    5) Exit
+                    6) Exit
                     Enter your option:""");
             int option = sc.nextInt();
             switch (option) {
                 case 1:
-                    ProductMenuFunction.addProduct();
+                    SupplierMenuFunction.supplierManagement();
                     break;
                 case 2:
                     ProductMenuFunction.productListing();
                     break;
                 case 3:
-                    poMenuFunction.productListing();
-                    break;
-                case 4:
-                    SupplierMenuFunction.supplierManagement();
-                    //SupplierMenuFunction.addSupplier();
-                    break;
-                case 5:
                     System.out.println("Exiting the program...");
                     keepRunning = false;
                     break;

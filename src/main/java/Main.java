@@ -8,34 +8,31 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        boolean keepRunning = true;
-
-        while (keepRunning) {
+        int choice;
+        do {
             Design.DesignLOGO();
             System.out.print("""
-                1) Sign Up
-                2) Log In
+                1) Inventory Manager
+                2) Staff
                 3) Exit
-                Enter your option:
-                """);
-            int option = sc.nextInt();
-            switch (option) {
+                Enter your option:""");
+            Scanner sc = new Scanner(System.in);
+            choice = sc.nextInt();
+            switch (choice) {
                 case 1:
-                    UserMenuFunction.signUp();
+                    UserMenuFunction.mainMenu(choice);
                     break;
                 case 2:
-                    UserMenuFunction.getLogin();
+                    UserMenuFunction.mainMenu(choice);
                     break;
                 case 3:
                     System.out.println("Exiting the program...");
-                    keepRunning = false;
                     break;
                 default:
-                    System.out.println("Invalid option");
-                    break;
+                    System.out.println("***Invalid choice! Please try again...***");
             }
-        }
+        } while (choice != 3);
+
     }
 
 }

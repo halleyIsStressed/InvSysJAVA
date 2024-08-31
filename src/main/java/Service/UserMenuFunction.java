@@ -1,112 +1,149 @@
 package Service;
 
 import DAO.InventoryManagerMapper;
+import DAO.StaffMapper;
 import Database.Database;
+import Design.Design;
 import Entity.User;
 import org.apache.ibatis.session.SqlSession;
 
-import java.io.IOException;
 import java.util.Scanner;
 
+
 public class UserMenuFunction {
-    public static User getInventoryMInput() {
 
-        String position = "Inventory Manager";
-        String gender = "";
-        Scanner in = new Scanner(System.in);
-        int option;
-        System.out.print("Enter Password: ");
-        String password = in.next();
-        System.out.print("Enter name: ");
-        String name = in.next();
-        System.out.print("Enter age: ");
-        int age = in.nextInt();
-        System.out.print("""
-                1) Male
-                2) Female
-                Enter gender:""");
-        option = in.nextInt();
-        if (option == 1) {
-            gender = "Male";
-        } else if (option == 2) {
-            gender = "Female";
-        }
-        System.out.print("Enter phone: ");
-        String phone = in.next();
-        return new User(password, name, age, gender, phone, position);
-    }
+    public static void mainMenu(int choice) {
+        Scanner sc = new Scanner(System.in);
+        boolean keepRunning = true;
 
-    public static User getStaffInput(){
-        String position = "Staff";
-        String gender = "";
-        Scanner in = new Scanner(System.in);
-        int option;
-        System.out.print("Enter Password: ");
-        String password = in.next();
-        System.out.print("Enter name: ");
-        String name = in.next();
-        System.out.print("Enter age: ");
-        int age = in.nextInt();
-        System.out.print("""
-                1) Male
-                2) Female
-                Enter gender:""");
-        option = in.nextInt();
-        if (option == 1) {
-            gender = "Male";
-        } else if (option == 2) {
-            gender = "Female";
-        }
-        System.out.print("Enter phone: ");
-        String phone = in.next();
-        return new User(password, name, age, gender, phone, position);
-    }
-
-
-    public static void signUp(){
-        User insertInventoryM = getInventoryMInput();
-
-        try (SqlSession conn = Database.getInstance().openSession()) {
-            InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);
-            inventoryManagerMapper.insert(insertInventoryM);
-            conn.commit();
-        }
-
-    }
-
-    public static void getLogin() throws IOException {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter your id: ");
-        String id = in.next();
-        System.out.println("Enter your password: ");
-        String password = in.next();
-        information(id, password);
-    }
-
-    public static User information( String id, String password)  {
-        User currentInventoryManager = null;
-        try (SqlSession conn = Database.getInstance().openSession()) {
-             InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);
-             currentInventoryManager = inventoryManagerMapper.selectByIdAndPassword(id);
-        }
-
-        if (currentInventoryManager != null) {
-            if (currentInventoryManager.getPassword().equals(password)) {
-                System.out.println("Name:" + currentInventoryManager.getName());
-                System.out.println("Gender:" + currentInventoryManager.getGender());
-                System.out.println("Age:" + currentInventoryManager.getAge());
-                System.out.println("Phone:" + currentInventoryManager.getPhone());
-                System.out.println("Position:" + currentInventoryManager.getPosition());
+        while (keepRunning) {
+            Design.DesignLOGO();
+            System.out.print("""
+                    1) Sign Up
+                    2) Log In
+                    3) Exit
+                    Enter your option:
+                    """);
+            int option = sc.nextInt();
+            switch (option) {
+                case 1:
+                    signUp(choice);
+                    break;
+                case 2:
+                   selectInformation(choice);
+                    break;
+                case 3:
+                    System.out.println("Exiting the program...");
+                    keepRunning = false;
+                    break;
+                default:
+                    System.out.println("Invalid option");
+                    break;
             }
-            else {
+        }
+    }
+
+    public static User getLogin() {
+        Scanner in = new Scanner(System.in);
+        User login = new User();
+        System.out.println("Enter your id: ");
+        login.setId(in.nextLine());
+        System.out.println("Enter your password: ");
+        login.setPassword(in.nextLine());
+        return login;
+    }
+
+    public static void selectInformation(int choice)  {
+        User login = getLogin();
+        User currentUser = null;
+
+        switch (choice) {
+            case 1:
+                try (SqlSession conn = Database.getInstance().openSession()) {
+                    InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);
+                    currentUser = inventoryManagerMapper.selectByIdAndPassword(login.getId());
+                }
+                break;
+            case 2:
+                try (SqlSession conn = Database.getInstance().openSession()) {
+                   StaffMapper staffMapper = conn.getMapper(StaffMapper.class);
+                   currentUser = staffMapper.selectByIdAndPassword(login.getId());
+                }
+                break;
+        }
+        if (currentUser != null) {
+            if (currentUser.getPassword().equals(login.getPassword())) {
+                System.out.println("Name:" + currentUser.getName());
+                System.out.println("Gender:" + currentUser.getGender());
+                System.out.println("Age:" + currentUser.getAge());
+                System.out.println("Phone:" + currentUser.getPhone());
+                System.out.println("Position:" + currentUser.getPosition());
+            } else {
                 System.out.println("Wrong Password");
             }
-        } else {
-            System.out.println("No user found.");
+        }
+        else{
+            System.out.println("Wrong ID");
         }
 
 
-        return  currentInventoryManager;
     }
 
+
+    public static User getInput(int option) {
+
+
+        User user = new User();
+        if (option == 1) {
+            user.setPosition("Inventory Manager");
+        } else {
+            user.setPosition("Staff");
+        }
+        boolean check = false;
+        Scanner in = new Scanner(System.in);
+        int selection;
+        System.out.print("Enter name: ");
+        user.setName(in.nextLine());
+        System.out.print("Enter Password: ");
+        user.setPassword(in.nextLine());
+        System.out.print("Enter age: ");
+        user.setAge(in.nextInt());
+        System.out.print("""
+                1) Male
+                2) Female
+                Enter gender:""");
+        selection = in.nextInt();
+        do {
+            if (selection == 1) {
+                user.setGender("Male");
+                check = true;
+            } else if (selection == 2) {
+                user.setGender("Female");
+                check = true;
+            } else {
+                System.out.print("Error");
+            }
+        } while (!check);
+        in.nextLine();
+        System.out.print("Enter phone: ");
+        user.setPhone(in.nextLine());
+        return user;
+    }
+
+    public static void signUp(int choice) {
+        User insertInput = getInput(choice);
+        if (choice == 1) {
+            try (SqlSession conn = Database.getInstance().openSession()) {
+                InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);
+                inventoryManagerMapper.insert(insertInput);
+                conn.commit();
+            }
+        } else {
+            try (SqlSession conn = Database.getInstance().openSession()) {
+                StaffMapper staffMapper = conn.getMapper(StaffMapper.class);
+                staffMapper.insert(insertInput);
+                conn.commit();
+            }
+        }
+    }
 }

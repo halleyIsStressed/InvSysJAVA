@@ -34,7 +34,7 @@
 
     <select id="selectByName" resultType="Entity.Supplier">
         SELECT
-            supplier_id   AS supplierId,
+           supplier_id   AS supplierId,
            supplier_name AS supplierName,
            contact_no    AS supplierTel,
            address       AS supplierAddress,
@@ -47,5 +47,21 @@
     <delete id="deleteSupplierById">
         DELETE FROM SUPPLIER WHERE SUPPLIER_ID = #{param1}
     </delete>
+
+  <update id="updateSupplierById" parameterType="Entity.Supplier">
+      UPDATE SUPPLIER SET SUPPLIER_NAME= #{supplierName},
+            CONTACT_NO=#{supplierTel},
+            ADDRESS=#{supplierAddress},
+            EMAIL=#{supplierEmail}
+      WHERE SUPPLIER_ID = #{supplierID}
+  </update>
+
+    <update id="updateSupplierByName" parameterType="Entity.Supplier">
+        UPDATE SUPPLIER SET SUPPLIER_NAME= #{supplierName},
+            CONTACT_NO=#{supplierTel},
+            ADDRESS=#{supplierAddress},
+            EMAIL=#{supplierEmail}
+        WHERE SUPPLIER_NAME = #{supplierName}
+    </update>
 
 </mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+
+
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DAO.StaffMapper">
+
+    <insert id="insert" parameterType="Entity.User">
+        INSERT INTO STAFF (PASSWORD, NAME, AGE, GENDER, PHONE, POSITION)VALUES (#{password}, #{name}, #{age}, #{gender}, #{phone}, #{position})
+    </insert>
+
+    <select id="selectAll" resultType="Entity.User">
+        SELECT * FROM STAFF
+    </select>
+
+    <select id="selectByIdAndPassword" resultType="Entity.User">
+        SELECT * FROM STAFF WHERE ID = #{param1}
+    </select>
+
+</mapper>

@@ -9,10 +9,36 @@
         INSERT INTO PRODUCT (PRODUCT_TYPE,PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_QUANTITY) VALUES (#{product_type},#{product_name},#{product_price},#{product_qty})
     </insert>
 
-
-
     <select id="selectALLProduct" resultType="Entity.Product">
-        SELECT * FROM PRODUCT
+        SELECT PRODUCT_ID, PRODUCT_TYPE, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_QUANTITY FROM PRODUCT
     </select>
+
+    <select id="selectTargetType" resultType="Entity.Product">
+        SELECT * FROM PRODUCT WHERE  PRODUCT_TYPE = #{param1}
+    </select>
+
+    <select id="selectById" resultType="Entity.Product">
+        SELECT  * FROM PRODUCT WHERE PRODUCT_ID =#{param1}
+    </select>
+
+    <delete id="deleteProductById">
+        DELETE FROM PRODUCT WHERE PRODUCT_ID =#{param1}
+    </delete>
+
+    <update id="updateModifyData" parameterType="Entity.Product">
+        UPDATE PRODUCT SET  PRODUCT_TYPE=#{product_type},
+            PRODUCT_NAME=#{product_name},
+            PRODUCT_PRICE =#{product_price},
+            PRODUCT_QUANTITY=#{product_quantity}
+            WHERE PRODUCT_ID =#{product_id}
+
+    </update>
+
+    <select id="selectMaxandMinPrice" resultType="Entity.Product">
+        SELECT * FROM  PRODUCT
+        WHERE  PRODUCT_PRICE BETWEEN #{param1} AND #{param2}
+    </select>
+
+
 
 </mapper>

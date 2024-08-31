@@ -17,4 +17,8 @@ public interface SupplierMapper {
     @Nullable Supplier selectByName(@NotNull String supplierName);
 
     void deleteSupplierById(@NotNull String supplierId);
+
+    void updateSupplierByName(Supplier supplier);
+
+    void updateSupplierById(Supplier supplier);
 }
