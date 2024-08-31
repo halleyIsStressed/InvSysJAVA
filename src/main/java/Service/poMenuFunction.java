@@ -25,7 +25,7 @@ public class poMenuFunction {
             System.out.printf("%-10s | %-11s | %-10d | %-5f | %-12s\n",
                     po.getPo_number(),
                     po.getProduct_id(),
-                    po.getPurchase_qty(),
+                    po.getPurchase_quantity(),
                     po.getOrder_price(),
                     po.getSupplier_id());
         }
