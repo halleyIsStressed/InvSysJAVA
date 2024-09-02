@@ -27,6 +27,9 @@ public class Test {
                     ProductMenuFunction.productListing();
                     break;
                 case 3:
+                    poMenuFunction.poListing();
+                    break;
+                case 4:
                     System.out.println("Exiting the program...");
                     keepRunning = false;
                     break;

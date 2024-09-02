@@ -121,27 +121,22 @@ public class ProductMenuFunction {
                     switch (typeSorter) {
                         case 1:
                             targetType = "Rod";
-                            // Here
                             selectProductType(targetType);
                             break;
                         case 2:
                             targetType = "Reel";
-                            // Here
                             selectProductType(targetType);
                             break;
                         case 3:
                             targetType = "Line";
-                            // Here
                             selectProductType(targetType);
                             break;
                         case 4:
                             targetType = "Lure";
-                            // Here
                             selectProductType(targetType);
                             break;
                         case 5:
                             targetType = "Accessory";
-                            // Here
                             selectProductType(targetType);
                             break;
                         case 6:
