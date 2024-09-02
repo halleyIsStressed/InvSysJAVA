@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ProductMenuFunction {
@@ -117,8 +118,6 @@ public class ProductMenuFunction {
                     System.out.println("6 > Return");
                     typeSorter = typeSc.nextInt();
 
-                    // TODO Ahdan - Use a singular function, receive "targetType" as a parameter for query using WHERE. Display all products that fit that condition.
-                    //done
                     switch (typeSorter) {
                         case 1:
                             targetType = "Rod";
@@ -164,8 +163,7 @@ public class ProductMenuFunction {
                         System.out.print("Enter maximum price: ");
                         maxPrice = priceSc.nextDouble();
 
-                        // TODO AhDan - Use minPrice and maxPrice to SELECT products using WHERE product_price BETWEEN statement.
-                        // TODO DONE PLEASE TEST
+
                     List<Product> productsPrice;
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         ProductMapper productMapper = conn.getMapper( ProductMapper.class);
@@ -218,8 +216,8 @@ public class ProductMenuFunction {
         System.out.print("Enter Target Product ID: ");
         targetID = targetProductScanner.next();
 
-        // TODO Ahdan : Search PRODUCT table for matching ID using WHERE statement. Return the whole row into targetProduct.
-        // TODO - Done please test
+        // TODO Ahdan : Updating name with a space doesn't work. Eg. Spinning Rod -> Spinning
+
         try (SqlSession conn = Database.getInstance().openSession()) {
             ProductMapper productMapper = conn.getMapper( ProductMapper.class);
             targetProduct=productMapper.selectById(targetID);
@@ -275,13 +273,11 @@ public class ProductMenuFunction {
     }
 
     public static void deleteProduct() {
-        int confirmation;
+        String confirmation;
         String targetID = "";
         Scanner targetProductScanner = new Scanner(System.in);
         Scanner confirmationScanner = new Scanner(System.in);
 
-        //  TODO Ahdan : Find product using targetID, save row into targetProduct, display contents and check quantity.
-       // TODO - Done please test
         System.out.print("Enter Product ID: ");
         targetID = targetProductScanner.next();
         Product targetProduct = new Product();
@@ -305,11 +301,9 @@ public class ProductMenuFunction {
             System.out.println("Are you sure you would like to remove this product from the database?\n");
         }
         System.out.print("Enter 1 to delete item, enter any other key to return > ");
-        confirmation = confirmationScanner.nextInt();
+        confirmation = confirmationScanner.nextLine();
 
-        if (confirmation == 1) {
-            // TODO - Ahdan: Logic for deleting item is to be placed here
-            // TODO - Done please test
+        if (Objects.equals(confirmation, "1")) {
             try (SqlSession sqlSession = Database.getInstance().openSession()){
                 ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
                 mapper.deleteProductById(targetProduct.getProduct_id());
@@ -317,6 +311,7 @@ public class ProductMenuFunction {
             }
             System.out.println("Item deleted successfully.");
         }
+        else;
 
     }
 

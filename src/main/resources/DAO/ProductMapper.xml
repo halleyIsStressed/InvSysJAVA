@@ -6,7 +6,7 @@
 <mapper namespace="DAO.ProductMapper">
 
     <insert id="insertProduct" parameterType="Entity.Product">
-        INSERT INTO PRODUCT (PRODUCT_TYPE,PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_QUANTITY) VALUES (#{product_type},#{product_name},#{product_price},#{product_qty})
+        INSERT INTO PRODUCT (PRODUCT_TYPE,PRODUCT_NAME,PRODUCT_PRICE,PRODUCT_QUANTITY) VALUES (#{product_type},#{product_name},#{product_price},#{product_quantity})
     </insert>
 
     <select id="selectALLProduct" resultType="Entity.Product">
