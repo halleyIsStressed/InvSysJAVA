@@ -16,6 +16,7 @@ public class Test {
             System.out.print("""
                     1) Supplier Menu
                     2) Product Listing
+                    3) Purchase Order Listing
                     6) Exit
                     Enter your option:""");
             int option = sc.nextInt();
