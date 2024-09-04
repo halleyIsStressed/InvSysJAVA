@@ -22,14 +22,15 @@ public class poMenuFunction {
             poList = poMapper.selectALLpo();
         }
 
-        System.out.printf("%-10s | %-11s | %-10s | %-5s | %-12s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID");
+        System.out.printf("%-10s | %-11s | %-10s | %-5s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID", "Status");
         for (Purchase_Order po : poList) {
-            System.out.printf("%-10s | %-11s | %-10d | %-5f | %-12s\n",
+            System.out.printf("%-10s | %-11s | %-10d | %-5f | %-12s | %-11s\n",
                     po.getPo_number(),
                     po.getProduct_id(),
                     po.getPurchase_quantity(),
                     po.getOrder_price(),
-                    po.getSupplier_id());
+                    po.getSupplier_id(),
+                    po.getStatus());
         }
         do {
             System.out.println("Choose Option:");

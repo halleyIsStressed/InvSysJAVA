@@ -11,6 +11,7 @@ public class Purchase_Order {
     private int purchase_quantity;
     private double order_price;
     private String order_date;
+    private String status;
 
 
 }
