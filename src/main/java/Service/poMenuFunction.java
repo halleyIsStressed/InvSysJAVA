@@ -1,9 +1,7 @@
 package Service;
 
-import DAO.ProductMapper;
 import DAO.PurchaseOrderMapper;
 import Database.Database;
-import Entity.Product;
 import Entity.Purchase_Order;
 import org.apache.ibatis.session.SqlSession;
 
@@ -42,10 +40,10 @@ public class poMenuFunction {
             poMenuOptions = poScanner.nextInt();
             switch (poMenuOptions) {
                 case 1:
-                    // createPO();
+                    createPurchaseOrder();
                     break;
                 case 2:
-                    // searchPO();
+                    searchPurchaseOrder();
                     break;
                 case 3:
                     // editPO();
@@ -64,8 +62,34 @@ public class poMenuFunction {
         } while (poMenuOptions != 5);
     }
 
+    public static void createPurchaseOrder() {
+        Purchase_Order newPO = getNewPurchaseOrder();
+        try (SqlSession conn = Database.getInstance().openSession()) {
+            PurchaseOrderMapper productMapper = conn.getMapper( PurchaseOrderMapper.class);
+            productMapper.insertPo(newPO); // TODO Ahdan - Write insert logic into .xml file. Also check if mappers are correct.
+            conn.commit();
+        }
+    }
 
-    public static void searchProduct() throws IOException {
+    public static Purchase_Order getNewPurchaseOrder(){
+
+        Purchase_Order newPO = new Purchase_Order();
+        Scanner newPoScanner = new Scanner(System.in);
+        System.out.print("\nEnter product ID to order (Eg. P00001): ");
+        newPO.setProduct_id(newPoScanner.nextLine());
+        System.out.print("\nEnter quantity: ");
+        newPO.setPurchase_quantity(newPoScanner.nextInt());
+        System.out.print("\nEnter supplier ID to order from (Eg. 1,2,3): ");
+        newPO.setSupplier_id(newPoScanner.nextLine());
+
+        System.out.print("\n\n");
+        System.out.println("Purchase Order Created. Awaiting response and payment calculations from Supplier.");
+        return newPO;
+    }
+
+
+
+    public static void searchPurchaseOrder() throws IOException {
         // More akin to a Filtering function.
         Scanner sc = new Scanner(System.in);
         int filterOptions;
@@ -81,23 +105,38 @@ public class poMenuFunction {
                 case 1:
                     Scanner supplierSc = new Scanner(System.in);
                     String targetSupplier = "";
-                    System.out.print("Enter Supplier ID: ");
+                    System.out.print("Enter Supplier ID (Eg. 1, 2, 3): ");
                     targetSupplier = supplierSc.nextLine();
 
-                    //Show all Purchase Orders done by targetSupplier. Print it out in the below format. NOTE: No need to select supplier_id column.
-                    /*System.out.printf("%-10s | %-11s | %-10d | %-5f\n",
-                            po.getPo_number(),
-                            po.getProduct_id(),
-                            po.getPurchase_quantity(),
-                            po.getOrder_price(),
-                       */
+
+
+                    System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Status");
+                    // TODO Ahdan - Show all Purchase Orders done by targetSupplier. No need to select supplier_id column.
+                    /*for (Logic here) {
+                        System.out.printf("%-10s | %-11s | %-10d | %-5.2f | %-11s\n",
+                                po.getPo_number(),
+                                po.getProduct_id(),
+                                po.getPurchase_quantity(),
+                                po.getOrder_price(),
+                                po.getStatus());
+                    }*/
                     break;
 
                 case 2:
                     Scanner productSc = new Scanner(System.in);
                     String targetProduct = "";
-                    System.out.print("Enter Product ID: ");
+                    System.out.print("Enter Product ID (Eg. P00001): ");
                     targetProduct = productSc.nextLine();
+                    // TODO Ahdan - Show all Purchase Orders that has the targetProduct ID. No need to print product_id column.
+
+                    System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Quantity", "Cost", "Supplier ID", "Status");
+                    /*System.out.printf("%-10s | %-10d | %-5.2f | %-12s | %-11s\n",
+                                po.getPo_number(),
+                                po.getPurchase_quantity(),
+                                po.getOrder_price(),
+                                po.getSupplier_id(),
+                                po.getStatus());
+                    }*/
                     break;
 
                 case 3:
@@ -107,7 +146,7 @@ public class poMenuFunction {
                     startDate = priceSc.nextLine();
                     System.out.print("Enter end date: ");
                     endDate = priceSc.nextLine();
-                    // Don't touch this yet lol
+                    // TODO - Don't touch this yet lol
                     break;
 
 

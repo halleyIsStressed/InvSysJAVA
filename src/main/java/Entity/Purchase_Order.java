@@ -14,4 +14,8 @@ public class Purchase_Order {
     private String status;
 
 
+    public Purchase_Order() {
+
+    }
+
 }
