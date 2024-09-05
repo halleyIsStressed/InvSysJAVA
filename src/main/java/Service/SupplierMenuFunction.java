@@ -1,12 +1,10 @@
 package Service;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class SupplierMenuFunction {
-    public static void supplierManagement() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-
+    public static void supplierManagement() throws IOException {
         int choice;
         do {
             System.out.println("\n************************************");
@@ -43,8 +41,8 @@ public class SupplierMenuFunction {
                     break;
                 default:
                     System.out.println("***Invalid choice! Please try again...***");
+                    System.in.read();
             }
         } while (choice != 6);
-
     }
 }
