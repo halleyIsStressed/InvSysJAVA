@@ -42,8 +42,7 @@ public class SupplierManagementFunction {
             System.out.print("CONFIRM to CREATE new supplier?: ");
             confirm = sc.nextLine();
             //To confirm add new supplier with user.
-            if (confirm.equalsIgnoreCase("Y")
-                    || confirm.equalsIgnoreCase("YES")) {
+            if (confirm.equalsIgnoreCase("Y") || confirm.equalsIgnoreCase("YES")) {
                 try (SqlSession sqlSession = Database.getInstance().openSession()){
                     SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
                     mapper.insertAddSuplier(supplier);
@@ -51,13 +50,12 @@ public class SupplierManagementFunction {
                 }
                 System.out.println("***Supplier created successfully!***");
             } else {
-                System.out.println("***Supplier NOT created successfully!***");
+                System.out.println("***Supplier NOT create successfully!***");
             }
             //To ask user continue to add another supplier or not.
             System.out.print("Continue to create another supplier?: ");
             confirm = sc.nextLine();
-        } while (confirm.equalsIgnoreCase("Y")
-                || confirm.equalsIgnoreCase("YES"));
+        } while (confirm.equalsIgnoreCase("Y") || confirm.equalsIgnoreCase("YES"));
     }
 
     //Search supplier
@@ -103,8 +101,8 @@ public class SupplierManagementFunction {
                 System.out.println(supplier);
 
             System.out.print("Continue to search another supplier?: ");
-            confirm = sc.nextLine().toUpperCase();
-        } while (confirm.equals("Y") || confirm.equals("YES"));
+            confirm = sc.nextLine();
+        } while (confirm.equalsIgnoreCase("Y") || confirm.equalsIgnoreCase("YES"));
     }
 
     //Modify supplier
@@ -204,8 +202,8 @@ public class SupplierManagementFunction {
                 System.out.println("Updated details: ");
                 System.out.println(supplier);
                 System.out.print("CONFIRM to UPDATE these changes?: ");
-                confirm = sc.nextLine().toUpperCase();
-                if (confirm.equals("Y") || confirm.equals("YES")) {
+                confirm = sc.nextLine();
+                if (confirm.equalsIgnoreCase("Y") || confirm.equalsIgnoreCase("YES")) {
                     if(choice==1){
                         try (SqlSession sqlSession = Database.getInstance().openSession()){
                             SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
@@ -228,8 +226,8 @@ public class SupplierManagementFunction {
             }
 
             System.out.print("Continue to update supplier's details?: ");
-            confirm = sc.nextLine().toUpperCase();
-        } while (confirm.equals("Y") || confirm.equals("YES"));
+            confirm = sc.nextLine();
+        } while (confirm.equalsIgnoreCase("Y") || confirm.equalsIgnoreCase("YES"));
     }
 
     //Remove supplier
@@ -288,8 +286,8 @@ public class SupplierManagementFunction {
             }
 
             System.out.print("Continue to delete supplier?: ");
-            confirm = sc.nextLine().toUpperCase();
-        } while (confirm.equals("Y") || confirm.equals("YES"));
+            confirm = sc.nextLine();
+        } while (confirm.equalsIgnoreCase("Y") || confirm.equalsIgnoreCase("YES"));
     }
 
     //Display all suppliers
@@ -323,57 +321,3 @@ public class SupplierManagementFunction {
     }
 
 }
-
-
-
-
-
-//public class SupplierMenuFunction {
-//    //Add supplier(change to getter form to essay store and insert data to database)
-//    public static Supplier getaddSupplier() {
-//        Supplier addSupplier =new Supplier();
-//        Scanner newProductScanner = new Scanner(System.in);
-//
-//        System.out.println("Please enter the details of the supplier:");
-//        System.out.print("Supplier name: ");
-//        addSupplier.setSupplierName(newProductScanner.next());
-//        System.out.print("Supplier address: ");
-//        addSupplier.setSupplierAddress(newProductScanner.next());
-//        System.out.print("Supplier telephone number: ");
-//        addSupplier.setSupplierTel(newProductScanner.next());
-//        System.out.print("Supplier email: ");
-//        addSupplier.setSupplierEmail(newProductScanner.next());
-//        System.out.println("Supplier added successfully!");
-//        return addSupplier;
-//    }
-//
-//    //Database connection
-//    public static void addSupplier() {
-//     Supplier insertSupplier = getaddSupplier();
-//        try (SqlSession conn = Database.getInstance().openSession()) {
-//            SupplierMapper supplierMapper = conn.getMapper(SupplierMapper.class);
-//            supplierMapper.insertAddSuplier(insertSupplier);
-//            conn.commit();
-//        }
-//    }
-//
-//    //Display all suppliers
-//    public static void displaySuppliers(){
-//        //Database connection
-//        List<Supplier> supplierList;
-//        try (SqlSession conn = Database.getInstance().openSession()) {
-//            SupplierMapper supplierMapper = conn.getMapper(SupplierMapper.class);
-//            supplierList = supplierMapper.selectAllSuppliers();
-//        }
-//        if(supplierList.isEmpty()){
-//            System.out.println("No supplier found!");
-//        }
-//        else{
-//            for(Supplier s: supplierList){
-//                System.out.printf("%-5s | %-10s | %-20s | %-7s | %-5s\n\n", "ID", "Name", "Tel", "Address", "Email");
-//                System.out.println(s.getSupplierID()  +  s.getSupplierName() +  s.getSupplierAddress() +  s.getSupplierTel() +  s.getSupplierEmail());
-//            }
-//        }
-//    }
-//
-//}
