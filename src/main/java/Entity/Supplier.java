@@ -10,7 +10,7 @@ public class Supplier {
     private String supplierTel;
     private String supplierAddress;
     private String supplierEmail;
-    private String dateTimeCreated;
+    private String supplierDateTimeCreated;
 
     //Constructor
     public Supplier(String id, String name, String tel, String address, String email, String dateTime){
@@ -19,7 +19,7 @@ public class Supplier {
         this.supplierTel = tel;
         this.supplierAddress = address;
         this.supplierEmail = email;
-        this.dateTimeCreated = dateTime;
+        this.supplierDateTimeCreated = dateTime;
     }
 
     public Supplier() {}
@@ -33,19 +33,7 @@ public class Supplier {
                 "\nTelephone: "+supplierTel+
                 "\nAddress: "+supplierAddress+
                 "\nEmail: "+supplierEmail+
-                "\nDate & Time created: "+dateTimeCreated+
+                "\nDate & Time created: "+supplierDateTimeCreated+
                 "\n*****************************************";
     }
-
-//    public Supplier(String supplierName, String supplierTel, String supplierAddress, String supplierEmail) {
-//        this.supplierName = supplierName;
-//        this.supplierTel = supplierTel;
-//        this.supplierAddress = supplierAddress;
-//        this.supplierEmail = supplierEmail;
-//    }
-//
-//
-//    public Supplier() {
-//
-//    }
 }
