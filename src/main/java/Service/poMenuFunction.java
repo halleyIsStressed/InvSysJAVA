@@ -149,13 +149,17 @@ public class poMenuFunction {
                     break;
 
                 case 3:
-                    Scanner priceSc = new Scanner(System.in);
                     String startDate, endDate;
-                    System.out.print("Enter start date: ");
-                    startDate = priceSc.nextLine();
-                    System.out.print("Enter end date: ");
-                    endDate = priceSc.nextLine();
-                    // TODO - Don't touch this yet lol
+
+                    System.out.println("Enter start date.");
+                    startDate = getDate();
+                    System.out.println("\nEnter end date.");
+                    endDate = getDate();
+
+                    // TODO Ahdan - Find purchase orders that fall between startDate and endDate. Format is MM/YYYY.
+                    System.out.println(startDate);
+                    System.out.println(endDate);
+
                     break;
 
 
@@ -171,6 +175,32 @@ public class poMenuFunction {
         } while (filterOptions != 4);
     }
 
+    private static String getDate() {
+        int month, year;
+        String date;
+        Scanner dateSc = new Scanner(System.in);
+
+        do {
+            System.out.print("Month (MM): ");
+            month = dateSc.nextInt();
+
+            if (month < 1 || month > 12) {
+                System.out.println("\nInvalid Month. Try Again.");
+            }
+        } while (month < 1 || month > 12);
+
+        do {
+            System.out.print("Year (YYYY): ");
+            year = dateSc.nextInt();
+
+            if (year > 2024) {
+                System.out.println("\nInvalid Year. Try Again.");
+            }
+        } while (year > 2024);
+
+        date = month + "/" + year;
+        return date;
+    };
 
 
 }
