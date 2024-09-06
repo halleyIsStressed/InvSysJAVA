@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS InventoryManager (
     AGE      INT,
     GENDER   TEXT,
     PHONE    TEXT,
+    EMAIL    TEXT,
     POSITION TEXT
 );
 
@@ -17,6 +18,15 @@ BEGIN
     WHERE oid = new.ROWID;
 END;
 
+CREATE TRIGGER IF NOT EXISTS createInventoryManagerEmail
+    AFTER INSERT
+    ON InventoryManager
+BEGIN
+    UPDATE InventoryManager
+    SET ID = PRINTF('IM%05d@gmail.com', new.oid)
+    WHERE oid = new.ROWID;
+END;
+
 CREATE TABLE IF NOT EXISTS STAFF (
     ID       TEXT PRIMARY KEY,
     PASSWORD VARCHAR(20) NOT NULL,
@@ -24,6 +34,7 @@ CREATE TABLE IF NOT EXISTS STAFF (
     AGE      INT,
     GENDER   TEXT,
     PHONE    TEXT,
+    EMAIL    TEXT,
     POSITION TEXT
 );
 
@@ -36,6 +47,14 @@ BEGIN
     WHERE oid = new.ROWID;
 END;
 
+CREATE TRIGGER IF NOT EXISTS createSTAFFEmail
+    AFTER INSERT
+    ON STAFF
+BEGIN
+    UPDATE STAFF
+    SET ID = PRINTF('S%05d@gmail.com', new.oid)
+    WHERE oid = new.ROWID;
+END;
 
 CREATE TABLE IF NOT EXISTS PRODUCT (
     PRODUCT_ID       TEXT PRIMARY KEY,

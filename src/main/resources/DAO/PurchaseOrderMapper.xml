@@ -10,7 +10,7 @@
     </select>
 
     <insert id="insertPo" parameterType="Entity.Purchase_Order">
-        INSERT INTO PURCHASE_ORDER (SUPPLIER_ID, PRODUCT_ID,QUANTITY) VALUES (etcetcetc)
+        INSERT INTO PURCHASE_ORDER (SUPPLIER_ID, PRODUCT_ID,QUANTITY) VALUES ()
     </insert>
 
 

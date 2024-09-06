@@ -98,7 +98,7 @@ public class UserMenuFunction {
         } else {
             user.setPosition("Staff");
         }
-        boolean check = false;
+        int check = 0;
         Scanner in = new Scanner(System.in);
         int selection;
         System.out.print("Enter name: ");
@@ -112,17 +112,24 @@ public class UserMenuFunction {
                 2) Female
                 Enter gender:""");
         selection = in.nextInt();
-        do {
-            if (selection == 1) {
+        do{
+        switch (selection) {
+            case 1: {
                 user.setGender("Male");
-                check = true;
-            } else if (selection == 2) {
+                check=1;
+                break;
+                }
+            case 2: {
                 user.setGender("Female");
-                check = true;
-            } else {
+                check = 1;
+                break;
+                }
+            default: {
                 System.out.print("Error");
+                break;
+                }
             }
-        } while (!check);
+        } while (check==1);
         in.nextLine();
         System.out.print("Enter phone: ");
         user.setPhone(in.nextLine());
