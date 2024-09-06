@@ -67,7 +67,7 @@ public class poMenuFunction {
         try (SqlSession conn = Database.getInstance().openSession()) {
             PurchaseOrderMapper productMapper = conn.getMapper( PurchaseOrderMapper.class);
             productMapper.insertPo(newPO); // TODO Ahdan - Write insert logic into .xml file. Also check if mappers are correct.
-            conn.commit();
+            conn.commit();            //TODO DONE
         }
     }
 
@@ -86,7 +86,7 @@ public class poMenuFunction {
         System.out.println("Purchase Order Created. Awaiting response and payment calculations from Supplier.");
         return newPO;
     }
-
+    //TODO DONE
 
 
     public static void searchPurchaseOrder() throws IOException {
@@ -108,8 +108,12 @@ public class poMenuFunction {
                     System.out.print("Enter Supplier ID (Eg. 1, 2, 3): ");
                     targetSupplier = supplierSc.nextLine();
 
-
-
+                    List<Purchase_Order> targetList;
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        PurchaseOrderMapper poMapper = conn.getMapper(PurchaseOrderMapper.class);
+                        targetList = poMapper.selectIDfortaget(targetSupplier);
+                    }
+                    //TODO DONE
                     System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Status");
                     // TODO Ahdan - Show all Purchase Orders done by targetSupplier. No need to select supplier_id column.
                     /*for (Logic here) {
@@ -128,7 +132,12 @@ public class poMenuFunction {
                     System.out.print("Enter Product ID (Eg. P00001): ");
                     targetProduct = productSc.nextLine();
                     // TODO Ahdan - Show all Purchase Orders that has the targetProduct ID. No need to print product_id column.
-
+                    // TODO DONE
+                    Purchase_Order targetPO = new Purchase_Order();
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        PurchaseOrderMapper poMapper = conn.getMapper(PurchaseOrderMapper.class);
+                         targetPO= poMapper.selectBYPOID(targetProduct);
+                    }
                     System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Quantity", "Cost", "Supplier ID", "Status");
                     /*System.out.printf("%-10s | %-10d | %-5.2f | %-12s | %-11s\n",
                                 po.getPo_number(),

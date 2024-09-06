@@ -10,8 +10,15 @@
     </select>
 
     <insert id="insertPo" parameterType="Entity.Purchase_Order">
-        INSERT INTO PURCHASE_ORDER (SUPPLIER_ID, PRODUCT_ID,QUANTITY) VALUES ()
+        INSERT INTO PURCHASE_ORDER (SUPPLIER_ID, PRODUCT_ID,QUANTITY) VALUES (#{supplier_id},#{product_id},#{product_quantity})
     </insert>
 
+    <select id="selectIDfortaget" resultType="Entity.Purchase_Order">
+        SELECT * FROM PURCHASE_ORDER WHERE SUPPLIER_ID = #{param1}
+    </select>
+
+    <select id="selectBYPOID" resultType="Entity.Purchase_Order">
+        SELECT * FROM PURCHASE_ORDER WHERE PRODUCT_ID = #{param1}
+    </select>
 
 </mapper>
