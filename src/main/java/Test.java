@@ -1,4 +1,5 @@
 import Design.Design;
+import Service.BranchMenuFunction;
 import Service.ProductMenuFunction;
 import Service.SupplierMenuFunction;
 import Service.poMenuFunction;
@@ -17,6 +18,7 @@ public class Test {
                     1) Supplier Menu
                     2) Product Listing
                     3) Purchase Order Listing
+                    4) Branch Menu
                     6) Exit
                     Enter your option:""");
             int option = sc.nextInt();
@@ -31,6 +33,9 @@ public class Test {
                     poMenuFunction.poListing();
                     break;
                 case 4:
+                    BranchMenuFunction.branchManagement();
+                    break;
+                case 6:
                     System.out.println("Exiting the program...");
                     keepRunning = false;
                     break;
