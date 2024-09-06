@@ -281,7 +281,7 @@ public class SupplierManagementFunction {
                     }
                     System.out.println("***Supplier deleted successfully!***");
                 } else {
-                    System.out.println("***Supplier NOT deleted successfully!***");
+                    System.out.println("***Supplier NOT delete successfully!***");
                 }
             }
 
