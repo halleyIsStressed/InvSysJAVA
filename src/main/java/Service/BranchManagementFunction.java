@@ -80,4 +80,153 @@ public class BranchManagementFunction {
         } while (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes"));
     }
 
+    //Modify Branch
+    public static void updateBranch() {
+        String confirm;
+        int choice;
+        int category;
+        System.out.println("\n************************************");
+        System.out.println("\t\t  Update Branch");
+        System.out.println("************************************");
+        do {
+            Branch branch = null;
+
+            System.out.println("1. Branch ID");
+            System.out.println("2. Branch location");
+            System.out.println("Search branch to update by: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter branch ID to update: ");
+                    //TODO: AHTAN COMPARE THE USER INPUT WITH THE BRANCH ID IN THE DATABASE
+                    break;
+                case 2:
+                    System.out.println("Enter branch location to update: ");
+                    //TODO: AHTAN COMPARE USER INPUT WITH THE BRANCH LOCATION IN THE DATABASE
+                    break;
+                default:
+                    System.out.println("***Invalid choice! Please try again...***");
+            }
+
+            if (branch == null)
+                System.out.println("***Branch NOT found!***");
+            else {
+                System.out.println("1. Branch location");
+                System.out.println("2. Branch phone number");
+                System.out.println("3. Branch manager name");
+                System.out.println("4. ALL");
+                System.out.println("Please select the category you would like to update: ");
+                category = sc.nextInt();
+                sc.nextLine();
+                switch (category) {
+                    case 1:
+                        System.out.println("Enter the new Branch location: ");
+                        branch.setBranchLocation(sc.nextLine());
+                        break;
+                    case 2:
+                        System.out.println("Enter the new Branch phone number: ");
+                        branch.setBranchPhoneNo(sc.nextLine());
+                        break;
+                    case 3:
+                        System.out.println("Enter the new Branch manager name: ");
+                        branch.setBranchMgrName(sc.nextLine());
+                        break;
+                    case 4:
+                        System.out.println("Enter the new Branch location");
+                        branch.setBranchLocation(sc.nextLine());
+                        System.out.println("Enter the new Branch phone number: ");
+                        branch.setBranchPhoneNo(sc.nextLine());
+                        System.out.println("Enter the new Branch manager name: ");
+                        branch.setBranchMgrName(sc.nextLine());
+                        break;
+                    default:
+                        System.out.println("***Invalid category! Please try again...***");
+                }
+                //Prompt user for confirmation
+                System.out.println("Updated details:");
+                System.out.println(branch);
+                System.out.println("CONFIRM to UPDATE these changes?: ");
+                confirm = sc.nextLine();
+                if (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")) {
+                    if (choice == 1) {
+                        //TODO: AHTAN UPDATE THE BRANCH BY ID
+                    } else {
+                        //TODO: AHTAN UPDATE THE BRANCH BY LOCATION
+                    }
+
+                    System.out.println("***Changes saved successfully!***");
+                } else
+                    System.out.println("***Changes DISCARDED! Branch details reverted to original.***");
+            }
+
+            System.out.println("Continue to update branch's details?: ");
+            confirm = sc.nextLine();
+        } while (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes"));
+    }
+
+    //Close Branch
+    public static void deleteBranch() {
+        String confirm;
+        int choice;
+        System.out.println("\n************************************");
+        System.out.println("\t\t  Delete Branch");
+        System.out.println("************************************");
+        do {
+            Branch branch = null;
+
+            System.out.println("1.Branch ID");
+            System.out.println("2. Branch location");
+            System.out.println("Search branch to delete by: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter branch ID to delete: ");
+                    //TODO: AHTAN SELECT BRANCH BY ID
+                    break;
+                case 2:
+                    System.out.println("Enter branch location to delete: ");
+                    //TODO: AHTAN SELECT BRANCH BY LOCATION
+                    break;
+                default:
+                    System.out.println("***Invalid choice! Please try again...***");
+            }
+
+            if (branch == null)
+                System.out.println("***Branch NOT found!***");
+            else {
+                System.out.println(branch);
+                System.out.println("CONFIRM to DELETE this branch?: ");
+                confirm = sc.nextLine();
+                if (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")) {
+                    //TODO: AHTAN DELETE THE BRANCH BY ID
+                    System.out.println("***Branch deleted successfully!***");
+                } else
+                    System.out.println("***Branch NOT delete successfully!***");
+            }
+
+            System.out.println("Continue to delete branch?: ");
+            confirm = sc.nextLine();
+        } while (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes"));
+    }
+
+    //Display all branches
+    public static void displayBranches() {
+        System.out.println("\n************************************");
+        System.out.println("\t\tDisplay All Branches");
+        System.out.println("************************************");
+
+        //TODO: AHTAN SELECT ALL BRANCHES FROM DATABASE
+
+//        if (branches.isEmpty())
+//            System.out.println("***No branch found!***");
+//        else
+//            for (Branch b : branches)
+//                System.out.println(b);
+
+            System.out.println("Press Enter to return back to the Branch Management Menu: ");
+            sc.nextLine();
+    }
+
 }
