@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class BranchMenuFunction {
     public static void branchManagement() throws IOException {
         int choice;
-        do{
+        do {
             System.out.println("\n************************************");
             System.out.println("\t\tBranches Management");
             System.out.println("************************************");
@@ -20,21 +20,21 @@ public class BranchMenuFunction {
             Scanner sc = new Scanner(System.in);
             choice = sc.nextInt();
 
-            switch(choice){
+            switch (choice) {
                 case 1:
-
+                    BranchManagementFunction.createBranch();
                     break;
                 case 2:
-
+                    BranchManagementFunction.readBranch();
                     break;
                 case 3:
-
+                    BranchManagementFunction.updateBranch();
                     break;
                 case 4:
-
+                    BranchManagementFunction.deleteBranch();
                     break;
                 case 5:
-
+                    BranchManagementFunction.displayBranches();
                     break;
                 case 6:
 
@@ -43,6 +43,6 @@ public class BranchMenuFunction {
                     System.out.println("***Invalid choice! Please try again...***");
                     System.in.read();
             }
-        }while(choice != 0);
+        } while (choice != 0);
     }
 }
