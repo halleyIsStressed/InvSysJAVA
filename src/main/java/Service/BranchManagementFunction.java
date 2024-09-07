@@ -36,6 +36,12 @@ public class BranchManagementFunction {
 
             if (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")) {
                 //TODO: AHTAN ADD IN NEW BRANCH TO DATABASE
+                //TODO DONE (TEST)
+                try (SqlSession conn = Database.getInstance().openSession()) {
+                    BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
+                    branchMapper.insertNewBranch(branch);
+                    conn.commit();
+                }
                 System.out.println("***Branch created successfully!***");
             } else
                 System.out.println("***Branch NOT create successfully***");
@@ -65,11 +71,21 @@ public class BranchManagementFunction {
                 case 1:
                     System.out.println("Enter branch ID to search: ");
                     //TODO: AHTAN COMPARE THE USER INPUT WITH THE BRANCH ID IN DATABASE
+                    //TODO DONE (TEST)
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
+                        branch = branchMapper.selectById(sc.next());
+                    }
                     break;
 
                 case 2:
                     System.out.println("Enter branch location to search: ");
                     //TODO: AHTAN COMPARE THE USER INPUT WITH THE BRANCH LOCATION IN DATABASE
+                    //TODO DONE (TEST)
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
+                        branch = branchMapper.selectByLocation(sc.next());
+                    }
                     break;
 
                 default:
@@ -106,6 +122,7 @@ public class BranchManagementFunction {
                 case 1:
                     System.out.println("Enter branch ID to update: ");
                     //TODO: AHTAN COMPARE THE USER INPUT WITH THE BRANCH ID IN THE DATABASE
+                    //TODO DONE
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
                         branch = branchMapper.selectById(sc.nextLine());
@@ -114,6 +131,7 @@ public class BranchManagementFunction {
                 case 2:
                     System.out.println("Enter branch location to update: ");
                     //TODO: AHTAN COMPARE USER INPUT WITH THE BRANCH LOCATION IN THE DATABASE
+                    //TODO DONE
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
                         branch = branchMapper.selectByLocation(sc.nextLine());
@@ -165,10 +183,20 @@ public class BranchManagementFunction {
                 if (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")) {
                     if (choice == 1) {
                         //TODO: AHTAN UPDATE THE BRANCH BY ID
-
+                        //TODO DONE (TEST)
+                        try (SqlSession conn = Database.getInstance().openSession()) {
+                            BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
+                            branchMapper.updateById(branch);
+                            conn.commit();
+                        }
                     } else {
                         //TODO: AHTAN UPDATE THE BRANCH BY LOCATION
-
+                        //TODO DONE (TEST)
+                        try (SqlSession conn = Database.getInstance().openSession()) {
+                            BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
+                            branchMapper.updateByLocation(branch);
+                            conn.commit();
+                        }
                     }
 
                     System.out.println("***Changes saved successfully!***");
@@ -200,6 +228,7 @@ public class BranchManagementFunction {
                 case 1:
                     System.out.println("Enter branch ID to delete: ");
                     //TODO: AHTAN SELECT BRANCH BY ID
+                    //TODO DONE (TEST)
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
                         branch = branchMapper.selectById(sc.nextLine());
@@ -208,6 +237,7 @@ public class BranchManagementFunction {
                 case 2:
                     System.out.println("Enter branch location to delete: ");
                     //TODO: AHTAN SELECT BRANCH BY LOCATION
+                    //TODO DONE (TEST)
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
                         branch = branchMapper.selectByLocation(sc.nextLine());
@@ -225,7 +255,7 @@ public class BranchManagementFunction {
                 confirm = sc.nextLine();
                 if (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")) {
                     //TODO: AHTAN DELETE THE BRANCH BY ID
-                    // TODO DONE
+                    //TODO DONE (TEST)
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
                        branchMapper.deleteById(branch.getBranchID());
@@ -249,7 +279,7 @@ public class BranchManagementFunction {
         System.out.println("************************************");
 
         //TODO: AHTAN SELECT ALL BRANCHES FROM DATABASE
-        // TODO DONE
+        //TODO DONE (TEST)
         List<Branch> branchList;
         try (SqlSession conn = Database.getInstance().openSession()) {
             BranchMapper branchMapper = conn.getMapper(BranchMapper.class);

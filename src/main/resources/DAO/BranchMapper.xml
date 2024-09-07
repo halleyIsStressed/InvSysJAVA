@@ -15,7 +15,7 @@
             FROM BRANCH
         </select>
 
-        <delete id="deleteByid">
+        <delete id="deleteById">
             DELETE FROM BRANCH WHERE BRANCH_ID =#{param1}
         </delete>
 
@@ -38,9 +38,29 @@
                 MANAGER AS branchMgrName,
                 DATE AS branchDateCreated
             FROM BRANCH
-            WHERE Location =#{param1}
+            WHERE Location =#{param1} COLLATE NOCASE
         </select>
 
+    <insert id="insertNewBranch" parameterType="Entity.Branch">
+        INSERT INTO BRANCH ( Location,CONTACT_NO,MANAGER) VALUES (#{branchLocation},#{branchPhoneNo},#{branchMgrName})
+    </insert>
 
+    <update id="updateById" parameterType="Entity.Branch">
+        UPDATE BRANCH SET
+            Location =#{branchLocation},
+            CONTACT_NO =#{branchPhoneNo},
+            MANAGER =#{branchMgrName},
+            DATE =#{branchDateCreated}
+        WHERE  BRANCH_ID =#{branchID}
+    </update>
+
+    <update id="updateByLocation" parameterType="Entity.Branch">
+        UPDATE BRANCH SET
+          Location =#{branchLocation},
+          CONTACT_NO =#{branchPhoneNo},
+          MANAGER =#{branchMgrName},
+          DATE =#{branchDateCreated}
+        WHERE   Location =#{branchLocation}
+    </update>
 
 </mapper>

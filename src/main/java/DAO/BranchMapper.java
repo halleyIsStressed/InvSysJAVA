@@ -9,10 +9,15 @@ public interface BranchMapper {
 
      List<Branch> selectAll();
 
-     void deleteById(@NotNull String branchID);
+     void deleteById(String branchID);
 
      Branch selectById(@NotNull String branchID);
 
      Branch selectByLocation(@NotNull String location);
 
+     void insertNewBranch(Branch branch);
+
+     void updateById(Branch branch);
+
+     void updateByLocation(Branch branch);
 }
