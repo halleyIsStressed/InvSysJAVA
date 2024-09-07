@@ -14,18 +14,11 @@ CREATE TRIGGER IF NOT EXISTS createInventoryManager
     ON InventoryManager
 BEGIN
     UPDATE InventoryManager
-    SET ID = PRINTF('IM%05d', new.oid)
-    WHERE oid = new.ROWID;
+    SET ID = PRINTF('IM%05d', new.ROWID),
+    EMAIL = PRINTF('IM%05d@gmail.com', new.ROWID)
+    WHERE ROWID = new.ROWID;
 END;
 
-CREATE TRIGGER IF NOT EXISTS createInventoryManagerEmail
-    AFTER INSERT
-    ON InventoryManager
-BEGIN
-    UPDATE InventoryManager
-    SET ID = PRINTF('IM%05d@gmail.com', new.oid)
-    WHERE oid = new.ROWID;
-END;
 
 CREATE TABLE IF NOT EXISTS STAFF (
     ID       TEXT PRIMARY KEY,

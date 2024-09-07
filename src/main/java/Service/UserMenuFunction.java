@@ -116,8 +116,10 @@ public class UserMenuFunction {
         switch (selection) {
             case 1: {
                 user.setGender("Male");
+                System.out.println("Gender Male");
                 check=1;
                 break;
+
                 }
             case 2: {
                 user.setGender("Female");
@@ -129,7 +131,7 @@ public class UserMenuFunction {
                 break;
                 }
             }
-        } while (check==1);
+        } while (check!=1);
         in.nextLine();
         System.out.print("Enter phone: ");
         user.setPhone(in.nextLine());

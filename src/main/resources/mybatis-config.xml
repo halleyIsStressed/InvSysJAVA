@@ -20,5 +20,6 @@
         <mapper resource="DAO/ProductMapper.xml"/>
         <mapper resource="DAO/PurchaseOrderMapper.xml"/>
         <mapper resource="DAO/SupplierMapper.xml"/>
+        <mapper resource="DAO/BranchMapper.xml"/>
     </mappers>
 </configuration>

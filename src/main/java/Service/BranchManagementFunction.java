@@ -106,10 +106,18 @@ public class BranchManagementFunction {
                 case 1:
                     System.out.println("Enter branch ID to update: ");
                     //TODO: AHTAN COMPARE THE USER INPUT WITH THE BRANCH ID IN THE DATABASE
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
+                        branch = branchMapper.selectById(sc.nextLine());
+                    }
                     break;
                 case 2:
                     System.out.println("Enter branch location to update: ");
                     //TODO: AHTAN COMPARE USER INPUT WITH THE BRANCH LOCATION IN THE DATABASE
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
+                        branch = branchMapper.selectByLocation(sc.nextLine());
+                    }
                     break;
                 default:
                     System.out.println("***Invalid choice! Please try again...***");
@@ -157,8 +165,10 @@ public class BranchManagementFunction {
                 if (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")) {
                     if (choice == 1) {
                         //TODO: AHTAN UPDATE THE BRANCH BY ID
+
                     } else {
                         //TODO: AHTAN UPDATE THE BRANCH BY LOCATION
+
                     }
 
                     System.out.println("***Changes saved successfully!***");
@@ -190,10 +200,18 @@ public class BranchManagementFunction {
                 case 1:
                     System.out.println("Enter branch ID to delete: ");
                     //TODO: AHTAN SELECT BRANCH BY ID
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
+                        branch = branchMapper.selectById(sc.nextLine());
+                    }
                     break;
                 case 2:
                     System.out.println("Enter branch location to delete: ");
                     //TODO: AHTAN SELECT BRANCH BY LOCATION
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
+                        branch = branchMapper.selectByLocation(sc.nextLine());
+                    }
                     break;
                 default:
                     System.out.println("***Invalid choice! Please try again...***");
@@ -207,6 +225,13 @@ public class BranchManagementFunction {
                 confirm = sc.nextLine();
                 if (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")) {
                     //TODO: AHTAN DELETE THE BRANCH BY ID
+                    // TODO DONE
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
+                       branchMapper.deleteById(branch.getBranchID());
+                       conn.commit();
+                    }
+
                     System.out.println("***Branch deleted successfully!***");
                 } else
                     System.out.println("***Branch NOT delete successfully!***");
@@ -224,17 +249,18 @@ public class BranchManagementFunction {
         System.out.println("************************************");
 
         //TODO: AHTAN SELECT ALL BRANCHES FROM DATABASE
+        // TODO DONE
         List<Branch> branchList;
         try (SqlSession conn = Database.getInstance().openSession()) {
-            BranchMapper poMapper = conn.getMapper(BranchMapper.class);
-            branchList = poMapper.selectALLpo();
+            BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
+            branchList = branchMapper.selectAll();
         }
 
-//        if (branches.isEmpty())
-//            System.out.println("***No branch found!***");
-//        else
-//            for (Branch b : branches)
-//                System.out.println(b);
+       if (branchList.isEmpty())
+           System.out.println("***No branch found!***");
+        else
+          for (Branch b : branchList)
+               System.out.println(b);
 
             System.out.println("Press Enter to return back to the Branch Management Menu: ");
             sc.nextLine();

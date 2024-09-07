@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DAO.BranchMapper">
+
+        <select id="selectAll" resultType="Entity.Branch">
+            SELECT
+                BRANCH_ID AS branchID,
+                Location AS branchLocation,
+                CONTACT_NO AS branchPhoneNo,
+                MANAGER AS branchMgrName,
+                DATE AS branchDateCreated
+            FROM BRANCH
+        </select>
+
+        <delete id="deleteByid">
+            DELETE FROM BRANCH WHERE BRANCH_ID =#{param1}
+        </delete>
+
+        <select id="selectById" resultType="Entity.Branch">
+            SELECT
+                BRANCH_ID AS branchID,
+                Location AS branchLocation,
+                CONTACT_NO AS branchPhoneNo,
+                MANAGER AS branchMgrName,
+                DATE AS branchDateCreated
+            FROM BRANCH
+            WHERE BRANCH_ID =#{param1}
+        </select>
+
+        <select id="selectByLocation" resultType="Entity.Branch">
+            SELECT
+                BRANCH_ID AS branchID,
+                Location AS branchLocation,
+                CONTACT_NO AS branchPhoneNo,
+                MANAGER AS branchMgrName,
+                DATE AS branchDateCreated
+            FROM BRANCH
+            WHERE Location =#{param1}
+        </select>
+
+
+
+</mapper>
