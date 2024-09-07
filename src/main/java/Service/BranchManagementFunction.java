@@ -1,7 +1,13 @@
 package Service;
 
+import DAO.BranchMapper;
+import DAO.PurchaseOrderMapper;
+import Database.Database;
 import Entity.Branch;
+import Entity.Purchase_Order;
+import org.apache.ibatis.session.SqlSession;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class BranchManagementFunction {
@@ -218,6 +224,11 @@ public class BranchManagementFunction {
         System.out.println("************************************");
 
         //TODO: AHTAN SELECT ALL BRANCHES FROM DATABASE
+        List<Branch> branchList;
+        try (SqlSession conn = Database.getInstance().openSession()) {
+            BranchMapper poMapper = conn.getMapper(BranchMapper.class);
+            branchList = poMapper.selectALLpo();
+        }
 
 //        if (branches.isEmpty())
 //            System.out.println("***No branch found!***");
