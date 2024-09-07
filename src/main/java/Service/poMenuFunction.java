@@ -156,7 +156,7 @@ public class poMenuFunction {
                     System.out.println("\nEnter end date.");
                     endDate = getDate();
 
-                    // TODO Ahdan - Find purchase orders that fall between startDate and endDate. Format is MM-YYYY.
+                    // TODO Ahdan - Find purchase orders that fall between startDate and endDate. Format is MM/YYYY.
                     System.out.println(startDate);
                     System.out.println(endDate);
 
@@ -198,7 +198,7 @@ public class poMenuFunction {
             }
         } while (year > 2024);
 
-        date = month + "-" + year;
+        date = month + "/" + year;
         return date;
     };
 
