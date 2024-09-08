@@ -1,9 +1,7 @@
 package Service;
 
-import DAO.ProductMapper;
 import DAO.PurchaseOrderMapper;
 import Database.Database;
-import Entity.Product;
 import Entity.Purchase_Order;
 import org.apache.ibatis.session.SqlSession;
 
@@ -269,8 +267,6 @@ public class poMenuFunction {
 
 
     }
-
-
 
 
     public static void cancelPurchaseOrder() throws IOException {

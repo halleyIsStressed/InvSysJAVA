@@ -1,8 +1,5 @@
 import Design.Design;
-import Service.BranchMenuFunction;
-import Service.ProductMenuFunction;
-import Service.SupplierMenuFunction;
-import Service.poMenuFunction;
+import Service.*;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -19,6 +16,7 @@ public class Test {
                     2) Product Listing
                     3) Purchase Order Listing
                     4) Branch Menu
+                    5) Return Order Listing
                     6) Exit
                     Enter your option:""");
             int option = sc.nextInt();
@@ -34,6 +32,9 @@ public class Test {
                     break;
                 case 4:
                     BranchMenuFunction.branchManagement();
+                    break;
+                case 5:
+                    ProductReturnMenuFunction.returnOrderListing();
                     break;
                 case 6:
                     System.out.println("Exiting the program...");
