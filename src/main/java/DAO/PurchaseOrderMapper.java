@@ -17,4 +17,7 @@ public interface PurchaseOrderMapper {
     Purchase_Order selectBYPOID(String product_id);
 
     void cancelPoByID (@NotNull String po_number);
+
+    void updateModifyData(Purchase_Order product);
+
 }

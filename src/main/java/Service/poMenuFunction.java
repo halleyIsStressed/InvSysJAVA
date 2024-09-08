@@ -34,6 +34,7 @@ public class poMenuFunction {
                     po.getSupplier_id(),
                     po.getStatus());
         }
+
         do {
             System.out.println("Choose Option:");
             System.out.println("1 > Create Purchase Order");
@@ -50,7 +51,7 @@ public class poMenuFunction {
                     searchPurchaseOrder();
                     break;
                 case 3:
-                    // editPO();
+                    editPurchaseOrder();
                     break;
                 case 4:
                     cancelPurchaseOrder();
@@ -201,6 +202,75 @@ public class poMenuFunction {
         date = month + "/" + year;
         return date;
     };
+
+
+    public static void editPurchaseOrder() throws IOException {
+
+        Purchase_Order targetPo = new Purchase_Order();
+        String targetNumber;
+        int choice;
+        Scanner targetProductScanner = new Scanner(System.in);
+        Scanner choiceScanner = new Scanner(System.in);
+
+        System.out.print("Enter Target Product ID: ");
+        targetNumber = targetProductScanner.next();
+
+
+        try (SqlSession conn = Database.getInstance().openSession()) {
+            PurchaseOrderMapper poMapper = conn.getMapper( PurchaseOrderMapper.class);
+            targetPo=poMapper.selectBYPOID(targetNumber);
+        }
+        if(targetPo==null){
+            System.out.println("Target Product Not Found");
+        }
+
+        else if (!Objects.equals(targetPo.getStatus(), "Pending")){
+            System.out.print("\nUnable to modify specified Purchase Order. (PO already confirmed/completed!)\n");
+            System.in.read();
+        }
+
+
+        else {
+            do {
+                System.out.println("Choose value to modify:");
+                System.out.println("1 > Product ID");
+                System.out.println("2 > Quantity");
+                System.out.println("3 > Return");
+
+                choice = choiceScanner.nextInt();
+                choiceScanner.nextLine();
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter new Product ID (Eg. P00001): ");
+                        targetPo.setProduct_id(choiceScanner.nextLine());
+                        break;
+                    case 2:
+                        System.out.print("Enter new Quantity: ");
+                        targetPo.setPurchase_quantity(choiceScanner.nextInt());
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        System.out.println("Invalid Input. Try Again.");
+                        System.in.read();
+                        break;
+                }
+
+                // update modify function
+                // TODO Ahdan - do .xml logic for modifying PO. Check if mapper.java logic is correct.
+                try (SqlSession conn = Database.getInstance().openSession()) {
+                    PurchaseOrderMapper mapper = conn.getMapper(PurchaseOrderMapper.class);
+                    mapper.updateModifyData(targetPo);
+                    conn.commit();
+                }
+            } while (choice != 3);
+            System.out.println("Purchase Order Successfully Modified!");
+        }
+
+
+    }
+
+
 
 
     public static void cancelPurchaseOrder() throws IOException {

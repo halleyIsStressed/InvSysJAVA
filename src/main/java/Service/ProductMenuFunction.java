@@ -196,15 +196,11 @@ public class ProductMenuFunction {
     }
 
 
-
-
     public static void updateProduct() throws IOException {
 
         Product targetProduct = new Product();
         String targetID;
         int choice;
-        double newPrice;
-        String newValue;
         Scanner targetProductScanner = new Scanner(System.in);
         Scanner choiceScanner = new Scanner(System.in);
 
@@ -228,24 +224,20 @@ public class ProductMenuFunction {
                 System.out.println("3 > Price");
                 System.out.println("4 > Return");
 
-                //bug at case 1 and case 2 cannot key in please be debug case 3 is normal
                 choice = choiceScanner.nextInt();
                 choiceScanner.nextLine();
                 switch (choice) {
                     case 1:
                         System.out.print("Enter new Type (Rod, Reel, Line, Lure, Accessory): ");
-                        targetProduct.setProduct_type(choiceScanner.next());
-                        choiceScanner.nextLine();//clear the bug
+                        targetProduct.setProduct_type(choiceScanner.nextLine());
                         break;
                     case 2:
                         System.out.print("Enter new Name: ");
-                        targetProduct.setProduct_name(choiceScanner.next());
-                        choiceScanner.nextLine();//clear input bug
+                        targetProduct.setProduct_name(choiceScanner.nextLine());
                         break;
                     case 3:
                         System.out.print("Enter new Price: ");
                         targetProduct.setProduct_price(choiceScanner.nextDouble());
-                        choiceScanner.nextLine();
                         break;
                     case 4:
                         break;
@@ -255,6 +247,7 @@ public class ProductMenuFunction {
                         break;
                 }
                 // update modify function
+
                 try (SqlSession conn = Database.getInstance().openSession()) {
                     ProductMapper productMapper = conn.getMapper(ProductMapper.class);
                     productMapper.updateModifyData(targetProduct);
@@ -266,6 +259,7 @@ public class ProductMenuFunction {
 
 
     }
+
 
     public static void deleteProduct() {
         String confirmation;

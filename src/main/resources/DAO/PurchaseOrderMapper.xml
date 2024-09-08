@@ -25,5 +25,18 @@
         DELETE FROM PURCHASE_ORDER WHERE PURCHASE_ORDER_NUMBER =#{param1}
     </delete>
 
+    <update id="updateModifyData" parameterType="Entity.Purchase_Order">
+        UPDATE PURCHASE_ORDER SET
+                            PRODUCT_TYPE=#{product_type},
+                            PRODUCT_NAME=#{product_name},
+                            PRODUCT_PRICE =#{product_price},
+                            PRODUCT_QUANTITY=#{product_quantity}
+        WHERE PRODUCT_ID =#{product_id}
+
+    </update>
+
+
+
+
 
 </mapper>
