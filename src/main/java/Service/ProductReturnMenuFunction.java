@@ -1,13 +1,6 @@
 package Service;
 
-import DAO.ProductReturnMapper;
-import Database.Database;
-import Entity.ReturnOrder;
-import org.apache.ibatis.session.SqlSession;
-
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class ProductReturnMenuFunction {
@@ -24,19 +17,19 @@ public class ProductReturnMenuFunction {
             roMenuOptions = optionScanner.nextInt();
             switch (roMenuOptions) {
                 case 1:
-                    //createReturnOrder();
+                    createReturnOrder();
                     System.out.println("C");
                     break;
                 case 2:
-                    //searchReturnOrder();
+                    searchReturnOrder();
                     System.out.println("R");
                     break;
                 case 3:
-                    //editReturnOrder();
+                    editReturnOrder();
                     System.out.println("U");
                     break;
                 case 4:
-                    //cancelReturnOrder();
+                    cancelReturnOrder();
                     System.out.println("D");
                     break;
                 case 5:
@@ -48,7 +41,22 @@ public class ProductReturnMenuFunction {
                     System.out.print("\n\n");
             }
         } while (roMenuOptions != 5);
+
     }
 
+    public static void createReturnOrder() {
 
+    }
+
+    public static void searchReturnOrder() {
+
+    }
+
+    public static void editReturnOrder() {
+
+    }
+
+    public static void cancelReturnOrder() {
+
+    }
 }
