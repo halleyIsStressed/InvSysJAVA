@@ -4,12 +4,13 @@ import DAO.InventoryManagerMapper;
 import DAO.StaffMapper;
 import Database.Database;
 import Design.Design;
+import Entity.User;
 import org.apache.ibatis.session.SqlSession;
 
 public class ProfileMenu {
 
     public static void profileList(String id,int choice){
-
+        User currentUser = null;
         switch (choice) {
             case 1:
                 try (SqlSession conn = Database.getInstance().openSession()) {
