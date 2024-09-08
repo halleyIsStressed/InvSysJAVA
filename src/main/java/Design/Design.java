@@ -12,5 +12,10 @@ public class Design {
         System.out.println("|______________________________________________________________________________|");
     }
 
+    public static void designLine(){
+        for(int i=0; i<20;i++){
+            System.out.print("-");
+        }
+    }
 
 }

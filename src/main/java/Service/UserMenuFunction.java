@@ -73,11 +73,8 @@ public class UserMenuFunction {
         }
         if (currentUser != null) {
             if (currentUser.getPassword().equals(login.getPassword())) {
-                System.out.println("Name:" + currentUser.getName());
-                System.out.println("Gender:" + currentUser.getGender());
-                System.out.println("Age:" + currentUser.getAge());
-                System.out.println("Phone:" + currentUser.getPhone());
-                System.out.println("Position:" + currentUser.getPosition());
+                System.out.println("You have successfully logged in!");
+                ProfileMenu.profileList(login.getId(),choice);
             } else {
                 System.out.println("Wrong Password");
             }
