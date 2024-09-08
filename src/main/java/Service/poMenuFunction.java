@@ -1,16 +1,20 @@
 package Service;
 
+import DAO.ProductMapper;
 import DAO.PurchaseOrderMapper;
 import Database.Database;
+import Entity.Product;
 import Entity.Purchase_Order;
 import org.apache.ibatis.session.SqlSession;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 
 public class poMenuFunction {
+
     public static void poListing() throws IOException {
         int poMenuOptions;
         Scanner poScanner = new Scanner(System.in);
@@ -22,7 +26,7 @@ public class poMenuFunction {
 
         System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID", "Status");
         for (Purchase_Order po : poList) {
-            System.out.printf("%-10s | %-11s | %-10d | %-5.2f | %-12s | %-11s\n",
+            System.out.printf("%-10s | %-11s | %-10d | %-7.2f | %-12s | %-11s\n",
                     po.getPo_number(),
                     po.getProduct_id(),
                     po.getPurchase_quantity(),
@@ -49,7 +53,7 @@ public class poMenuFunction {
                     // editPO();
                     break;
                 case 4:
-                    // cancelPO();
+                    cancelPurchaseOrder();
                     break;
                 case 5:
                     // fuckOff();
@@ -66,8 +70,8 @@ public class poMenuFunction {
         Purchase_Order newPO = getNewPurchaseOrder();
         try (SqlSession conn = Database.getInstance().openSession()) {
             PurchaseOrderMapper productMapper = conn.getMapper( PurchaseOrderMapper.class);
-            productMapper.insertPo(newPO); // TODO Ahdan - Write insert logic into .xml file. Also check if mappers are correct.
-            conn.commit();            //TODO DONE
+            productMapper.insertPo(newPO);
+            conn.commit();
         }
     }
 
@@ -86,7 +90,6 @@ public class poMenuFunction {
         System.out.println("Purchase Order Created. Awaiting response and payment calculations from Supplier.");
         return newPO;
     }
-    //TODO DONE
 
 
     public static void searchPurchaseOrder() throws IOException {
@@ -113,9 +116,8 @@ public class poMenuFunction {
                         PurchaseOrderMapper poMapper = conn.getMapper(PurchaseOrderMapper.class);
                         targetList = poMapper.selectIDfortaget(targetSupplier);
                     }
-                    //TODO DONE
+
                     System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Status");
-                    // TODO Ahdan - Show all Purchase Orders done by targetSupplier. No need to select supplier_id column.
                     /*for (Logic here) {
                         System.out.printf("%-10s | %-11s | %-10d | %-5.2f | %-11s\n",
                                 po.getPo_number(),
@@ -131,8 +133,6 @@ public class poMenuFunction {
                     String targetProduct = "";
                     System.out.print("Enter Product ID (Eg. P00001): ");
                     targetProduct = productSc.nextLine();
-                    // TODO Ahdan - Show all Purchase Orders that has the targetProduct ID. No need to print product_id column.
-                    // TODO DONE
                     Purchase_Order targetPO = new Purchase_Order();
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         PurchaseOrderMapper poMapper = conn.getMapper(PurchaseOrderMapper.class);
@@ -202,5 +202,50 @@ public class poMenuFunction {
         return date;
     };
 
+
+    public static void cancelPurchaseOrder() throws IOException {
+        String confirmation;
+        String targetNumber = "";
+        Scanner targetPoScanner = new Scanner(System.in);
+        Scanner confirmationScanner = new Scanner(System.in);
+
+        System.out.print("Enter Product ID: ");
+        targetNumber = targetPoScanner.next();
+        Purchase_Order targetPo = new Purchase_Order();
+        try (SqlSession conn = Database.getInstance().openSession()) {
+            PurchaseOrderMapper purchaseOrderMapper = conn.getMapper( PurchaseOrderMapper.class);
+            targetPo=purchaseOrderMapper.selectBYPOID(targetNumber);
+        }
+
+        if (!Objects.equals(targetPo.getProduct_id(), "Pending")) {
+            System.out.print("\nUnable to Delete Specified Purchase Order. (PO already confirmed/completed!)\n");
+            System.in.read();
+        }
+
+        else {
+
+            System.out.printf("%-10s | %-11s | %-10d | %-5.2f | %-12s | %-11s\n",
+                    targetPo.getPo_number(),
+                    targetPo.getProduct_id(),
+                    targetPo.getPurchase_quantity(),
+                    targetPo.getOrder_price(),
+                    targetPo.getSupplier_id(),
+                    targetPo.getStatus());
+
+
+            System.out.println("Are you sure you would like to cancel this Purchase Order?\n");
+            System.out.print("Enter 1 to cancel, enter any other key to return > ");
+            confirmation = confirmationScanner.nextLine();
+
+            if (Objects.equals(confirmation, "1")) {
+                try (SqlSession sqlSession = Database.getInstance().openSession()) {
+                    PurchaseOrderMapper mapper = sqlSession.getMapper(PurchaseOrderMapper.class);
+                    mapper.cancelPoByID(targetPo.getPo_number());
+                    sqlSession.commit();
+                }
+                System.out.println("Purchase Order canceled.");
+            } else ;
+        }
+    }
 
 }

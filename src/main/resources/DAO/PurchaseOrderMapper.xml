@@ -21,4 +21,9 @@
         SELECT * FROM PURCHASE_ORDER WHERE PRODUCT_ID = #{param1}
     </select>
 
+    <delete id="cancelPoByID">
+        DELETE FROM PURCHASE_ORDER WHERE PURCHASE_ORDER_NUMBER =#{param1}
+    </delete>
+
+
 </mapper>
