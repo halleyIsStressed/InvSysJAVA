@@ -54,7 +54,7 @@
             ORDER_DATE            AS order_date ,
             PRICE                 AS  order_price,
             STATUS                AS  status
-        FROM PURCHASE_ORDER WHERE PRODUCT_ID = #{param1}
+        FROM PURCHASE_ORDER WHERE PURCHASE_ORDER_NUMBER = #{param1}
     </select>
 
     <delete id="cancelPoByID">

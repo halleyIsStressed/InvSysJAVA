@@ -288,7 +288,7 @@ public class poMenuFunction {
             targetPo=purchaseOrderMapper.selectBYPOID(targetNumber);
         }
 
-        if (!Objects.equals(targetPo.getProduct_id(), "Pending")) {
+        if (!Objects.equals(targetPo.getStatus(), "Pending")) {
             System.out.print("\nUnable to Delete Specified Purchase Order. (PO already confirmed/completed!)\n");
             System.in.read();
         }
