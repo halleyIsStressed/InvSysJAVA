@@ -62,15 +62,16 @@
     </delete>
 
     <update id="updateModifyData" parameterType="Entity.Purchase_Order">
-            UPDATE
-
-
+            UPDATE PURCHASE_ORDER SET
+                PURCHASE_ORDER_NUMBER=#{po_number},
+                SUPPLIER_ID =#{supplier_id},
+                PRODUCT_ID =#{product_id},
+                QUANTITY =#{purchase_quantity},
+                ORDER_DATE =#{order_date},
+                PRICE     =#{order_price},
+                STATUS   =#{status}
+            WHERE PURCHASE_ORDER_NUMBER = #{po_number}
     </update>
-
-
-
-
-
 
 
 </mapper>
