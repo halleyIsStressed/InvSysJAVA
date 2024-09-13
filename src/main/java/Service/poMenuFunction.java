@@ -215,7 +215,7 @@ public class poMenuFunction {
         Scanner targetProductScanner = new Scanner(System.in);
         Scanner choiceScanner = new Scanner(System.in);
 
-        System.out.print("Enter Target Product ID: ");
+        System.out.print("Enter Target Purchase Order number (Eg. PO0001): ");
         targetNumber = targetProductScanner.next();
 
 
@@ -224,7 +224,7 @@ public class poMenuFunction {
             targetPo=poMapper.selectBYPOID(targetNumber);
         }
         if(targetPo==null){
-            System.out.println("Target Product Not Found");
+            System.out.println("Target Purchase Order Not Found!");
         }
 
         else if (!Objects.equals(targetPo.getStatus(), "Pending")){
