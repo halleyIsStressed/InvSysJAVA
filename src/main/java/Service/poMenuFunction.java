@@ -82,6 +82,7 @@ public class poMenuFunction {
         newPO.setProduct_id(newPoScanner.nextLine());
         System.out.print("\nEnter quantity: ");
         newPO.setPurchase_quantity(newPoScanner.nextInt());
+        newPoScanner.nextLine();
         System.out.print("\nEnter supplier ID to order from (Eg. 1,2,3): ");
         newPO.setSupplier_id(newPoScanner.nextLine());
 
@@ -116,15 +117,15 @@ public class poMenuFunction {
                         targetList = poMapper.selectIDfortaget(targetSupplier);
                     }
 
-                    System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Status");
-                    /*for (Logic here) {
+                    System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s |\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Status");
+                    for (Purchase_Order po : targetList) {
                         System.out.printf("%-10s | %-11s | %-10d | %-5.2f | %-11s\n",
                                 po.getPo_number(),
                                 po.getProduct_id(),
                                 po.getPurchase_quantity(),
                                 po.getOrder_price(),
                                 po.getStatus());
-                    }*/
+                    }
                     break;
 
                 case 2:
@@ -132,20 +133,24 @@ public class poMenuFunction {
                     String targetProduct = "";
                     System.out.print("Enter Product ID (Eg. P00001): ");
                     targetProduct = productSc.nextLine();
-                    Purchase_Order targetPO = new Purchase_Order();
+                    new Purchase_Order();
+                    List<Purchase_Order> targetPO;
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         PurchaseOrderMapper poMapper = conn.getMapper(PurchaseOrderMapper.class);
-                         targetPO= poMapper.selectBYPOID(targetProduct);
+                         targetPO= poMapper.selectBYPOIDToList(targetProduct);
                     }
-                    System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Quantity", "Cost", "Supplier ID", "Status");
-                    /*System.out.printf("%-10s | %-10d | %-5.2f | %-12s | %-11s\n",
+                    System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s |\n\n", "PO Number", "Quantity", "Cost", "Supplier ID", "Status");
+                    for (Purchase_Order po : targetPO) {
+
+                        System.out.printf("%-10s | %-10d | %-5.2f | %-12s | %-11s\n",
                                 po.getPo_number(),
                                 po.getPurchase_quantity(),
                                 po.getOrder_price(),
                                 po.getSupplier_id(),
                                 po.getStatus());
-                    }*/
+                    }
                     break;
+
 
                 case 3:
                     String startDate, endDate;

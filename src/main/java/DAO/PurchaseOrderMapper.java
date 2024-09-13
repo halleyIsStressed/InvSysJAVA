@@ -14,6 +14,8 @@ public interface PurchaseOrderMapper {
 
     List<Purchase_Order> selectIDfortaget(String supplier_id);
 
+    List<Purchase_Order> selectBYPOIDToList(String product_id);
+
     Purchase_Order selectBYPOID(String product_id);
 
     void cancelPoByID (@NotNull String po_number);

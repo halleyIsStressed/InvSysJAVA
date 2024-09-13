@@ -6,19 +6,55 @@
 <mapper namespace="DAO.PurchaseOrderMapper">
 
     <select id="selectALLpo" resultType="Entity.Purchase_Order">
-        SELECT * FROM PURCHASE_ORDER
+        SELECT
+            PURCHASE_ORDER_NUMBER AS po_number,
+            SUPPLIER_ID           AS supplier_id,
+            PRODUCT_ID            AS product_id,
+            QUANTITY              AS purchase_quantity,
+            ORDER_DATE            AS order_date ,
+            PRICE                 AS  order_price,
+            STATUS                AS  status
+        FROM PURCHASE_ORDER
     </select>
 
     <insert id="insertPo" parameterType="Entity.Purchase_Order">
-        INSERT INTO PURCHASE_ORDER (SUPPLIER_ID, PRODUCT_ID,QUANTITY) VALUES (#{supplier_id},#{product_id},#{product_quantity})
+        INSERT INTO PURCHASE_ORDER (SUPPLIER_ID, PRODUCT_ID,QUANTITY) VALUES (#{supplier_id},#{product_id},#{purchase_quantity})
     </insert>
 
     <select id="selectIDfortaget" resultType="Entity.Purchase_Order">
-        SELECT * FROM PURCHASE_ORDER WHERE SUPPLIER_ID = #{param1}
+        SELECT
+            PURCHASE_ORDER_NUMBER AS po_number,
+            SUPPLIER_ID           AS supplier_id,
+            PRODUCT_ID            AS product_id,
+            QUANTITY              AS purchase_quantity,
+            ORDER_DATE            AS order_date ,
+            PRICE                 AS  order_price,
+            STATUS                AS  status
+        FROM PURCHASE_ORDER WHERE SUPPLIER_ID = #{param1}
+    </select>
+
+    <select id="selectBYPOIDToList" resultType="Entity.Purchase_Order">
+        SELECT
+            PURCHASE_ORDER_NUMBER AS po_number,
+            SUPPLIER_ID           AS supplier_id,
+            PRODUCT_ID            AS product_id,
+            QUANTITY              AS purchase_quantity,
+            ORDER_DATE            AS order_date ,
+            PRICE                 AS  order_price,
+            STATUS                AS  status
+        FROM PURCHASE_ORDER WHERE PRODUCT_ID = #{param1}
     </select>
 
     <select id="selectBYPOID" resultType="Entity.Purchase_Order">
-        SELECT * FROM PURCHASE_ORDER WHERE PRODUCT_ID = #{param1}
+        SELECT
+            PURCHASE_ORDER_NUMBER AS po_number,
+            SUPPLIER_ID           AS supplier_id,
+            PRODUCT_ID            AS product_id,
+            QUANTITY              AS purchase_quantity,
+            ORDER_DATE            AS order_date ,
+            PRICE                 AS  order_price,
+            STATUS                AS  status
+        FROM PURCHASE_ORDER WHERE PRODUCT_ID = #{param1}
     </select>
 
     <delete id="cancelPoByID">
@@ -26,9 +62,12 @@
     </delete>
 
     <update id="updateModifyData" parameterType="Entity.Purchase_Order">
+            UPDATE
 
 
     </update>
+
+
 
 
 

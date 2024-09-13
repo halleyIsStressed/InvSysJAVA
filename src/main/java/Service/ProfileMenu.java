@@ -10,7 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 public class ProfileMenu {
 
     public static void profileList(String id,int choice){
-        User currentUser = null;
+        User currentUser = new User();
         switch (choice) {
             case 1:
                 try (SqlSession conn = Database.getInstance().openSession()) {
@@ -28,6 +28,7 @@ public class ProfileMenu {
 
         Design.designLine();
         System.out.println(currentUser.getPosition() + "Profile");
+        Design.designLine();
         System.out.println("Name:" + currentUser.getName());
         System.out.println("Gender:" + currentUser.getGender());
         System.out.println("Age:" + currentUser.getAge());
