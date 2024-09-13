@@ -280,9 +280,9 @@ public class poMenuFunction {
         Scanner targetPoScanner = new Scanner(System.in);
         Scanner confirmationScanner = new Scanner(System.in);
 
-        System.out.print("Enter Product ID: ");
+        System.out.print("Enter Purchase Order ID: ");
         targetNumber = targetPoScanner.next();
-        Purchase_Order targetPo = new Purchase_Order();
+        Purchase_Order targetPo;
         try (SqlSession conn = Database.getInstance().openSession()) {
             PurchaseOrderMapper purchaseOrderMapper = conn.getMapper( PurchaseOrderMapper.class);
             targetPo=purchaseOrderMapper.selectBYPOID(targetNumber);
