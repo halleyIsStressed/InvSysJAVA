@@ -43,6 +43,6 @@ public class BranchMenuFunction {
                     System.out.println("***Invalid choice! Please try again...***");
                     System.in.read();
             }
-        } while (choice != 0);
+        } while (choice != 6);
     }
 }
