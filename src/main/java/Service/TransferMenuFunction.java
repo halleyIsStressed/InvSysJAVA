@@ -25,7 +25,7 @@ public class TransferMenuFunction {
             trList = trMapper.selectPendingTransfers();
         }
 
-        System.out.println("\nALL PENDING REQUESTS FROM BRANCHES\n");
+        System.out.println("\nPENDING OUTWARD TRANSFER REQUESTS\n");
         System.out.printf("%-12s | %-11s | %-10s | %-9s | %-13s\n\n", "Transfer ID","Product ID","Branch ID","Quantity","Request Date");
         for (Stock_Transfer tr : trList) {
             System.out.printf("%-12s | %-11s | %-10s | %-9d | %-13s\n",

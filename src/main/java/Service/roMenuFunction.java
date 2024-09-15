@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class ProductReturnMenuFunction {
+public class roMenuFunction {
     public static void returnOrderListing() throws IOException {
         int roMenuOptions;
         Scanner optionScanner = new Scanner(System.in);
