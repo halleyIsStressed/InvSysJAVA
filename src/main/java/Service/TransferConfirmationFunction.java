@@ -1,9 +1,7 @@
 package Service;
 
-import DAO.PurchaseOrderMapper;
 import DAO.TransferMapper;
 import Database.Database;
-import Entity.Purchase_Order;
 import Entity.Stock_Transfer;
 import org.apache.ibatis.session.SqlSession;
 
@@ -28,18 +26,18 @@ public class TransferConfirmationFunction {
             trList = trMapper.selectPendingTransfers();
         }
 
+        System.out.println("\nALL PENDING REQUESTS FROM BRANCHES\n");
+        System.out.printf("%-12s | %-11s | %-10s | %-9s | %-13s\n\n", "Transfer ID","Product ID","Branch ID","Quantity","Request Date");
+        for (Stock_Transfer tr : trList) {
+            System.out.printf("%-12s | %-11s | %-10s | %-9d | %-13s\n",
+                    tr.getTransfer_id(),
+                    tr.getProduct_id(),
+                    tr.getBranch_id(),
+                    tr.getTransfer_quantity(),
+                    tr.getRequest_date());
+        }
 
         do {
-            System.out.println("\nALL PENDING REQUESTS FROM BRANCHES\n");
-            System.out.printf("%-12s | %-11s | %-10s | %-9s | %-13s\n\n", "Transfer id","Product ID","Branch ID","Quantity","Request Date");
-            for (Stock_Transfer tr : trList) {
-                System.out.printf("%-12s | %-11s | %-10s | %-9d | %-13s\n",
-                        tr.getTransfer_id(),
-                        tr.getProduct_id(),
-                        tr.getBranch_id(),
-                        tr.getTransfer_quantity(),
-                        tr.getRequest_date());
-            }
 
 
             System.out.println("\nChoose Option:");
