@@ -17,7 +17,7 @@ public class Test {
                     3) Purchase Order Listing
                     4) Branch Menu
                     5) Return Order Listing
-                    6) Transfer Menu
+                    6) Reply to Product Requests
                     7) Exit
                     Enter your option:""");
             int option = sc.nextInt();
@@ -38,7 +38,7 @@ public class Test {
                     ProductReturnMenuFunction.returnOrderListing();
                     break;
                 case 6:
-                    TransferMenuFunction.transferMenu();
+                    TransferMenuFunction.confirmationMenu();
                     break;
                 case 7:
                     System.out.println("Exiting the program...");

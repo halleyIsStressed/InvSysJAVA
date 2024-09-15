@@ -20,4 +20,8 @@ public class Stock_Transfer {
         this.request_date = transfer_date;
         this.status = status;
     }
+
+    public Stock_Transfer() {
+
+    }
 }
