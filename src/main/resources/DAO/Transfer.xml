@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DAO.TransferMapper">
+
+
+    <select id="selectPendingTransfers" resultType="Entity.Stock_Transfer">
+        SELECT TRANSFER_ID, PRODUCT_ID, BRANCH_ID, TRANSFER_QUANTITY, REQUEST_DATE
+        FROM StockTransfer
+        WHERE STATUS = "Pending"
+    </select>
+
+
+</mapper>

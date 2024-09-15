@@ -59,4 +59,19 @@ VALUES
     ('SP00001', 'P00008', 301, DATE('now'), 3010, 'Pending'),
     ('SP00004', 'P00001', 136, DATE('now'), 680, 'Cancelled');
 
-
+/*Stock Transfer*/
+INSERT INTO StockTransfer
+(PRODUCT_ID, BRANCH_ID, TRANSFER_QUANTITY, REQUEST_DATE, STATUS)
+VALUES
+    ('P00001', 'BR00001', 31, '2024-06-13', 'Completed'),
+    ('P00003', 'BR00002', 89, '2024-06-21', 'Completed'),
+    ('P00006', 'BR00001', 90, '2024-07-03', 'Completed'),
+    ('P00002', 'BR00001', 23, '2024-07-20', 'Completed'),
+    ('P00002', 'BR00004', 56, '2024-07-29', 'Completed'),
+    ('P00005', 'BR00004', 44, '2024-08-02', 'Completed'),
+    ('P00008', 'BR00003', 50, '2024-08-15', 'Confirmed'),
+    ('P00002', 'BR00002', 20, '2024-08-27', 'Confirmed'),
+    ('P00007', 'BR00002', 100, '2024-09-09', 'Pending'),
+    ('P00004', 'BR00003', 31, '2024-09-12', 'Pending'),
+    ('P00009', 'BR00003', 10, '2024-09-13', 'Pending'),
+    ('P00010', 'BR00003', 50, '2024-09-14', 'Pending');
