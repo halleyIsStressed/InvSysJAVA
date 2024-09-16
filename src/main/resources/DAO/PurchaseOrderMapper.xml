@@ -73,5 +73,17 @@
             WHERE PURCHASE_ORDER_NUMBER = #{po_number}
     </update>
 
+    <select id="selectByDate" resultType="Entity.Purchase_Order">
+        SELECT
+            PURCHASE_ORDER_NUMBER AS po_number,
+            SUPPLIER_ID           AS supplier_id,
+            PRODUCT_ID            AS product_id,
+            QUANTITY              AS purchase_quantity,
+            ORDER_DATE            AS order_date ,
+            PRICE                 AS  order_price,
+            STATUS                AS  status
+        FROM PURCHASE_ORDER WHERE ORDER_DATE  BETWEEN  #{param1} AND #{param2}
+    </select>
+
 
 </mapper>

@@ -2,6 +2,7 @@ package Service;
 
 import DAO.ProductReturnMapper;
 import Database.Database;
+import Entity.Purchase_Order;
 import Entity.ReturnOrder;
 import org.apache.ibatis.session.SqlSession;
 
@@ -43,11 +44,10 @@ public class roMenuFunction {
     public static void createReturnOrder() {
         ReturnOrder newReturnOrder = getNewReturnOrder();
         try (SqlSession conn = Database.getInstance().openSession()) {
-            ProductReturnMapper roMapper = conn.getMapper( ProductReturnMapper.class);
+            ProductReturnMapper roMapper = conn.getMapper(ProductReturnMapper.class);
             roMapper.insertRo(newReturnOrder);
             conn.commit();
            }
-
     }
 
     public static ReturnOrder getNewReturnOrder(){
@@ -57,18 +57,19 @@ public class roMenuFunction {
         System.out.print("\nEnter product ID to return (Eg. P00001): ");
         newRo.setProduct_id(newRoScanner.nextLine());
         System.out.print("\nEnter quantity: ");
-        newRo.setReturn_quantity(newRoScanner.nextInt());
+        newRo.setQuantity(newRoScanner.nextInt());
+        newRoScanner.nextLine();
         System.out.print("\nEnter supplier ID to return to (Eg. 1,2,3): ");
         newRo.setSupplier_id(newRoScanner.nextLine());
         System.out.print("\nEnter reason of return (Max 20 Characters): ");
-        newRo.setSupplier_id(newRoScanner.nextLine());
+        newRo.setReturn_reason(newRoScanner.nextLine());
 
         System.out.print("\n\n");
         System.out.println("Return Order Created. Quantity has been deducted.");
         return newRo;
 
         // TODO Ahdan - Write .xml logic for creating new Return Order. Deduct product_quantity with return_quantity here.
-
+        // done
     }
 
 
@@ -96,8 +97,22 @@ public class roMenuFunction {
                         ProductReturnMapper roMapper = conn.getMapper(ProductReturnMapper.class);
                         targetList = roMapper.selectRoFromSupplier(targetSupplier);
                     }
-                    // TODO Ahdan - Find all Return Orders linked to targetSupplier and display all rows.
+                    if (targetList == null || targetList.isEmpty()) {
+                        System.out.println("No purchase orders found for the given date range.");
+                    } else {
+                        for (ReturnOrder ro : targetList) {
+                            System.out.printf("%-12s | %-10s | %-10s | %-10s | %-10d | %-20s |\n",
+                                    ro.getReturn_date(),        // String or Date, so use %s
+                                    ro.getReturn_id(),          // String, so use %s
+                                    ro.getProduct_id(),         // String, so use %s
+                                    ro.getSupplier_id(),        // String, so use %s
+                                    ro.getQuantity(),    // int, so use %d
+                                    ro.getReturn_reason());     // String, so use %s
+                        }
+                    }//TODO LEE DESIGN THE OUTPUT
 
+                    // TODO Ahdan - Find all Return Orders linked to targetSupplier and display all rows.
+                    //done
                     break;
 
                 case 2:
@@ -106,25 +121,57 @@ public class roMenuFunction {
                     System.out.print("Enter Product ID (Eg. P00001): ");
                     targetProduct = productSc.nextLine();
                     ReturnOrder targetRo = new ReturnOrder();
+                    List<ReturnOrder> targetPList;
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         ProductReturnMapper roMapper = conn.getMapper(ProductReturnMapper.class);
-                        targetRo= roMapper.selectRoByProduct(targetProduct);
+                        targetPList = roMapper.selectRoByProduct(targetProduct);
                     }
-                    // TODO Ahdan - Find all Return Orders linked to targetProduct and display all rows.
 
+                    // TODO Ahdan - Find all Return Orders linked to targetProduct and display all rows.
+                    //DONE
+                    if (targetPList == null || targetPList.isEmpty()) {
+                        System.out.println("No purchase orders found for the given date range.");
+                    } else {
+                        for (ReturnOrder ro : targetPList) {
+                            System.out.printf("%-12s | %-10s | %-10s | %-10s | %-10d | %-20s |\n",
+                                    ro.getReturn_date(),        // String or Date, so use %s
+                                    ro.getReturn_id(),          // String, so use %s
+                                    ro.getProduct_id(),         // String, so use %s
+                                    ro.getSupplier_id(),        // String, so use %s
+                                    ro.getQuantity(),    // int, so use %d
+                                    ro.getReturn_reason());     // String, so use %s
+                        }
+                    }
                     break;
 
                 case 3:
                     String startDate, endDate;
-
+                    List<ReturnOrder> returnList;
                     System.out.println("Enter start date.");
                     startDate = getDate();
                     System.out.println("\nEnter end date.");
                     endDate = getDate();
 
                     // TODO Ahdan - Find Return Orders that fall between startDate and endDate. Format is MM/YYYY.
-                    System.out.println(startDate);
-                    System.out.println(endDate);
+                    //done
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        ProductReturnMapper roMapper = conn.getMapper(ProductReturnMapper.class);
+                        returnList= roMapper.selectReturnByDate(startDate, endDate);
+                    }
+                    if (returnList == null || returnList.isEmpty()) {
+                        System.out.println("No purchase orders found for the given date range.");
+                    } else {
+                        for (ReturnOrder ro : returnList) {
+                            System.out.printf("%-12s | %-10s | %-10s | %-10s | %-10d | %-20s |\n",
+                                    ro.getReturn_date(),        // String or Date, so use %s
+                                    ro.getReturn_id(),          // String, so use %s
+                                    ro.getProduct_id(),         // String, so use %s
+                                    ro.getSupplier_id(),        // String, so use %s
+                                    ro.getQuantity(),    // int, so use %d
+                                    ro.getReturn_reason());     // St
+                        }
+                    }
+
 
                     break;
 
@@ -142,18 +189,9 @@ public class roMenuFunction {
     }
 
     private static String getDate() {
-        int month, year;
+        int month, year,day = 0;
         String date;
         Scanner dateSc = new Scanner(System.in);
-
-        do {
-            System.out.print("Month (MM): ");
-            month = dateSc.nextInt();
-
-            if (month < 1 || month > 12) {
-                System.out.println("\nInvalid Month. Try Again.");
-            }
-        } while (month < 1 || month > 12);
 
         do {
             System.out.print("Year (YYYY): ");
@@ -164,9 +202,51 @@ public class roMenuFunction {
             }
         } while (year > 2024);
 
-        date = month + "/" + year;
+        do {
+            System.out.print("Month (MM): ");
+            month = dateSc.nextInt();
+            if (month < 1 || month > 12) {
+                System.out.println("\nInvalid Month. Please enter a month between 1 and 12.");
+            }
+        } while (month < 1 || month > 12);
+
+
+        boolean validDay;
+        do {
+            validDay = true;
+            System.out.print("Day (DD): ");
+            day = dateSc.nextInt();
+            if (month == 2) { // February
+                if (isLeapYear(year)) {
+                    if (day < 1 || day > 29) {
+                        validDay = false;
+                        System.out.println("\nInvalid Day for February in a Leap Year. Try Again.");
+                    }
+                } else {
+                    if (day < 1 || day > 28) {
+                        validDay = false;
+                        System.out.println("\nInvalid Day for February. Try Again.");
+                    }
+                }
+            } else if (month == 4 || month == 6 || month == 9 || month == 11) { // Months with 30 days
+                if (day < 1 || day > 30) {
+                    validDay = false;
+                    System.out.println("\nInvalid Day. This month has 30 days. Try Again.");
+                }
+            } else { // Months with 31 days
+                if (day < 1 || day > 31) {
+                    validDay = false;
+                    System.out.println("\nInvalid Day. This month has 31 days. Try Again.");
+                }
+            }
+        } while (!validDay);
+
+        date = String.format("%04d-%02d-%02d", year, month, day);
         return date;
-    };
+    }
+    private static boolean isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
 
 
 }

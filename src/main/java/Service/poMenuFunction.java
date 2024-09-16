@@ -156,14 +156,33 @@ public class poMenuFunction {
                 case 3:
                     String startDate, endDate;
 
+                    List<Purchase_Order> poList;
                     System.out.println("Enter start date.");
                     startDate = getDate();
                     System.out.println("\nEnter end date.");
                     endDate = getDate();
 
                     // TODO Ahdan - Find purchase orders that fall between startDate and endDate. Format is MM/YYYY.
-                    System.out.println(startDate);
-                    System.out.println(endDate);
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        PurchaseOrderMapper poMapper = conn.getMapper(PurchaseOrderMapper.class);
+                        poList=poMapper.selectByDate(startDate,endDate);
+                    }
+
+                    if (poList == null || poList.isEmpty()) {
+                        System.out.println("No purchase orders found for the given date range.");
+                    } else {
+                        for (Purchase_Order po : poList) {
+                            System.out.printf("%-12s | %-10s | %-10s | %-12d | %-8.2f | %-10s | %-10s\n",
+                                    po.getOrder_date(),
+                                    po.getPo_number(),
+                                    po.getProduct_id(),
+                                    po.getPurchase_quantity(),
+                                    po.getOrder_price(),
+                                    po.getSupplier_id(),
+                                    po.getStatus());
+                        }
+                    }
+
 
                     break;
 
@@ -181,18 +200,9 @@ public class poMenuFunction {
     }
 
     private static String getDate() {
-        int month, year;
+        int month, year,day = 0;
         String date;
         Scanner dateSc = new Scanner(System.in);
-
-        do {
-            System.out.print("Month (MM): ");
-            month = dateSc.nextInt();
-
-            if (month < 1 || month > 12) {
-                System.out.println("\nInvalid Month. Try Again.");
-            }
-        } while (month < 1 || month > 12);
 
         do {
             System.out.print("Year (YYYY): ");
@@ -203,9 +213,52 @@ public class poMenuFunction {
             }
         } while (year > 2024);
 
-        date = month + "/" + year;
+        do {
+            System.out.print("Month (MM): ");
+            month = dateSc.nextInt();
+            if (month < 1 || month > 12) {
+                System.out.println("\nInvalid Month. Please enter a month between 1 and 12.");
+            }
+        } while (month < 1 || month > 12);
+
+
+        boolean validDay;
+            do {
+                validDay = true;
+                System.out.print("Day (DD): ");
+                day = dateSc.nextInt();
+                if (month == 2) { // February
+                    if (isLeapYear(year)) {
+                        if (day < 1 || day > 29) {
+                            validDay = false;
+                            System.out.println("\nInvalid Day for February in a Leap Year. Try Again.");
+                        }
+                    } else {
+                        if (day < 1 || day > 28) {
+                            validDay = false;
+                            System.out.println("\nInvalid Day for February. Try Again.");
+                        }
+                    }
+                } else if (month == 4 || month == 6 || month == 9 || month == 11) { // Months with 30 days
+                    if (day < 1 || day > 30) {
+                        validDay = false;
+                        System.out.println("\nInvalid Day. This month has 30 days. Try Again.");
+                    }
+                } else { // Months with 31 days
+                    if (day < 1 || day > 31) {
+                        validDay = false;
+                        System.out.println("\nInvalid Day. This month has 31 days. Try Again.");
+                    }
+                }
+            } while (!validDay);
+
+        date = String.format("%04d-%02d-%02d", year, month, day);
         return date;
     };
+
+    private static boolean isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
 
 
     public static void editPurchaseOrder() throws IOException {

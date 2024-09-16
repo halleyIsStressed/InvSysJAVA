@@ -20,14 +20,8 @@ INSERT INTO SUPPLIER
 VALUES
     ('Global Supplies Inc.', '212-555-1234', '123 Main St, New York, NY 10001', 'contact@globalsupplies.com'),
     ('West Coast Distributors', '323-555-5678', '456 Sunset Blvd, Los Angeles, CA 90001', 'info@westcoastdist.com'),
-    ('Midwest Supply Co.', '312-555-8765', '789 Michigan Ave, Chicago, IL 60601', 'sales@midwestsupply.com'),
-    ('Lone Star Suppliers', '713-555-2345', '321 Bay Area Blvd, Houston, TX 77001', 'support@lonestarsuppliers.com'),
-    ('Desert Wholesale', '602-555-6789', '654 Grand Ave, Phoenix, AZ 85001', 'contact@desertwholesale.com'),
-    ('East Coast Supplies', '215-555-3456', '987 Chestnut St, Philadelphia, PA 19101', 'info@eastcoastsupplies.com'),
-    ('Alamo Suppliers', '210-555-9876', '543 Alamo Plaza, San Antonio, TX 78201', 'sales@alamosuppliers.com'),
-    ('Harbor Distributors', '619-555-6543', '876 Harbor Dr, San Diego, CA 92101', 'support@harbordist.com'),
-    ('Metro Supplies', '214-555-7654', '210 Elm St, Dallas, TX 75201', 'contact@metrosupplies.com'),
-    ('Silicon Valley Distributors', '408-555-4321', '432 Market St, San Jose, CA 95101', 'info@siliconvalleydist.com');
+    ('Midwest Supply Co.', '312-555-8765', '789 Michigan Ave, Chicago, IL 60601', 'sales@midwestsupply.com');
+
 
 /*Branch*/
 INSERT INTO BRANCH
