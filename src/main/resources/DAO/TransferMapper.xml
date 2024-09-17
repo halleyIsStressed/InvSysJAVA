@@ -10,5 +10,23 @@
         SELECT * FROM STOCK_TRANSFER WHERE STATUS = 'Pending'
     </select>
 
+    <update id="updateStatus" parameterType="Entity.Stock_Transfer">
+        UPDATE STOCK_TRANSFER SET
+             TRANSFER_ID=#{transfer_id},
+             PRODUCT_ID=#{product_id}        ,
+             BRANCH_ID=#{branch_id}       ,
+             TRANSFER_QUANTITY=#{transfer_quantity} ,
+             REQUEST_DATE=#{request_date},
+             STATUS=#{status} WHERE TRANSFER_ID=#{transfer_id}
+    </update>
+
+    <select id="selectBYID" resultType="Entity.Stock_Transfer">
+        SELECT * FROM STOCK_TRANSFER WHERE TRANSFER_ID=#{param1}
+    </select>
+    
+    <delete id="deleteTransferQequest">
+        DELETE FROM STOCK_TRANSFER WHERE TRANSFER_ID=#{param1}
+    </delete>
+
 
 </mapper>

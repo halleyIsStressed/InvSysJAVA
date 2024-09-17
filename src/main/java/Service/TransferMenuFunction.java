@@ -1,7 +1,10 @@
 package Service;
 
+import DAO.ProductMapper;
 import DAO.TransferMapper;
 import Database.Database;
+import Entity.Product;
+import Entity.Stock_Return;
 import Entity.Stock_Transfer;
 import org.apache.ibatis.session.SqlSession;
 
@@ -44,25 +47,76 @@ public class TransferMenuFunction {
             System.out.println("2 > Deny Request");
             System.out.println("3 > Return");
             confirmationOptions = optionScanner.nextInt();
+            Stock_Transfer stockTransfer=null;
             switch (confirmationOptions) {
                 case 1:
                     System.out.println("Enter Transfer ID to Confirm(Eg. TR00001): ");
                     targetTransferID = idScanner.nextLine();
+
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        TransferMapper trMapper = conn.getMapper(TransferMapper.class);
+                        stockTransfer = trMapper.selectBYID(targetTransferID);
+                    }
+                    System.out.printf("%-12s | %-11s | %-10s | %-9d | %-13s\n",
+                            stockTransfer.getTransfer_id(),
+                            stockTransfer.getProduct_id(),
+                            stockTransfer.getBranch_id(),
+                            stockTransfer.getTransfer_quantity(),
+                            stockTransfer.getRequest_date());
+
+
 
                     System.out.println("Are you sure you want to confirm this transfer request?");
                     System.out.print("Enter 1 to cancel, enter any other key to return > ");
                     confirmation = confirmationScanner.nextLine();
 
                     if (Objects.equals(confirmation, "1")) {
-                        try (SqlSession sqlSession = Database.getInstance().openSession()) {
-                            System.out.println("Not Implemented");
-                            // TODO Ahdan - Write logic to UPDATE Stock_Transfer object of targetTransferID.status into "Confirmed".
+                        boolean transferCompleted = false;
+                        do {
+                            Product product = null;
+                            try (SqlSession conn = Database.getInstance().openSession()) {
+                                ProductMapper productMapper = conn.getMapper(ProductMapper.class);
+                                product = productMapper.selectById(stockTransfer.getProduct_id());
+                            }
+                            if (product.getProduct_quantity()>stockTransfer.getTransfer_quantity()) {
 
-                            // TODO Ahdan - Write logic to UPDATE Product table, and deduct PRODUCT_QUANTITY with TRANSFER_QUANTITY.
+                                // TODO Ahdan - Write logic to UPDATE Product table, and deduct PRODUCT_QUANTITY with TRANSFER_QUANTITY.
 
-                        }
+                                int newQuantity;
+                                int stockTQ = stockTransfer.getTransfer_quantity();
+                                int productQ = product.getProduct_quantity();
+                                newQuantity = productQ - stockTQ;
+                                product.setProduct_quantity(newQuantity);
 
-                        System.out.println("Request Confirmed! Quantity of product deducted from local database.");
+                                try (SqlSession conn = Database.getInstance().openSession()) {
+                                    ProductMapper productMapper = conn.getMapper(ProductMapper.class);
+                                    productMapper.updateModifyData(product);
+                                    conn.commit();
+                                }
+
+                                // TODO Ahdan - Write logic to UPDATE Stock_Transfer object of targetTransferID.status into "Confirmed".
+                                stockTransfer.setStatus("Confirmed");
+                                try (SqlSession conn = Database.getInstance().openSession()) {
+                                    TransferMapper trMapper = conn.getMapper(TransferMapper.class);
+                                    trMapper.updateStatus(stockTransfer);
+                                    conn.commit();
+                                }
+                                System.out.println("Request Confirmed! Quantity of product deducted from local database.");
+                                transferCompleted = true;
+                            }
+                        else{
+                                System.out.println("Insufficient stock for this transfer. Transfer cannot be confirmed.");
+                                System.out.print("Do you want to retry? (Enter 1 to retry, any other key to cancel): ");
+                                confirmation = confirmationScanner.nextLine();
+
+                                // If user doesn't want to retry, break the loop
+                                if (!Objects.equals(confirmation, "1")) {
+                                    transferCompleted = true;
+                                    System.out.println("Transfer cancelled.");
+                                }
+                           }
+                        }while (!transferCompleted);
+
                     } else ;
 
                     break;
@@ -70,16 +124,29 @@ public class TransferMenuFunction {
                     System.out.println("Enter Transfer ID to Deny(Eg. TR00001): ");
                     targetTransferID = idScanner.nextLine();
 
+
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        TransferMapper trMapper = conn.getMapper(TransferMapper.class);
+                        stockTransfer = trMapper.selectBYID(targetTransferID);
+                    }
+                    System.out.printf("%-12s | %-11s | %-10s | %-9d | %-13s\n",
+                            stockTransfer.getTransfer_id(),
+                            stockTransfer.getProduct_id(),
+                            stockTransfer.getBranch_id(),
+                            stockTransfer.getTransfer_quantity(),
+                            stockTransfer.getRequest_date());
+
+
                     System.out.println("Are you sure you want to deny this transfer request?");
                     System.out.print("Enter 1 to cancel, enter any other key to return > ");
                     confirmation = confirmationScanner.nextLine();
-
                     if (Objects.equals(confirmation, "1")) {
-                        try (SqlSession sqlSession = Database.getInstance().openSession()) {
-                            System.out.println("Not Implemented");
-                            // TODO Ahdan - Write logic to delete transfer request of targetTransferID.
+                        // TODO Ahdan - Write logic to delete transfer request of targetTransferID.
+                        try (SqlSession conn = Database.getInstance().openSession()) {
+                            TransferMapper trMapper = conn.getMapper(TransferMapper.class);
+                            trMapper.deleteTransferQequest(stockTransfer);
+                            conn.commit();
                         }
-
                         System.out.println("Request Denied.");
                     } else ;
 
