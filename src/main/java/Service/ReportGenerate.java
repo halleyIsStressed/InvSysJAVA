@@ -176,7 +176,7 @@ public class ReportGenerate {
                        System.out.println("No purchase orders found for the given date range.");
                     } else {
                        for (ReturnOrder ro : targetList) {
-                            System.out.printf("%-12s | %-10s | %-10s | %-10s | %-10d | %-20s |\n",
+
                                     System.out.printf("%-12s | %-10s | %-10s | %-10s | %-10d | %-20s |\n",
                                             ro.getReturn_date(),        // String or Date, so use %s
                                             ro.getReturn_id(),          // String, so use %s
@@ -184,7 +184,7 @@ public class ReportGenerate {
                                             ro.getSupplier_id(),        // String, so use %s
                                             ro.getQuantity(),    // int, so use %d
                                             ro.getReturn_reason()
-                                    ));    // St
+                                    );    // St
                         }
                     }
 

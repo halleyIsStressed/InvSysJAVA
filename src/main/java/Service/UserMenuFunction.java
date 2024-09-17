@@ -7,12 +7,13 @@ import Design.Design;
 import Entity.User;
 import org.apache.ibatis.session.SqlSession;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 
 public class UserMenuFunction {
 
-    public static void mainMenu(int choice) {
+    public static void mainMenu(int choice) throws IOException {
         Scanner sc = new Scanner(System.in);
         boolean keepRunning = true;
 
@@ -53,7 +54,7 @@ public class UserMenuFunction {
         return login;
     }
 
-    public static void selectInformation(int choice)  {
+    public static void selectInformation(int choice) throws IOException {
         User login = getLogin();
         User currentUser = null;
 

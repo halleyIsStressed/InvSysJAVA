@@ -7,9 +7,12 @@ import Design.Design;
 import Entity.User;
 import org.apache.ibatis.session.SqlSession;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 public class ProfileMenu {
 
-    public static void profileList(String id,int choice){
+    public static void profileList(String id,int choice) throws IOException {
         User currentUser = new User();
         switch (choice) {
             case 1:
@@ -25,14 +28,100 @@ public class ProfileMenu {
                 }
                 break;
         }
+        Scanner sc = new Scanner(System.in);
 
-        Design.designLine();
+        System.out.println("\n************************************");
         System.out.println(currentUser.getPosition() + "Profile");
-        Design.designLine();
+        System.out.println("\n************************************");
+
         System.out.println("Name:" + currentUser.getName());
         System.out.println("Gender:" + currentUser.getGender());
         System.out.println("Age:" + currentUser.getAge());
         System.out.println("Phone:" + currentUser.getPhone());
+
+        if (currentUser.getPosition().equals("Inventory Manager")){
+            boolean keepRunning = true;
+            while (keepRunning) {
+                Design.DesignLOGO();
+                System.out.print("""
+                    1) Supplier Menu
+                    2) Product Listing
+                    3) Purchase Order Listing
+                    4) Branch Menu
+                    5) Return Order Listing
+                    6) Reply to Product Requests
+                    7) Generate report
+                    8) Exit
+                    Enter your option:""");
+                int option = sc.nextInt();
+                switch (option) {
+                    case 1:
+                        SupplierMenuFunction.supplierManagement();
+                        break;
+                    case 2:
+                        ProductMenuFunction.productListing();
+                        break;
+                    case 3:
+                        poMenuFunction.poListing();
+                        break;
+                    case 4:
+                        BranchMenuFunction.branchManagement();
+                        break;
+                    case 5:
+                        roMenuFunction.returnOrderListing();
+                        break;
+                    case 6:
+                        TransferMenuFunction.confirmationMenu();
+                        break;
+                    case 7:
+                        ReportGenerate.reportGenerate();
+                    case 8:
+                        System.out.println("Exiting the program...");
+                        keepRunning = false;
+                        break;
+                    default:
+                        System.out.println("Invalid option");
+                        break;
+                }
+            }
+        }
+        else {
+            boolean keepRunning = true;
+            while (keepRunning) {
+                Design.DesignLOGO();
+                System.out.print("""
+                    1) Product Listing
+                    2) Purchase Order Listing
+                    3) Return Order Listing
+                    4) Reply to Product Requests
+                    5) Generate report
+                    6) Exit
+                    Enter your option:""");
+                int option = sc.nextInt();
+                switch (option) {
+                    case 1:
+                        ProductMenuFunction.productListing();
+                        break;
+                    case 2:
+                        poMenuFunction.poListing();
+                        break;
+                    case 3:
+                        roMenuFunction.returnOrderListing();
+                        break;
+                    case 4:
+                        TransferMenuFunction.confirmationMenu();
+                        break;
+                    case 5:
+                        System.out.println("Exiting the program...");
+                        keepRunning = false;
+                        break;
+                    default:
+                        System.out.println("Invalid option");
+                        break;
+                }
+            }
+        }
     }
+
 
 }
