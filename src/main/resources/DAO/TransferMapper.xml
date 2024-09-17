@@ -7,9 +7,7 @@
 
 
     <select id="selectPendingTransfers" resultType="Entity.Stock_Transfer">
-        SELECT *
-        FROM STOCK_TRANSFER
-        WHERE STATUS = 'Pending'
+        SELECT * FROM STOCK_TRANSFER WHERE STATUS = 'Pending'
     </select>
 
 

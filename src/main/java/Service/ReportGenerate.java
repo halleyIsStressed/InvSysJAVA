@@ -147,6 +147,7 @@ public class ReportGenerate {
                     System.out.println("************************************");
 
                     //TODO: AHTAN SELECT ALL INFOMATIONS FROM STOCK TRANSFERS IN DATABASE, THEN HELP ME TO EDIT BELOW CODE TO DISPLAY THEM OUT...
+
 //                    System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID", "Status");
 //                    for (Purchase_Order po : poList) {
 //                        System.out.printf("%-10s | %-11s | %-10d | %-7.2f | %-12s | %-11s\n",
@@ -168,6 +169,7 @@ public class ReportGenerate {
                     System.out.println("************************************");
 
                     //TODO: AHTAN SELECT ALL INFORMATIONS FROM RETURN ORDER IN DATABASE, THEN HELP ME TO EDIT BELOW CODE TO DISPLAY THEM OUT...
+
 //                    System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID", "Status");
 //                    for (Purchase_Order po : poList) {
 //                        System.out.printf("%-10s | %-11s | %-10d | %-7.2f | %-12s | %-11s\n",

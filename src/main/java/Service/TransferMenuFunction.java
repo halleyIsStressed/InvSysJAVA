@@ -57,7 +57,9 @@ public class TransferMenuFunction {
                         try (SqlSession sqlSession = Database.getInstance().openSession()) {
                             System.out.println("Not Implemented");
                             // TODO Ahdan - Write logic to UPDATE Stock_Transfer object of targetTransferID.status into "Confirmed".
+
                             // TODO Ahdan - Write logic to UPDATE Product table, and deduct PRODUCT_QUANTITY with TRANSFER_QUANTITY.
+
                         }
 
                         System.out.println("Request Confirmed! Quantity of product deducted from local database.");
