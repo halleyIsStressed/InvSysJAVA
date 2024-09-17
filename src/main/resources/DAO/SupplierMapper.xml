@@ -16,7 +16,7 @@
             contact_no AS supplierTel,
             address AS supplierAddress,
             email AS supplierEmail,
-            create_date AS dateTimeCreated
+            create_date AS supplierDateTimeCreated
         FROM SUPPLIER
     </select>
 
@@ -27,7 +27,7 @@
             contact_no AS supplierTel,
             address AS supplierAddress,
             email AS supplierEmail,
-            create_date AS dateTimeCreated
+            create_date AS supplierDateTimeCreated
         FROM SUPPLIER
         WHERE SUPPLIER_ID = #{param1}
     </select>
@@ -39,7 +39,7 @@
            contact_no    AS supplierTel,
            address       AS supplierAddress,
            email         AS supplierEmail,
-           create_date   AS dateTimeCreated
+           create_date   AS supplierDateTimeCreated
         FROM SUPPLIER
         WHERE SUPPLIER_NAME = #{param1} COLLATE NOCASE
     </select>

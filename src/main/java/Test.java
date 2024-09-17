@@ -18,7 +18,8 @@ public class Test {
                     4) Branch Menu
                     5) Return Order Listing
                     6) Reply to Product Requests
-                    7) Exit
+                    7) Generate report
+                    8) Exit
                     Enter your option:""");
             int option = sc.nextInt();
             switch (option) {
@@ -41,6 +42,8 @@ public class Test {
                     TransferMenuFunction.confirmationMenu();
                     break;
                 case 7:
+                    ReportGenerate.reportGenerate();
+                case 8:
                     System.out.println("Exiting the program...");
                     keepRunning = false;
                     break;

@@ -21,5 +21,10 @@
         SELECT * FROM RETURN_ORDER  WHERE RETURN_DATE BETWEEN #{param1} AND #{param2}
     </select>
 
+    <select id="selectAllRo" resultType="Entity.ReturnOrder">
+        SELECT * FROM RETURN_ORDER
+    </select>
+
+
 
 </mapper>

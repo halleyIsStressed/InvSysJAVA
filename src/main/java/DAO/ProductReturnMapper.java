@@ -17,4 +17,5 @@ public interface ProductReturnMapper {
 
     List<ReturnOrder>selectReturnByDate (@Param("param1") String startDate, @Param("param2") String endDate);
 
+    List<ReturnOrder> selectAllRo ();
 }

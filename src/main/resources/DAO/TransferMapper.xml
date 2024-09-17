@@ -28,5 +28,10 @@
         DELETE FROM STOCK_TRANSFER WHERE TRANSFER_ID=#{param1}
     </delete>
 
+    <select id="selectTransfers" resultType="Entity.Stock_Transfer">
+        SELECT * FROM STOCK_TRANSFER
+    </select>
+
+
 
 </mapper>
