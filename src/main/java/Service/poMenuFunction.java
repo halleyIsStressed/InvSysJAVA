@@ -22,7 +22,7 @@ public class poMenuFunction {
             poList = poMapper.selectALLpo();
         }
 
-        System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-12s | %-11s\n\n", "PO Number","Product ID","Quantity","Cost","Order Date","Supplier ID","Status");
+        System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Order Date", "Supplier ID", "Status");
         for (Purchase_Order po : poList) {
             System.out.printf("%-10s | %-11s | %-10d | %-7.2f |  %-12s | %-12s | %-11s\n",
                     po.getPo_number(),
@@ -66,26 +66,47 @@ public class poMenuFunction {
         } while (poMenuOptions != 5);
     }
 
-    public static void createPurchaseOrder() {
+    public static void createPurchaseOrder() throws IOException {
         Purchase_Order newPO = getNewPurchaseOrder();
         try (SqlSession conn = Database.getInstance().openSession()) {
-            PurchaseOrderMapper productMapper = conn.getMapper( PurchaseOrderMapper.class);
+            PurchaseOrderMapper productMapper = conn.getMapper(PurchaseOrderMapper.class);
             productMapper.insertPo(newPO);
             conn.commit();
         }
     }
 
-    public static Purchase_Order getNewPurchaseOrder(){
-
+    public static Purchase_Order getNewPurchaseOrder() throws IOException {
+        boolean invalid;
         Purchase_Order newPO = new Purchase_Order();
         Scanner newPoScanner = new Scanner(System.in);
-        System.out.print("\nEnter product ID to order (Eg. P00001): ");
-        newPO.setProduct_id(newPoScanner.nextLine());
+        do {
+            invalid = false;
+            System.out.print("\nEnter product ID to order (Eg. P00001): ");
+
+            newPO.setProduct_id(newPoScanner.nextLine());
+            if (newPO.getProduct_id().matches("^P\\d{5}$")) {
+            } else {
+                invalid = true;
+                System.out.println("\nInvalid product ID format. Try Again.");
+                System.in.read();
+            }
+        } while (invalid);
+
         System.out.print("\nEnter quantity: ");
         newPO.setPurchase_quantity(newPoScanner.nextInt());
         newPoScanner.nextLine();
-        System.out.print("\nEnter supplier ID to order from (Eg. 1,2,3): ");
-        newPO.setSupplier_id(newPoScanner.nextLine());
+
+        do {
+            invalid = false;
+            System.out.print("\nEnter supplier ID to order from (Eg. SP00001): ");
+            newPO.setSupplier_id(newPoScanner.nextLine());
+            if (newPO.getSupplier_id().matches("^SP\\d{5}$")) {
+            } else {
+                invalid = true;
+                System.out.println("\nInvalid supplier ID format. Try Again.");
+                System.in.read();
+            }
+        } while (invalid);
 
         System.out.print("\n\n");
         System.out.println("Purchase Order Created. Awaiting response and payment calculations from Supplier.");
@@ -107,10 +128,21 @@ public class poMenuFunction {
 
             switch (filterOptions) {
                 case 1:
+                    boolean invalid;
                     Scanner supplierSc = new Scanner(System.in);
                     String targetSupplier = "";
-                    System.out.print("Enter Supplier ID (Eg. 1, 2, 3): ");
-                    targetSupplier = supplierSc.nextLine();
+                    do {
+                        invalid = false;
+                        System.out.print("\nEnter supplier ID (Eg. SP00001): ");
+                        targetSupplier = supplierSc.nextLine();
+                        if (targetSupplier.matches("^SP\\d{5}$")) {
+
+                        } else {
+                            invalid = true;
+                            System.out.println("\nInvalid supplier ID format. Try Again.");
+                            System.in.read();
+                        }
+                    } while (invalid);
 
                     List<Purchase_Order> targetList;
                     try (SqlSession conn = Database.getInstance().openSession()) {
@@ -127,18 +159,30 @@ public class poMenuFunction {
                                 po.getOrder_price(),
                                 po.getStatus());
                     }
+                    System.out.println("\n");
                     break;
 
                 case 2:
                     Scanner productSc = new Scanner(System.in);
                     String targetProduct = "";
-                    System.out.print("Enter Product ID (Eg. P00001): ");
-                    targetProduct = productSc.nextLine();
+                    do {
+                        invalid = false;
+                        System.out.print("\nEnter product ID (Eg. P00001): ");
+                        targetProduct = productSc.nextLine();
+                        if (targetProduct.matches("^P\\d{5}$")) {
+                        } else {
+                            invalid = true;
+                            System.out.println("\nInvalid product ID format. Try Again.");
+                            System.in.read();
+                        }
+                    } while (invalid);
+
+
                     new Purchase_Order();
                     List<Purchase_Order> targetPO;
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         PurchaseOrderMapper poMapper = conn.getMapper(PurchaseOrderMapper.class);
-                         targetPO= poMapper.selectBYPOIDToList(targetProduct);
+                        targetPO = poMapper.selectBYPOIDToList(targetProduct);
                     }
                     System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s |\n\n", "PO Number", "Quantity", "Cost", "Supplier ID", "Status");
                     for (Purchase_Order po : targetPO) {
@@ -162,10 +206,9 @@ public class poMenuFunction {
                     System.out.println("\nEnter end date.");
                     endDate = getDate();
 
-                    // TODO Ahdan - Find purchase orders that fall between startDate and endDate. Format is MM/YYYY.
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         PurchaseOrderMapper poMapper = conn.getMapper(PurchaseOrderMapper.class);
-                        poList=poMapper.selectByDate(startDate,endDate);
+                        poList = poMapper.selectByDate(startDate, endDate);
                     }
 
                     if (poList == null || poList.isEmpty()) {
@@ -200,7 +243,7 @@ public class poMenuFunction {
     }
 
     private static String getDate() {
-        int month, year,day = 0;
+        int month, year, day = 0;
         String date;
         Scanner dateSc = new Scanner(System.in);
 
@@ -223,38 +266,39 @@ public class poMenuFunction {
 
 
         boolean validDay;
-            do {
-                validDay = true;
-                System.out.print("Day (DD): ");
-                day = dateSc.nextInt();
-                if (month == 2) { // February
-                    if (isLeapYear(year)) {
-                        if (day < 1 || day > 29) {
-                            validDay = false;
-                            System.out.println("\nInvalid Day for February in a Leap Year. Try Again.");
-                        }
-                    } else {
-                        if (day < 1 || day > 28) {
-                            validDay = false;
-                            System.out.println("\nInvalid Day for February. Try Again.");
-                        }
-                    }
-                } else if (month == 4 || month == 6 || month == 9 || month == 11) { // Months with 30 days
-                    if (day < 1 || day > 30) {
+        do {
+            validDay = true;
+            System.out.print("Day (DD): ");
+            day = dateSc.nextInt();
+            if (month == 2) { // February
+                if (isLeapYear(year)) {
+                    if (day < 1 || day > 29) {
                         validDay = false;
-                        System.out.println("\nInvalid Day. This month has 30 days. Try Again.");
+                        System.out.println("\nInvalid Day for February in a Leap Year. Try Again.");
                     }
-                } else { // Months with 31 days
-                    if (day < 1 || day > 31) {
+                } else {
+                    if (day < 1 || day > 28) {
                         validDay = false;
-                        System.out.println("\nInvalid Day. This month has 31 days. Try Again.");
+                        System.out.println("\nInvalid Day for February. Try Again.");
                     }
                 }
-            } while (!validDay);
+            } else if (month == 4 || month == 6 || month == 9 || month == 11) { // Months with 30 days
+                if (day < 1 || day > 30) {
+                    validDay = false;
+                    System.out.println("\nInvalid Day. This month has 30 days. Try Again.");
+                }
+            } else { // Months with 31 days
+                if (day < 1 || day > 31) {
+                    validDay = false;
+                    System.out.println("\nInvalid Day. This month has 31 days. Try Again.");
+                }
+            }
+        } while (!validDay);
 
         date = String.format("%04d-%02d-%02d", year, month, day);
         return date;
-    };
+    }
+
 
     private static boolean isLeapYear(int year) {
         return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
@@ -263,31 +307,36 @@ public class poMenuFunction {
 
     public static void editPurchaseOrder() throws IOException {
 
-        Purchase_Order targetPo = new Purchase_Order();
-        String targetNumber;
+        Purchase_Order targetPo;
+        String targetNumber = "";
         int choice;
+        boolean invalid;
         Scanner targetProductScanner = new Scanner(System.in);
         Scanner choiceScanner = new Scanner(System.in);
 
-        System.out.print("Enter Target Purchase Order number (Eg. PO0001): ");
-        targetNumber = targetProductScanner.next();
+        do {
+            invalid = false;
+            System.out.print("\nEnter Target Purchase Order number (Eg. PO00001): ");
+            targetNumber = targetProductScanner.nextLine();
+            if (targetNumber.matches("^PO\\d{5}$")) {
+            } else {
+                invalid = true;
+                System.out.println("\nInvalid product ID format. Try Again.");
+                System.in.read();
+            }
+        } while (invalid);
 
 
         try (SqlSession conn = Database.getInstance().openSession()) {
-            PurchaseOrderMapper poMapper = conn.getMapper( PurchaseOrderMapper.class);
-            targetPo=poMapper.selectBYPOID(targetNumber);
+            PurchaseOrderMapper poMapper = conn.getMapper(PurchaseOrderMapper.class);
+            targetPo = poMapper.selectBYPOID(targetNumber);
         }
-        if(targetPo==null){
+        if (targetPo == null) {
             System.out.println("Target Purchase Order Not Found!");
-        }
-
-        else if (!Objects.equals(targetPo.getStatus(), "Pending")){
+        } else if (!Objects.equals(targetPo.getStatus(), "Pending")) {
             System.out.print("\nUnable to modify specified Purchase Order. (PO already confirmed/completed!)\n");
             System.in.read();
-        }
-
-
-        else {
+        } else {
             do {
                 System.out.println("Choose value to modify:");
                 System.out.println("1 > Product ID");
@@ -298,8 +347,17 @@ public class poMenuFunction {
                 choiceScanner.nextLine();
                 switch (choice) {
                     case 1:
-                        System.out.print("Enter new Product ID (Eg. P00001): ");
-                        targetPo.setProduct_id(choiceScanner.nextLine());
+                        do {
+                            invalid = false;
+                            System.out.print("\nEnter new product ID (Eg. P00001): ");
+                            targetPo.setProduct_id(choiceScanner.nextLine());
+                            if (targetPo.getProduct_id().matches("^P\\d{5}$")) {
+                            } else {
+                                invalid = true;
+                                System.out.println("\nInvalid product ID format. Try Again.");
+                                System.in.read();
+                            }
+                        } while (invalid);
                         break;
                     case 2:
                         System.out.print("Enter new Quantity: ");
@@ -313,8 +371,7 @@ public class poMenuFunction {
                         break;
                 }
 
-                // update modify function
-                // TODO Ahdan - do .xml logic for modifying PO. Check if mapper.java logic is correct.
+
                 try (SqlSession conn = Database.getInstance().openSession()) {
                     PurchaseOrderMapper mapper = conn.getMapper(PurchaseOrderMapper.class);
                     mapper.updateModifyData(targetPo);
@@ -333,21 +390,32 @@ public class poMenuFunction {
         String targetNumber = "";
         Scanner targetPoScanner = new Scanner(System.in);
         Scanner confirmationScanner = new Scanner(System.in);
+        boolean invalid;
+        do {
+            invalid = false;
+            System.out.print("\nEnter Target Purchase Order (Eg. PO00001): ");
+            targetNumber = targetPoScanner.nextLine();
+            if (targetNumber.matches("^PO\\d{5}$")) {
+            } else {
+                invalid = true;
+                System.out.println("\nInvalid product ID format. Try Again.");
+                System.in.read();
+            }
+        } while (invalid);
 
-        System.out.print("Enter Purchase Order ID: ");
+
+
         targetNumber = targetPoScanner.next();
         Purchase_Order targetPo;
         try (SqlSession conn = Database.getInstance().openSession()) {
-            PurchaseOrderMapper purchaseOrderMapper = conn.getMapper( PurchaseOrderMapper.class);
-            targetPo=purchaseOrderMapper.selectBYPOID(targetNumber);
+            PurchaseOrderMapper purchaseOrderMapper = conn.getMapper(PurchaseOrderMapper.class);
+            targetPo = purchaseOrderMapper.selectBYPOID(targetNumber);
         }
 
         if (!Objects.equals(targetPo.getStatus(), "Pending")) {
             System.out.print("\nUnable to Delete Specified Purchase Order. (PO already confirmed/completed!)\n");
             System.in.read();
-        }
-
-        else {
+        } else {
 
             System.out.printf("%-10s | %-11s | %-10d | %-5.2f | %-12s | %-11s\n",
                     targetPo.getPo_number(),

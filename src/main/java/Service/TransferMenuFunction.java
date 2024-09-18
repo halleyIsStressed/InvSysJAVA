@@ -4,7 +4,6 @@ import DAO.ProductMapper;
 import DAO.TransferMapper;
 import Database.Database;
 import Entity.Product;
-import Entity.Stock_Return;
 import Entity.Stock_Transfer;
 import org.apache.ibatis.session.SqlSession;
 
@@ -17,6 +16,7 @@ public class TransferMenuFunction {
     public static void confirmationMenu() throws IOException {
         int confirmationOptions;
         String targetTransferID;
+        boolean invalid;
         String confirmation;
         Scanner optionScanner = new Scanner(System.in);
         Scanner idScanner = new Scanner(System.in);
@@ -50,8 +50,20 @@ public class TransferMenuFunction {
             Stock_Transfer stockTransfer=null;
             switch (confirmationOptions) {
                 case 1:
-                    System.out.println("Enter Transfer ID to Confirm(Eg. TR00001): ");
-                    targetTransferID = idScanner.nextLine();
+                    do {
+                        invalid = false;
+                        System.out.print("\nEnter Transfer ID to Confirm(Eg. TR00001): ");
+
+                        targetTransferID = idScanner.nextLine();
+                        if (targetTransferID.matches("^TR\\d{5}$")) {
+                        } else {
+                            invalid = true;
+                            System.out.println("\nInvalid Transfer ID format. Try Again.");
+                            System.in.read();
+                        }
+                    } while (invalid);
+
+
 
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         TransferMapper trMapper = conn.getMapper(TransferMapper.class);
@@ -80,7 +92,6 @@ public class TransferMenuFunction {
                             }
                             if (product.getProduct_quantity()>stockTransfer.getTransfer_quantity()) {
 
-                                // TODO Ahdan - Write logic to UPDATE Product table, and deduct PRODUCT_QUANTITY with TRANSFER_QUANTITY.
 
                                 int newQuantity;
                                 int stockTQ = stockTransfer.getTransfer_quantity();
@@ -94,7 +105,6 @@ public class TransferMenuFunction {
                                     conn.commit();
                                 }
 
-                                // TODO Ahdan - Write logic to UPDATE Stock_Transfer object of targetTransferID.status into "Confirmed".
                                 stockTransfer.setStatus("Confirmed");
                                 try (SqlSession conn = Database.getInstance().openSession()) {
                                     TransferMapper trMapper = conn.getMapper(TransferMapper.class);
@@ -121,8 +131,18 @@ public class TransferMenuFunction {
 
                     break;
                 case 2:
-                    System.out.println("Enter Transfer ID to Deny(Eg. TR00001): ");
-                    targetTransferID = idScanner.nextLine();
+                    do {
+                        invalid = false;
+                        System.out.print("\nEnter Transfer ID to Deny (Eg. TR00001): ");
+
+                        targetTransferID = idScanner.nextLine();
+                        if (targetTransferID.matches("^TR\\d{5}$")) {
+                        } else {
+                            invalid = true;
+                            System.out.println("\nInvalid Transfer ID format. Try Again.");
+                            System.in.read();
+                        }
+                    } while (invalid);
 
 
                     try (SqlSession conn = Database.getInstance().openSession()) {

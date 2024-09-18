@@ -2,16 +2,18 @@
 INSERT INTO PRODUCT
     (PRODUCT_TYPE, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_QUANTITY)
 VALUES
-    ('Fishing Rods', 'Carbon Fiber Rod', 199.99, 50),
-    ('Fishing Reels', 'Spinning Reel', 79.99, 100),
-    ('Fishing Lures', 'Topwater Frog', 12.99, 200),
-    ('Fishing Lines', 'Braided Line', 24.99, 150),
-    ('Nets', 'Landing Net', 29.99, 80),
-    ('Line', 'Waterproof Line', 99.99, 120),
-    ('Accessory', 'Tackle Box', 39.99, 300),
-    ('Baits', 'Live Worms', 8.99, 500),
-    ('Electronics', 'Fish Finder', 249.99, 30),
-    ('Boats', 'Inflatable Kayak', 599.99, 10);
+    ('Rod', 'Spinning Rod', 150.00, 10),
+    ('Rod', 'Casting Rod', 120.00, 15),
+    ('Reel', 'Spinning Reel', 75.00, 20),
+    ('Reel', 'Bait casting Reel', 85.00, 12),
+    ('Line', 'Braided Line', 25.00, 50),
+    ('Line', 'Mono filament Line', 15.00, 60),
+    ('Lure', 'Crank bait', 8.50, 100),
+    ('Lure', 'Spinner bait', 7.00, 80),
+    ('Accessory', 'Fishing Pliers', 12.00, 25),
+    ( 'Accessory', 'Tackle Box', 45.00, 30);
+
+
 /*Supplier */
 
 INSERT INTO SUPPLIER
