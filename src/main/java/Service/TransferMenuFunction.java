@@ -144,7 +144,7 @@ public class TransferMenuFunction {
                         // TODO Ahdan - Write logic to delete transfer request of targetTransferID.
                         try (SqlSession conn = Database.getInstance().openSession()) {
                             TransferMapper trMapper = conn.getMapper(TransferMapper.class);
-                            trMapper.deleteTransferQequest(stockTransfer);
+                            trMapper.deleteTransferRequest(stockTransfer);
                             conn.commit();
                         }
                         System.out.println("Request Denied.");

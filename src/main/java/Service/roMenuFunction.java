@@ -2,7 +2,6 @@ package Service;
 
 import DAO.ProductReturnMapper;
 import Database.Database;
-import Entity.Purchase_Order;
 import Entity.ReturnOrder;
 import org.apache.ibatis.session.SqlSession;
 
@@ -68,8 +67,6 @@ public class roMenuFunction {
         System.out.println("Return Order Created. Quantity has been deducted.");
         return newRo;
 
-        // TODO Ahdan - Write .xml logic for creating new Return Order. Deduct product_quantity with return_quantity here.
-        // done
     }
 
 
@@ -89,7 +86,7 @@ public class roMenuFunction {
                 case 1:
                     Scanner supplierSc = new Scanner(System.in);
                     String targetSupplier = "";
-                    System.out.print("Enter Supplier ID (Eg. 1, 2, 3): ");
+                    System.out.print("Enter Supplier ID: ");
                     targetSupplier = supplierSc.nextLine();
 
                     List<ReturnOrder> targetList;
@@ -101,18 +98,14 @@ public class roMenuFunction {
                         System.out.println("No purchase orders found for the given date range.");
                     } else {
                         for (ReturnOrder ro : targetList) {
-                            System.out.printf("%-12s | %-10s | %-10s | %-10s | %-10d | %-20s |\n",
-                                    ro.getReturn_date(),        // String or Date, so use %s
-                                    ro.getReturn_id(),          // String, so use %s
-                                    ro.getProduct_id(),         // String, so use %s
-                                    ro.getSupplier_id(),        // String, so use %s
-                                    ro.getQuantity(),    // int, so use %d
-                                    ro.getReturn_reason());     // String, so use %s
+                            System.out.printf("%-12s | %-10s | %-10s | %-10d | %-20s |\n",
+                                    ro.getReturn_date(),
+                                    ro.getReturn_id(),
+                                    ro.getProduct_id(),
+                                    ro.getQuantity(),
+                                    ro.getReturn_reason());
                         }
-                    }//TODO LEE DESIGN THE OUTPUT
-
-                    // TODO Ahdan - Find all Return Orders linked to targetSupplier and display all rows.
-                    //done
+                    }
                     break;
 
                 case 2:
@@ -127,19 +120,16 @@ public class roMenuFunction {
                         targetPList = roMapper.selectRoByProduct(targetProduct);
                     }
 
-                    // TODO Ahdan - Find all Return Orders linked to targetProduct and display all rows.
-                    //DONE
                     if (targetPList == null || targetPList.isEmpty()) {
                         System.out.println("No purchase orders found for the given date range.");
                     } else {
                         for (ReturnOrder ro : targetPList) {
-                            System.out.printf("%-12s | %-10s | %-10s | %-10s | %-10d | %-20s |\n",
-                                    ro.getReturn_date(),        // String or Date, so use %s
-                                    ro.getReturn_id(),          // String, so use %s
-                                    ro.getProduct_id(),         // String, so use %s
-                                    ro.getSupplier_id(),        // String, so use %s
-                                    ro.getQuantity(),    // int, so use %d
-                                    ro.getReturn_reason());     // String, so use %s
+                            System.out.printf("%-12s | %-10s | %-10s | %-10d | %-20s |\n",
+                                    ro.getReturn_date(),
+                                    ro.getReturn_id(),
+                                    ro.getSupplier_id(),
+                                    ro.getQuantity(),
+                                    ro.getReturn_reason());
                         }
                     }
                     break;
@@ -152,8 +142,6 @@ public class roMenuFunction {
                     System.out.println("\nEnter end date.");
                     endDate = getDate();
 
-                    // TODO Ahdan - Find Return Orders that fall between startDate and endDate. Format is MM/YYYY.
-                    //done
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         ProductReturnMapper roMapper = conn.getMapper(ProductReturnMapper.class);
                         returnList= roMapper.selectReturnByDate(startDate, endDate);
@@ -163,18 +151,15 @@ public class roMenuFunction {
                     } else {
                         for (ReturnOrder ro : returnList) {
                             System.out.printf("%-12s | %-10s | %-10s | %-10s | %-10d | %-20s |\n",
-                                    ro.getReturn_date(),        // String or Date, so use %s
-                                    ro.getReturn_id(),          // String, so use %s
-                                    ro.getProduct_id(),         // String, so use %s
-                                    ro.getSupplier_id(),        // String, so use %s
-                                    ro.getQuantity(),    // int, so use %d
-                                    ro.getReturn_reason());     // St
+                                    ro.getReturn_date(),
+                                    ro.getReturn_id(),
+                                    ro.getProduct_id(),
+                                    ro.getSupplier_id(),
+                                    ro.getQuantity(),
+                                    ro.getReturn_reason());
                         }
                     }
-
-
                     break;
-
 
                 case 4:
                     break;

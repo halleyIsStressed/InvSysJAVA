@@ -12,7 +12,7 @@ public interface TransferMapper {
 
     Stock_Transfer selectBYID(String transfer_id);
 
-    void deleteTransferQequest(Stock_Transfer stock_transfer);
+    void deleteTransferRequest(Stock_Transfer stock_transfer);
 
     List<Stock_Transfer> selectTransfers();
 }

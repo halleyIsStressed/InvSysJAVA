@@ -16,9 +16,8 @@ public class User {
      private String gender;
      private String phone;
      private String email;
-     private String position;
 
-     public User(String id, String password, String name, int age, String gender, String phone,String email, String position) {
+     public User(String id, String password, String name, int age, String gender, String phone,String email) {
           this.id = id;
           this.password = password;
           this.name = name;
@@ -26,16 +25,14 @@ public class User {
           this.gender = gender;
           this.phone = phone;
           this.email = email;
-          this.position = position;
      }
 
-     public User(String password, String name, int age, String gender, String phone, String position) {
+     public User(String password, String name, int age, String gender, String phone) {
           this.password = password;
           this.name = name;
           this.age = age;
           this.gender = gender;
           this.phone = phone;
-          this.position = position;
      }
 
      public User(String id, String password) {
