@@ -86,4 +86,18 @@ INSERT INTO RETURN_ORDER (SUPPLIER_ID, PRODUCT_ID, QUANTITY, RETURN_REASON) VALU
 /*Inventory Manager*/
 INSERT INTO InventoryManager (PASSWORD, NAME, AGE, GENDER, PHONE) VALUES ('pass123', 'John Doe', 29, 'Male', '019-4719766');
 
+/*STAFF*/
+INSERT INTO STAFF (PASSWORD, NAME, AGE, GENDER, PHONE, POSITION)
+VALUES
+    ('pass123', 'John Doe', 30, 'Male', '019-1234567', 'Inventory Clerk'),
+    ('pass124', 'Jane Smith', 25, 'Female', '019-2345678', 'Warehouse Staff'),
+    ('pass125', 'Bob Johnson', 40, 'Male', '019-3456789', 'Logistics Coordinator'),
+    ('pass126', 'Alice Brown', 28, 'Female', '019-4567890', 'Inventory Clerk'),
+    ('pass127', 'Tom White', 35, 'Male', '019-5678901', 'Warehouse Staff'),
+    ('pass128', 'Lucy Black', 32, 'Female', '019-6789012', 'Logistics Coordinator'),
+    ('pass129', 'Peter Green', 29, 'Male', '019-7890123', 'Inventory Clerk'),
+    ('pass130', 'Emma Blue', 31, 'Female', '019-8901234', 'Warehouse Staff'),
+    ('pass131', 'James Yellow', 38, 'Male', '019-9012345', 'Logistics Coordinator'),
+    ('pass132', 'Lily Red', 26, 'Female', '019-0123456', 'Inventory Clerk');
+
 

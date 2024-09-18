@@ -54,9 +54,9 @@ public class InventoryManagerMenu {
             Scanner inp = new Scanner(System.in);
             User login = new User();
             System.out.println("Enter your id: ");
-            login.setId(inp.nextLine());
+            login.setId(inp.next());
             System.out.println("Enter your password: ");
-            login.setPassword(inp.nextLine());
+            login.setPassword(inp.next());
             return login;
       }
 
