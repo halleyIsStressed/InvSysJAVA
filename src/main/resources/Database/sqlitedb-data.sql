@@ -6,13 +6,12 @@ VALUES
     ('Fishing Reels', 'Spinning Reel', 79.99, 100),
     ('Fishing Lures', 'Topwater Frog', 12.99, 200),
     ('Fishing Lines', 'Braided Line', 24.99, 150),
-    ('Fishing Nets', 'Landing Net', 29.99, 80),
-    ('Fishing Apparel', 'Waterproof Jacket', 99.99, 120),
-    ('Fishing Accessories', 'Tackle Box', 39.99, 300),
-    ('Fishing Baits', 'Live Worms', 8.99, 500),
-    ('Fishing Electronics', 'Fish Finder', 249.99, 30),
-    ('Fishing Boats', 'Inflatable Kayak', 599.99, 10);
-
+    ('Nets', 'Landing Net', 29.99, 80),
+    ('Line', 'Waterproof Line', 99.99, 120),
+    ('Accessory', 'Tackle Box', 39.99, 300),
+    ('Baits', 'Live Worms', 8.99, 500),
+    ('Electronics', 'Fish Finder', 249.99, 30),
+    ('Boats', 'Inflatable Kayak', 599.99, 10);
 /*Supplier */
 
 INSERT INTO SUPPLIER

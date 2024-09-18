@@ -71,6 +71,9 @@ public class InventoryManagerMenu {
             if (currentUser != null) {
                   if (currentUser.getPassword().equals(login.getPassword())) {
                         System.out.println("You have successfully logged in!");
+                        System.out.println(" \n*****************************************\n");
+                        System.out.println(         "Inventory Manager Profile");
+                        System.out.println("\n*****************************************\n");
                         System.out.println(currentUser);
                         ProfileMenu.profileList(currentUser.getId(),choice);
                   } else {

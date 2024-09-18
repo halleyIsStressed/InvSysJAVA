@@ -130,9 +130,6 @@ public class ProfileMenu {
                 while (keepRunning) {
 
                     System.out.print("""
-                                *****************************************
-                                      Inventory Manager Profile
-                                *****************************************
                                 1) Supplier Menu
                                 2) Product Listing
                                 3) Purchase Order Listing
