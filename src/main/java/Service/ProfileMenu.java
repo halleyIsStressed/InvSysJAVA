@@ -31,7 +31,7 @@ public class ProfileMenu {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("\n************************************");
-        System.out.println(currentUser.getPosition() + "Profile");
+        System.out.print(currentUser.getPosition() + " Profile ");
         System.out.println("\n************************************");
 
         System.out.println("Name:" + currentUser.getName());
@@ -42,7 +42,7 @@ public class ProfileMenu {
         if (currentUser.getPosition().equals("Inventory Manager")){
             boolean keepRunning = true;
             while (keepRunning) {
-                Design.DesignLOGO();
+
                 System.out.print("""
                     1) Supplier Menu
                     2) Product Listing
@@ -86,40 +86,104 @@ public class ProfileMenu {
             }
         }
         else {
-            boolean keepRunning = true;
-            while (keepRunning) {
-                Design.DesignLOGO();
-                System.out.print("""
-                    1) Product Listing
-                    2) Purchase Order Listing
-                    3) Return Order Listing
-                    4) Reply to Product Requests
-                    5) Generate report
-                    6) Exit
-                    Enter your option:""");
-                int option = sc.nextInt();
-                switch (option) {
-                    case 1:
-                        ProductMenuFunction.productListing();
-                        break;
-                    case 2:
-                        poMenuFunction.poListing();
-                        break;
-                    case 3:
-                        roMenuFunction.returnOrderListing();
-                        break;
-                    case 4:
-                        TransferMenuFunction.confirmationMenu();
-                        break;
-                    case 5:
-                        System.out.println("Exiting the program...");
-                        keepRunning = false;
-                        break;
-                    default:
-                        System.out.println("Invalid option");
-                        break;
+            if (currentUser.getPosition().equals("Inventory Clerk")) {
+                boolean keepRunning = true;
+                while (keepRunning) {
+                    System.out.print("""
+                            1) Product Listing
+                            2) Generate report
+                            3) Exit
+                            Enter your option:""");
+                    int option = sc.nextInt();
+                    switch (option) {
+                        case 1:
+                            ProductMenuFunction.productListing();
+                            break;
+                        case 2:
+                            ReportGenerate.checkPositionToGenerateReport(currentUser.getPosition());
+                            break;
+                        case 3:
+                            System.out.println("Exiting the program...");
+                            keepRunning = false;
+                            break;
+                        default:
+                            System.out.println("Invalid option");
+                            break;
+                    }
+                }
+            } else if (currentUser.getPosition().equals("Warehouse Staff")) {
+                boolean keepRunning = true;
+                while (keepRunning) {
+                    System.out.print("""
+                            1) Product Listing
+                            2) Purchase Order Listing
+                            3) Return Order Listing
+                            4) Reply to Product Requests
+                            5) Generate report
+                            6) Exit
+                            Enter your option:""");
+                    int option = sc.nextInt();
+                    switch (option) {
+                        case 1:
+                            ProductMenuFunction.productListing();
+                            break;
+                        case 2:
+                            poMenuFunction.poListing();
+                            break;
+                        case 3:
+                            roMenuFunction.returnOrderListing();
+                            break;
+                        case 4:
+                            TransferMenuFunction.confirmationMenu();
+                            break;
+                        case 5:
+                            ReportGenerate.checkPositionToGenerateReport(currentUser.getPosition());
+                            break;
+                        case 6:
+                            System.out.println("Exiting the program...");
+                            keepRunning = false;
+                            break;
+                        default:
+                            System.out.println("Invalid option");
+                            break;
+                    }
                 }
             }
+            else{
+                boolean keepRunning = true;
+                while (keepRunning) {
+                    System.out.print("""
+                            1) Purchase Order Listing
+                            2) Return Order Listing
+                            3) Reply to Product Requests
+                            4) Generate report
+                            5) Exit
+                            Enter your option:""");
+                    int option = sc.nextInt();
+                    switch (option) {
+                        case 1:
+                            poMenuFunction.poListing();
+                            break;
+                        case 2:
+                            roMenuFunction.returnOrderListing();
+                            break;
+                        case 3:
+                            TransferMenuFunction.confirmationMenu();
+                            break;
+                        case 4:
+                            ReportGenerate.checkPositionToGenerateReport(currentUser.getPosition());
+                            break;
+                        case 5:
+                            System.out.println("Exiting the program...");
+                            keepRunning = false;
+                            break;
+                        default:
+                            System.out.println("Invalid option");
+                            break;
+                    }
+                }
+            }
+
         }
     }
 
