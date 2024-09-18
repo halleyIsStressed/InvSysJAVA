@@ -12,5 +12,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Staff extends User{
     private String position;
+
+
+    public String toString(){
+        return  "\n************************************\n      "
+                + position+ " Profile \n"
+                +"\n************************************\n"
+                +super.toString();
+    }
 }
 

@@ -1,11 +1,12 @@
 package DAO;
 
+import Entity.Staff;
 import Entity.User;
 
 
 public interface StaffMapper {
-    void insert(User staff);
+    void insert(Staff staff);
 
 
-    User selectByIdAndPassword( String id);
+    Staff selectStaffByIdAndPassword( String id);
 }

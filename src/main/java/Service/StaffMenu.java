@@ -4,92 +4,84 @@ import DAO.InventoryManagerMapper;
 import DAO.StaffMapper;
 import Database.Database;
 import Design.Design;
+import Entity.Staff;
 import Entity.User;
 import org.apache.ibatis.session.SqlSession;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Scanner;
 
+public class StaffMenu {
+        static Staff staff = new Staff();
 
-public class UserMenuFunction {
+        public static void staffMenu(int choice) throws IOException {
+            Scanner sc = new Scanner(System.in);
+            boolean keepRunning = true;
 
-    public static void mainMenu(int choice) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        boolean keepRunning = true;
+            while (keepRunning) {
+                Design.DesignLOGO();
 
-        while (keepRunning) {
-            Design.DesignLOGO();
+                int option = 0;
+                boolean validInput = false;
 
-            int option = 0;
-            boolean validInput = false;
-
-            while (!validInput) {
-                System.out.print("""
+                while (!validInput) {
+                    System.out.print("""
                     1) Sign Up
                     2) Log In
                     3) Exit
                     Enter your option:""");
 
-                if (sc.hasNextInt()) {
-                    option = sc.nextInt();
-                    validInput = true;
-                } else {
-                    System.out.println("Invalid input. Please enter a number between 1 and 3.");
-                    sc.next();
+                    if (sc.hasNextInt()) {
+                        option = sc.nextInt();
+                        validInput = true;
+                    } else {
+                        System.out.println("Invalid input. Please enter a number between 1 and 3.");
+                        sc.next();
+                    }
+                }
+
+                switch (option) {
+                    case 1:
+                        signUp();
+                        break;
+                    case 2:
+                        selectInformation(choice);
+                        break;
+                    case 3:
+                        System.out.println("Exiting the program...");
+                        keepRunning = false;
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please select a valid option between 1 and 3.");
+                        break;
                 }
             }
-
-            switch (option) {
-                case 1:
-                    signUp(choice);
-                    break;
-                case 2:
-                    selectInformation(choice);
-                    break;
-                case 3:
-                    System.out.println("Exiting the program...");
-                    keepRunning = false;
-                    break;
-                default:
-                    System.out.println("Invalid option. Please select a valid option between 1 and 3.");
-                    break;
-            }
         }
-    }
 
-
-    public static User getLogin() {
+    public static Staff getLogin() {
         Scanner in = new Scanner(System.in);
-        User login = new User();
+        Staff login = new Staff();
         System.out.println("Enter your id: ");
         login.setId(in.nextLine());
         System.out.println("Enter your password: ");
         login.setPassword(in.nextLine());
-        return login;
+        return  login;
     }
 
     public static void selectInformation(int choice) throws IOException {
-        User login = getLogin();
-        User currentUser = null;
+        Staff login = getLogin();
+        Staff currentUser = null;
 
-        switch (choice) {
-            case 1:
-                try (SqlSession conn = Database.getInstance().openSession()) {
-                    InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);
-                    currentUser = inventoryManagerMapper.selectByIdAndPassword(login.getId());
-                }
-                break;
-            case 2:
-                try (SqlSession conn = Database.getInstance().openSession()) {
-                   StaffMapper staffMapper = conn.getMapper(StaffMapper.class);
-                   currentUser = staffMapper.selectByIdAndPassword(login.getId());
-                }
-                break;
+        try (SqlSession conn = Database.getInstance().openSession()) {
+            StaffMapper staffMapper = conn.getMapper(StaffMapper.class);
+            currentUser = staffMapper.selectStaffByIdAndPassword(login.getId());
         }
         if (currentUser != null) {
             if (currentUser.getPassword().equals(login.getPassword())) {
                 System.out.println("You have successfully logged in!");
-                ProfileMenu.profileList(login.getId(),choice);
+                System.out.println(currentUser);
+                ProfileMenu.profileList(currentUser.getId(),choice);
             } else {
                 System.out.println("Wrong Password");
             }
@@ -98,18 +90,11 @@ public class UserMenuFunction {
             System.out.println("Wrong ID");
         }
 
-
     }
 
-    public static User getInput(int option) {
+    public static Staff getInput() {
 
-        User user = new User();
-        if (option == 1) {
-            user.setPosition("Inventory Manager");
-        } else {
-            user.setPosition("Staff");
-        }
-
+        Staff staff = new Staff();
         Scanner in = new Scanner(System.in);
 
 
@@ -120,13 +105,13 @@ public class UserMenuFunction {
             if (!name.matches("[a-zA-Z\\s]{2,}")) {
                 System.out.println("Invalid name. Please enter a valid name.");
             } else {
-                user.setName(name);
+                staff.setName(name);
             }
         } while (!name.matches("[a-zA-Z\\s]{2,}"));
 
 
         System.out.print("Enter Password: ");
-        user.setPassword(in.nextLine());
+        staff.setPassword(in.nextLine());
 
 
         int age;
@@ -141,7 +126,7 @@ public class UserMenuFunction {
                 System.out.println("Invalid age. Please enter a valid age between 18 and 65.");
             }
         } while (age < 18 || age > 65);
-        user.setAge(age);
+        staff.setAge(age);
 
         // Gender selection
         int selection;
@@ -154,11 +139,11 @@ public class UserMenuFunction {
             selection = in.nextInt();
             switch (selection) {
                 case 1:
-                    user.setGender("Male");
+                    staff.setGender("Male");
                     check = 1;
                     break;
                 case 2:
-                    user.setGender("Female");
+                    staff.setGender("Female");
                     check = 1;
                     break;
                 default:
@@ -168,9 +153,6 @@ public class UserMenuFunction {
 
         in.nextLine();
 
-        if (option == 1) {
-            user.setPosition("Inventory Manager");
-        } else {
             boolean keepRunning = true;
 
             while (keepRunning) {
@@ -200,15 +182,15 @@ public class UserMenuFunction {
                 // Use switch to assign the position based on the valid input
                 switch (selectP) {
                     case 1:
-                        user.setPosition("Inventory Clerk");
+                        staff.setPosition("Inventory Clerk");
                         keepRunning = false; // Exit the loop after assigning
                         break;
                     case 2:
-                        user.setPosition("Warehouse Staff");
+                        staff.setPosition("Warehouse Staff");
                         keepRunning = false;
                         break;
                     case 3:
-                        user.setPosition("Logistics Coordinator");
+                        staff.setPosition("Logistics Coordinator");
                         keepRunning = false;
                         break;
                     default:
@@ -216,7 +198,6 @@ public class UserMenuFunction {
                         break;
                 }
             }
-        }
         in.nextLine();
         String phone;
         do {
@@ -225,27 +206,21 @@ public class UserMenuFunction {
             if (!phone.matches("\\d{3}-\\d{7}") && !phone.matches("\\d{10,13}")) {
                 System.out.println("Invalid phone number. Please enter a valid phone number (e.g., 019-4719766 or 10-13 digits).");
             } else {
-                user.setPhone(phone);
+                staff.setPhone(phone);
             }
         } while (!phone.matches("\\d{3}-\\d{7}") && !phone.matches("\\d{10,13}"));
 
-        return user;
+        return staff;
     }
 
-    public static void signUp(int choice) {
-        User insertInput = getInput(choice);
-        if (choice == 1) {
-            try (SqlSession conn = Database.getInstance().openSession()) {
-                InventoryManagerMapper inventoryManagerMapper = conn.getMapper(InventoryManagerMapper.class);
-                inventoryManagerMapper.insert(insertInput);
-                conn.commit();
-            }
-        } else {
+    public static void signUp() {
+        Staff insertInput = getInput();
             try (SqlSession conn = Database.getInstance().openSession()) {
                 StaffMapper staffMapper = conn.getMapper(StaffMapper.class);
                 staffMapper.insert(insertInput);
                 conn.commit();
             }
-        }
     }
+
+
 }

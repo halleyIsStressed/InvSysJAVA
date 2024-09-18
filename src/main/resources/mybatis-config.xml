@@ -15,7 +15,7 @@
     </environments>
 
     <mappers>
-        <mapper resource="DAO/InventoryManagerDao.xml"/>
+        <mapper resource="DAO/UserDao.xml"/>
         <mapper resource="DAO/StaffDao.xml"/>
         <mapper resource="DAO/ProductMapper.xml"/>
         <mapper resource="DAO/PurchaseOrderMapper.xml"/>
@@ -23,5 +23,6 @@
         <mapper resource="DAO/BranchMapper.xml"/>
         <mapper resource="DAO/TransferMapper.xml"/>
         <mapper resource="DAO/ProductReturn.xml"/>
+        <mapper resource="DAO/StaffDao.xml"/>
     </mappers>
 </configuration>

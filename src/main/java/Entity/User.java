@@ -40,5 +40,15 @@ public class User {
           this.password = password;
      }
 
+     @Override
+     public String toString(){
+          return  "Name : " + name + "\n"
+                  + "Gender : " + gender + "\n"
+                  + "Age : " + age + "\n"
+                  + "Phone : " + phone + "\n"
+                  + "Email : " + email + "\n";
+     }
+
+
 
 }

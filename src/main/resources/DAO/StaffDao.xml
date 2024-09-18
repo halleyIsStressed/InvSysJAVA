@@ -9,16 +9,15 @@
 
 <mapper namespace="DAO.StaffMapper">
 
-    <insert id="insert" parameterType="Entity.User">
-        INSERT INTO STAFF (PASSWORD, NAME, AGE, GENDER, PHONE, POSITION)VALUES (#{password}, #{name}, #{age}, #{gender}, #{phone}, #{position})
+    <insert id="insert" parameterType="Entity.Staff">
+        INSERT INTO STAFF (PASSWORD, NAME, AGE, GENDER, PHONE,POSITION)VALUES (#{password}, #{name}, #{age}, #{gender}, #{phone},#{position})
     </insert>
 
-    <select id="selectAll" resultType="Entity.User">
-        SELECT * FROM STAFF
-    </select>
 
-    <select id="selectByIdAndPassword" resultType="Entity.User">
+    <select id="selectStaffByIdAndPassword" resultType="Entity.Staff">
         SELECT * FROM STAFF WHERE ID = #{param1}
     </select>
+
+
 
 </mapper>

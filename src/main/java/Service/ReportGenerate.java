@@ -365,10 +365,7 @@ public class ReportGenerate {
                             System.out.println("***Invalid selection! Please try again...***");
                             System.in.read();
                     }
-                    System.out.print("Press Enter to return back to the Report Generation Menu: ");
-                    sc.nextLine();
                 }while (choice != 5);
-
             }
             else{
                 Scanner sc = new Scanner(System.in);
@@ -426,8 +423,7 @@ public class ReportGenerate {
                                         tr.getTransfer_quantity(),
                                         tr.getRequest_date());
                             }
-                            System.out.print("Press Enter to return back to the Report Generation Menu: ");
-                            sc.nextLine();
+
                             break;
                         case 3:
                             System.out.println("\n************************************");
@@ -467,8 +463,7 @@ public class ReportGenerate {
                             System.out.println("***Invalid selection! Please try again...***");
                             System.in.read();
                     }
-                    System.out.print("Press Enter to return back to the Report Generation Menu: ");
-                    sc.nextLine();
+
                 }while (choice != 4);
             }
     }

@@ -1,4 +1,5 @@
-import Service.UserMenuFunction;
+import Service.InventoryManagerMenu;
+import Service.StaffMenu;
 import Design.Design;
 
 import java.io.IOException;
@@ -24,10 +25,10 @@ public class Main {
                 choice = sc.nextInt();
                 switch (choice) {
                     case 1:
-                        UserMenuFunction.mainMenu(choice); // Call mainMenu for Inventory Manager
+                        InventoryManagerMenu.InventoryManagerMenu(choice); // Call mainMenu for Inventory Manager
                         break;
                     case 2:
-                        UserMenuFunction.mainMenu(choice); // Call mainMenu for Staff
+                        StaffMenu.staffMenu(choice); // Call mainMenu for Staff
                         break;
                     case 3:
                         System.out.println("Exiting the program...");
