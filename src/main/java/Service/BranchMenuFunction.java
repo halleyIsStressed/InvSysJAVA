@@ -16,7 +16,7 @@ public class BranchMenuFunction {
             System.out.println("4. Close Branch");
             System.out.println("5. Display All Branches");
             System.out.println("6. Exit Branches Management");
-            System.out.println("Please enter your choice: ");
+            System.out.print("Please enter your choice: ");
             Scanner sc = new Scanner(System.in);
             choice = sc.nextInt();
 
