@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class ProfileMenu {
 
     public static void profileList(String id,int choice) throws IOException {
-        Staff currentUser;
+        User currentUser = new Staff();
         Scanner sc = new Scanner(System.in);
         if(choice==2) {
             try (SqlSession conn = Database.getInstance().openSession()) {
@@ -23,7 +23,7 @@ public class ProfileMenu {
                 currentUser = staffMapper.selectStaffByIdAndPassword(id);
             }
 
-            switch (currentUser.getPosition()) {
+            switch (((Staff) currentUser).getPosition()) {
                 case "Inventory Clerk" -> {
                     boolean keepRunning = true;
                     while (keepRunning) {
@@ -39,7 +39,7 @@ public class ProfileMenu {
                                 ProductMenuFunction.productListing();
                                 break;
                             case 2:
-                                ReportGenerate.checkPositionToGenerateReport(currentUser.getPosition());
+                                ReportGenerate.checkPositionToGenerateReport(((Staff) currentUser).getPosition());
                                 break;
                             case 3:
                                 System.out.println("Return to Main page...");
@@ -78,7 +78,7 @@ public class ProfileMenu {
                                 TransferMenuFunction.confirmationMenu();
                                 break;
                             case 5:
-                                ReportGenerate.checkPositionToGenerateReport(currentUser.getPosition());
+                                ReportGenerate.checkPositionToGenerateReport(((Staff) currentUser).getPosition());
                                 break;
                             case 6:
                                 System.out.println("Return to Main page...");
@@ -113,7 +113,7 @@ public class ProfileMenu {
                                 TransferMenuFunction.confirmationMenu();
                                 break;
                             case 4:
-                                ReportGenerate.checkPositionToGenerateReport(currentUser.getPosition());
+                                ReportGenerate.checkPositionToGenerateReport(((Staff) currentUser).getPosition());
                                 break;
                             case 5:
                                 System.out.println("Return to Main page...");
