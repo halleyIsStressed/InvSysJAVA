@@ -382,11 +382,10 @@ public class ReportGenerate {
             int choice;
 
             do {
-                System.out.println("1. Products Report");
-                System.out.println("2. Purchase Orders Report");
-                System.out.println("3. Stock Transfers Report");
-                System.out.println("4. Order Return Report");
-                System.out.println("5. Exit Report Generation");
+                System.out.println("1. Purchase Orders Report");
+                System.out.println("2. Stock Transfers Report");
+                System.out.println("3. Order Return Report");
+                System.out.println("4. Exit Report Generation");
                 choice = sc.nextInt();
                 switch (choice) {
                     case 1:
