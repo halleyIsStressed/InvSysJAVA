@@ -1,11 +1,5 @@
 package Entity;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@Builder
-@NoArgsConstructor
 public class ReturnOrder {
     private String return_id;
     private String supplier_id;

@@ -1,10 +1,5 @@
 package Entity;
 
-
-
-
-
-
 public class Product {
 
     private String product_id;

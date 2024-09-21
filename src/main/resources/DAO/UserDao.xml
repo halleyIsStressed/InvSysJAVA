@@ -14,7 +14,7 @@
         SELECT * FROM InventoryManager
     </select>
 
-    <select id="selectByIdAndPassword" resultType="Entity.User">
+    <select id="selectByIdAndPassword" resultType="Entity.InventoryManager">
         SELECT * FROM InventoryManager WHERE ID = #{param1}
     </select>
 

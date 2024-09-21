@@ -1,12 +1,5 @@
 package Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@Builder
 public class Purchase_Order {
     private String po_number;
     private String supplier_id;

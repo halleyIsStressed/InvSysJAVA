@@ -1,10 +1,11 @@
 package DAO;
 
+import Entity.InventoryManager;
 import Entity.User;
 
 
 public interface InventoryManagerMapper {
 
 
-    User selectByIdAndPassword( String id);
+    InventoryManager selectByIdAndPassword(String id);
 }

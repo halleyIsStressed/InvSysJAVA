@@ -4,6 +4,7 @@ import DAO.InventoryManagerMapper;
 import Database.Database;
 import Design.Design;
 import Entity.User;
+import Entity.InventoryManager;
 import org.apache.ibatis.session.SqlSession;
 
 import java.io.IOException;
@@ -50,9 +51,9 @@ public class InventoryManagerMenu {
             }
       }
 
-      public static User getLogin() {
+      public static InventoryManager getLogin() {
             Scanner inp = new Scanner(System.in);
-            User login = new User();
+            InventoryManager login = new InventoryManager();
             System.out.print("Enter your id: ");
             login.setId(inp.nextLine());
             System.out.print("Enter your password: ");
@@ -61,8 +62,8 @@ public class InventoryManagerMenu {
       }
 
       public static void selectInformation(int choice) throws IOException {
-            User login = getLogin();
-            User currentUser = null;
+            InventoryManager login = getLogin();
+            InventoryManager currentUser = null;
 
             try (SqlSession conn = Database.getInstance().openSession()) {
                   InventoryManagerMapper IMMapper = conn.getMapper(InventoryManagerMapper.class);
