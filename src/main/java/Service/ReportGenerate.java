@@ -196,7 +196,7 @@ public class ReportGenerate {
                     break;
 
                 case 7:
-                    InventoryManagerMenu.InventoryManagerMenu(choice);//Exit report generate function
+                    //Exit report generate function
                     break;
                 default:
                     System.out.println("***Invalid selection! Please try again...***");
