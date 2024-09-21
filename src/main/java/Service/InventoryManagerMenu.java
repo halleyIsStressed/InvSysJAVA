@@ -53,10 +53,10 @@ public class InventoryManagerMenu {
       public static User getLogin() {
             Scanner inp = new Scanner(System.in);
             User login = new User();
-            System.out.println("Enter your id: ");
-            login.setId(inp.next());
-            System.out.println("Enter your password: ");
-            login.setPassword(inp.next());
+            System.out.print("Enter your id: ");
+            login.setId(inp.nextLine());
+            System.out.print("Enter your password: ");
+            login.setPassword(inp.nextLine());
             return login;
       }
 
@@ -71,10 +71,6 @@ public class InventoryManagerMenu {
             if (currentUser != null) {
                   if (currentUser.getPassword().equals(login.getPassword())) {
                         System.out.println("You have successfully logged in!");
-                        System.out.println(" \n*****************************************\n");
-                        System.out.println(         "Inventory Manager Profile");
-                        System.out.println("\n*****************************************\n");
-                        System.out.println(currentUser);
                         ProfileMenu.profileList(currentUser.getId(),choice);
                   } else {
                         System.out.println("Wrong Password");

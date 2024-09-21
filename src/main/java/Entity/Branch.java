@@ -1,9 +1,6 @@
 package Entity;
-import lombok.Builder;
-import lombok.Data;
 
-@Data
-@Builder
+
 public class Branch {
 
     private String branchID;
@@ -19,6 +16,46 @@ public class Branch {
         this.branchPhoneNo = phoneNo;
         this.branchMgrName = mgrName;
         this.branchDateCreated = dateCreated;
+    }
+
+    public String getBranchPhoneNo() {
+        return branchPhoneNo;
+    }
+
+    public void setBranchPhoneNo(String branchPhoneNo) {
+        this.branchPhoneNo = branchPhoneNo;
+    }
+
+    public String getBranchID() {
+        return branchID;
+    }
+
+    public void setBranchID(String branchID) {
+        this.branchID = branchID;
+    }
+
+    public String getBranchLocation() {
+        return branchLocation;
+    }
+
+    public void setBranchLocation(String branchLocation) {
+        this.branchLocation = branchLocation;
+    }
+
+    public String getBranchMgrName() {
+        return branchMgrName;
+    }
+
+    public void setBranchMgrName(String branchMgrName) {
+        this.branchMgrName = branchMgrName;
+    }
+
+    public String getBranchDateCreated() {
+        return branchDateCreated;
+    }
+
+    public void setBranchDateCreated(String branchDateCreated) {
+        this.branchDateCreated = branchDateCreated;
     }
 
     public Branch(){}
