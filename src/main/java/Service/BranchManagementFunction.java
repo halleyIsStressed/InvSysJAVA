@@ -44,7 +44,7 @@ public class BranchManagementFunction {
             } else
                 System.out.println("***Branch NOT create successfully***");
 
-            System.out.println("Continue to create another branch?: ");
+            System.out.print("Continue to create another branch?: ");
             confirm = sc.nextLine();
         } while (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes"));
     }
@@ -65,12 +65,13 @@ public class BranchManagementFunction {
             System.out.println("2. Branch location: ");
             System.out.print("Search branch by: ");
             choice = sc.nextInt();
+            sc.nextLine();
             switch (choice) {
                 case 1:
                     System.out.print("Enter branch ID to search: ");
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
-                        branch = branchMapper.selectById(sc.next());
+                        branch = branchMapper.selectById(sc.nextLine());
                     }
                     break;
 
@@ -78,7 +79,7 @@ public class BranchManagementFunction {
                     System.out.print("Enter branch location to search: ");
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
-                        branch = branchMapper.selectByLocation(sc.next());
+                        branch = branchMapper.selectByLocation(sc.nextLine());
                     }
                     break;
 
