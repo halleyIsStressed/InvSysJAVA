@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class ProfileMenu {
 
     public static void profileList(String id,int choice) throws IOException {
-        Staff currentUser = new Staff();
+        Staff currentUser;
         Scanner sc = new Scanner(System.in);
         if(choice==2) {
             try (SqlSession conn = Database.getInstance().openSession()) {
@@ -27,6 +27,7 @@ public class ProfileMenu {
                 case "Inventory Clerk" -> {
                     boolean keepRunning = true;
                     while (keepRunning) {
+                        System.out.println(currentUser);
                         System.out.print("""
                                 1) Product Listing
                                 2) Generate report
@@ -41,7 +42,7 @@ public class ProfileMenu {
                                 ReportGenerate.checkPositionToGenerateReport(currentUser.getPosition());
                                 break;
                             case 3:
-                                System.out.println("Exiting the program...");
+                                System.out.println("Return to Main page...");
                                 keepRunning = false;
                                 break;
                             default:
@@ -53,6 +54,7 @@ public class ProfileMenu {
                 case "Warehouse Staff" -> {
                     boolean keepRunning = true;
                     while (keepRunning) {
+                        System.out.println(currentUser);
                         System.out.print("""
                                 1) Product Listing
                                 2) Purchase Order Listing
@@ -79,7 +81,7 @@ public class ProfileMenu {
                                 ReportGenerate.checkPositionToGenerateReport(currentUser.getPosition());
                                 break;
                             case 6:
-                                System.out.println("Exiting the program...");
+                                System.out.println("Return to Main page...");
                                 keepRunning = false;
                                 break;
                             default:
@@ -91,6 +93,7 @@ public class ProfileMenu {
                 case "Logistics Coordinator" -> {
                     boolean keepRunning = true;
                     while (keepRunning) {
+                        System.out.println(currentUser);
                         System.out.print("""
                                 1) Purchase Order Listing
                                 2) Return Order Listing
@@ -113,7 +116,7 @@ public class ProfileMenu {
                                 ReportGenerate.checkPositionToGenerateReport(currentUser.getPosition());
                                 break;
                             case 5:
-                                System.out.println("Exiting the program...");
+                                System.out.println("Return to Main page...");
                                 keepRunning = false;
                                 break;
                             default:
@@ -123,12 +126,19 @@ public class ProfileMenu {
                     }
                 }
             }
-
         }
          else{
                 boolean keepRunning = true;
                 while (keepRunning) {
-
+                    User inventoryManager;
+                    try (SqlSession conn = Database.getInstance().openSession()) {
+                        InventoryManagerMapper IMMapper = conn.getMapper(InventoryManagerMapper.class);
+                        inventoryManager=IMMapper.selectByIdAndPassword(id);
+                    }
+                    System.out.println(" \n*****************************************");
+                    System.out.println(         "Inventory Manager Profile");
+                    System.out.println("*****************************************\n");
+                    System.out.println(inventoryManager);
                     System.out.print("""
                                 1) Supplier Menu
                                 2) Product Listing
@@ -163,7 +173,7 @@ public class ProfileMenu {
                             ReportGenerate.reportGenerate();
                             break;
                         case 8:
-                            System.out.println("Exiting the program...");
+                            System.out.println("Return to Main page...");
                             keepRunning = false;
                             break;
                         default:

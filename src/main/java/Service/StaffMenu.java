@@ -62,9 +62,9 @@ public class StaffMenu {
     public static Staff getLogin() {
         Scanner in = new Scanner(System.in);
         Staff login = new Staff();
-        System.out.println("Enter your id: ");
+        System.out.print("Enter your id: ");
         login.setId(in.nextLine());
-        System.out.println("Enter your password: ");
+        System.out.print("Enter your password: ");
         login.setPassword(in.nextLine());
         return  login;
     }
@@ -80,7 +80,6 @@ public class StaffMenu {
         if (currentUser != null) {
             if (currentUser.getPassword().equals(login.getPassword())) {
                 System.out.println("You have successfully logged in!");
-                System.out.println(currentUser);
                 ProfileMenu.profileList(currentUser.getId(),choice);
             } else {
                 System.out.println("Wrong Password");

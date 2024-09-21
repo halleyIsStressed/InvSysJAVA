@@ -1,9 +1,6 @@
 package Entity;
-import lombok.Builder;
-import lombok.Data;
 
-@Data
-@Builder
+
 public class Supplier {
     private String supplierID;
     private String supplierName;
@@ -11,6 +8,56 @@ public class Supplier {
     private String supplierAddress;
     private String supplierEmail;
     private String supplierDateTimeCreated;
+
+    public String getSupplierEmail() {
+        return supplierEmail;
+    }
+
+    public void setSupplierEmail(String supplierEmail) {
+        this.supplierEmail = supplierEmail;
+    }
+
+    public String getSupplierID() {
+        return supplierID;
+    }
+
+    public void setSupplierID(String supplierID) {
+        this.supplierID = supplierID;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
+    }
+
+    public String getSupplierTel() {
+        return supplierTel;
+    }
+
+    public void setSupplierTel(String supplierTel) {
+        this.supplierTel = supplierTel;
+    }
+
+    public String getSupplierAddress() {
+        return supplierAddress;
+    }
+
+    public void setSupplierAddress(String supplierAddress) {
+        this.supplierAddress = supplierAddress;
+    }
+
+    public String getSupplierDateTimeCreated() {
+        return supplierDateTimeCreated;
+    }
+
+    public void setSupplierDateTimeCreated(String supplierDateTimeCreated) {
+        this.supplierDateTimeCreated = supplierDateTimeCreated;
+    }
+
+
 
     //Constructor
     public Supplier(String id, String name, String tel, String address, String email, String dateTime){
