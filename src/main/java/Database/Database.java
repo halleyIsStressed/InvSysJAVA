@@ -1,5 +1,7 @@
 package Database;
 
+import lombok.Getter;
+import lombok.experimental.Delegate;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -8,7 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Database {
-    @Getter private static final Database instance = new Database();
+    @Getter
+    private static final Database instance = new Database();
 
     @Delegate(types=SqlSessionFactory.class)
     private final SqlSessionFactory sqlSessionFactory;

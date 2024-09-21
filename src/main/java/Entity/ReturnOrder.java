@@ -8,6 +8,10 @@ public class ReturnOrder {
     private String return_reason;
     private int quantity;
 
+    public ReturnOrder() {
+
+    }
+
     public String getReturn_reason() {
         return return_reason;
     }
