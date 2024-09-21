@@ -6,7 +6,7 @@
 <mapper namespace="DAO.SupplierMapper">
 
     <insert id="insertAddSuplier" parameterType="Entity.Supplier">
-        INSERT INTO SUPPLIER (SUPPLIER_NAME,CONTACT_NO,ADDRESS,EMAIL) VALUES (#{supplierName},#{supplierAddress},#{supplierTel},#{supplierEmail})
+        INSERT INTO SUPPLIER (SUPPLIER_NAME,CONTACT_NO,ADDRESS,EMAIL) VALUES (#{supplierName},#{supplierTel},#{supplierAddress},#{supplierEmail})
     </insert>
 
     <select id="selectAllSuppliers" resultType="Entity.Supplier">
