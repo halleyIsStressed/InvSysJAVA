@@ -214,7 +214,7 @@ public class SupplierManagementFunction {
                     else{
                         try (SqlSession sqlSession = Database.getInstance().openSession()){
                             SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
-                            mapper.updateSupplierByName(supplier);
+                            mapper.updateSupplierById(supplier);
                             sqlSession.commit();
                         }
                     }
