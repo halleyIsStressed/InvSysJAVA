@@ -22,9 +22,9 @@ public class poMenuFunction {
             poList = poMapper.selectALLpo();
         }
 
-        System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Order Date", "Supplier ID", "Status");
+        System.out.printf("%-10s | %-11s | %-10s | %-7s | %-15s | %-13s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Order Date", "Supplier ID", "Status");
         for (Purchase_Order po : poList) {
-            System.out.printf("%-10s | %-11s | %-10d | %-7.2f |  %-12s | %-12s | %-11s\n",
+            System.out.printf("%-10s | %-11s | %-10d | %-7.2f | %-15s | %-13s | %-11s\n",
                     po.getPo_number(),
                     po.getProduct_id(),
                     po.getPurchase_quantity(),
@@ -150,13 +150,14 @@ public class poMenuFunction {
                         targetList = poMapper.selectIDfortaget(targetSupplier);
                     }
 
-                    System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s |\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Status");
+                    System.out.printf("%-10s | %-11s | %-10s | %-7s | %-13s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Order Date", "Status");
                     for (Purchase_Order po : targetList) {
-                        System.out.printf("%-10s | %-11s | %-10d | %-5.2f | %-11s\n",
+                        System.out.printf("%-10s | %-11s | %-10d | %-7.2f | %-13s | %-11s\n",
                                 po.getPo_number(),
                                 po.getProduct_id(),
                                 po.getPurchase_quantity(),
                                 po.getOrder_price(),
+                                po.getOrder_date(),
                                 po.getStatus());
                     }
                     System.out.println("\n");
@@ -184,14 +185,13 @@ public class poMenuFunction {
                         PurchaseOrderMapper poMapper = conn.getMapper(PurchaseOrderMapper.class);
                         targetPO = poMapper.selectBYPOIDToList(targetProduct);
                     }
-                    System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s |\n\n", "PO Number", "Quantity", "Cost", "Supplier ID", "Status");
+                    System.out.printf("%-10s | %-10s | %-7s | %-13s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Order Date", "Status");
                     for (Purchase_Order po : targetPO) {
-
-                        System.out.printf("%-10s | %-10d | %-5.2f | %-12s | %-11s\n",
+                        System.out.printf("%-10s | %-10d | %-7.2f | %-13s | %-11s\n",
                                 po.getPo_number(),
                                 po.getPurchase_quantity(),
                                 po.getOrder_price(),
-                                po.getSupplier_id(),
+                                po.getOrder_date(),
                                 po.getStatus());
                     }
                     break;
@@ -214,8 +214,9 @@ public class poMenuFunction {
                     if (poList == null || poList.isEmpty()) {
                         System.out.println("No purchase orders found for the given date range.");
                     } else {
+                        System.out.printf("%-15s | %-10s | %-10s | %-12s | %-8s | %-13s | %-11s\n\n", "Order Date", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID", "Status");
                         for (Purchase_Order po : poList) {
-                            System.out.printf("%-12s | %-10s | %-10s | %-12d | %-8.2f | %-10s | %-10s\n",
+                            System.out.printf("%-15s | %-10s | %-10s | %-12d | %-8.2f | %-13s | %-11s\n",
                                     po.getOrder_date(),
                                     po.getPo_number(),
                                     po.getProduct_id(),
@@ -403,9 +404,6 @@ public class poMenuFunction {
             }
         } while (invalid);
 
-
-
-        targetNumber = targetPoScanner.next();
         Purchase_Order targetPo;
         try (SqlSession conn = Database.getInstance().openSession()) {
             PurchaseOrderMapper purchaseOrderMapper = conn.getMapper(PurchaseOrderMapper.class);

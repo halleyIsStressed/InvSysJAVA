@@ -191,12 +191,16 @@ public class ProductMenuFunction {
                 case 2:
                     Scanner priceSc = new Scanner(System.in);
                     double minPrice, maxPrice;
+                    do {
                         System.out.print("Enter minimum price: ");
                         minPrice = priceSc.nextDouble();
                         System.out.print("Enter maximum price: ");
                         maxPrice = priceSc.nextDouble();
 
-
+                        if (minPrice > maxPrice) {
+                            System.out.println("\nInvalid Range. Try Again.");
+                        }
+                    } while (minPrice > maxPrice);
                     List<Product> productsPrice;
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         ProductMapper productMapper = conn.getMapper( ProductMapper.class);
@@ -366,7 +370,6 @@ public class ProductMenuFunction {
                 System.in.read();
             }
         } while (invalid);
-        System.out.println("Exit Validation");
 
         Product targetProduct = new Product();
         try (SqlSession conn = Database.getInstance().openSession()) {

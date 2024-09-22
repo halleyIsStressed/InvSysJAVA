@@ -18,7 +18,7 @@
     </select>
 
     <insert id="insertPo" parameterType="Entity.Purchase_Order">
-        INSERT INTO PURCHASE_ORDER (SUPPLIER_ID, PRODUCT_ID,QUANTITY) VALUES (#{supplier_id},#{product_id},#{purchase_quantity})
+        INSERT INTO PURCHASE_ORDER (SUPPLIER_ID, PRODUCT_ID,QUANTITY,ORDER_DATE, STATUS) VALUES (#{supplier_id},#{product_id},#{purchase_quantity}, DATE('now'), 'Pending')
     </insert>
 
     <select id="selectIDfortaget" resultType="Entity.Purchase_Order">
