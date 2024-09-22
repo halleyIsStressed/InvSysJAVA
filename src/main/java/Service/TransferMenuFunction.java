@@ -159,7 +159,7 @@ public class TransferMenuFunction {
 
                     System.out.println("Are you sure you want to deny this transfer request?");
                     System.out.print("Enter 1 to cancel, enter any other key to return > ");
-                    confirmation = confirmationScanner.next();
+                    confirmation = confirmationScanner.nextLine();
                     if (Objects.equals(confirmation, "1")) {
                         try (SqlSession conn = Database.getInstance().openSession()) {
                             TransferMapper trMapper = conn.getMapper(TransferMapper.class);
