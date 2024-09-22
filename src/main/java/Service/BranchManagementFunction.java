@@ -1,10 +1,8 @@
 package Service;
 
 import DAO.BranchMapper;
-import DAO.PurchaseOrderMapper;
 import Database.Database;
 import Entity.Branch;
-import Entity.Purchase_Order;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
@@ -156,7 +154,7 @@ public class BranchManagementFunction {
                         branch.setBranchMgrName(sc.nextLine());
                         break;
                     case 4:
-                        System.out.print("Enter the new Branch location :");
+                        System.out.print("Enter the new Branch location: ");
                         branch.setBranchLocation(sc.nextLine());
                         System.out.print("Enter the new Branch phone number: ");
                         branch.setBranchPhoneNo(sc.nextLine());
@@ -206,7 +204,7 @@ public class BranchManagementFunction {
         do {
             Branch branch = null;
 
-            System.out.println("1.Branch ID");
+            System.out.println("1. Branch ID");
             System.out.println("2. Branch location");
             System.out.print("Search branch to delete by: ");
             choice = sc.nextInt();
@@ -239,8 +237,8 @@ public class BranchManagementFunction {
                 if (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")) {
                     try (SqlSession conn = Database.getInstance().openSession()) {
                         BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
-                       branchMapper.deleteById(branch.getBranchID());
-                       conn.commit();
+                        branchMapper.deleteById(branch.getBranchID());
+                        conn.commit();
                     }
 
                     System.out.println("***Branch deleted successfully!***");
@@ -265,14 +263,14 @@ public class BranchManagementFunction {
             branchList = branchMapper.selectAll();
         }
 
-       if (branchList.isEmpty())
-           System.out.println("***No branch found!***");
+        if (branchList.isEmpty())
+            System.out.println("***No branch found!***");
         else
-          for (Branch b : branchList)
-               System.out.println(b);
+            for (Branch b : branchList)
+                System.out.println(b);
 
-            System.out.print("Press Enter to return back to the Branch Management Menu: ");
-            sc.nextLine();
+        System.out.print("Press Enter to return back to the Branch Management Menu: ");
+        sc.nextLine();
     }
 
 }
