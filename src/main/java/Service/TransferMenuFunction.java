@@ -161,7 +161,6 @@ public class TransferMenuFunction {
                     System.out.print("Enter 1 to cancel, enter any other key to return > ");
                     confirmation = confirmationScanner.nextLine();
                     if (Objects.equals(confirmation, "1")) {
-                        // TODO Ahdan - Write logic to delete transfer request of targetTransferID.
                         try (SqlSession conn = Database.getInstance().openSession()) {
                             TransferMapper trMapper = conn.getMapper(TransferMapper.class);
                             trMapper.deleteTransferRequest(stockTransfer);

@@ -213,16 +213,16 @@ VALUES
 INSERT INTO PURCHASE_ORDER
 (SUPPLIER_ID, PRODUCT_ID, QUANTITY, ORDER_DATE, PRICE, STATUS)
 VALUES
-    ('SP00001', 'P00008', 326, DATE('now'), 2608, 'Pending'),
-    ('SP00003', 'P00004', 174, DATE('now'), 1740, 'Completed'),
-    ('SP00002', 'P00006', 385, DATE('now'), 2310, 'Completed'),
-    ('SP00003', 'P00010', 324, DATE('now'), 1944, 'Pending'),
-    ('SP00002', 'P00001', 185, DATE('now'), 1480, 'Completed'),
-    ('SP00003', 'P00003', 269, DATE('now'), 1345, 'Pending'),
-    ('SP00001', 'P00009', 175, DATE('now'), 1575, 'Pending'),
-    ('SP00003', 'P00002', 130, DATE('now'), 910, 'Pending'),
-    ('SP00001', 'P00008', 301, DATE('now'), 3010, 'Pending'),
-    ('SP00002', 'P00001', 136, DATE('now'), 680, 'Pending');
+    ('SP00001', 'P00008', 326, '2024-07-09', 2608, 'Completed'),
+    ('SP00003', 'P00004', 174, '2024-07-13', 1740, 'Completed'),
+    ('SP00002', 'P00006', 385, '2024-07-26', 2310, 'Completed'),
+    ('SP00003', 'P00010', 324, '2024-08-04', 1944, 'Completed'),
+    ('SP00002', 'P00001', 185, '2024-08-16', 1480, 'Completed'),
+    ('SP00003', 'P00003', 269, '2024-08-29', 1345, 'Pending'),
+    ('SP00001', 'P00009', 175, '2024-09-01', 1575, 'Pending'),
+    ('SP00003', 'P00002', 130, '2024-09-08', 0, 'Pending'),
+    ('SP00001', 'P00008', 301, '2024-09-14', 0, 'Pending'),
+    ('SP00002', 'P00001', 136, '2024-09-20', 0, 'Pending');
 
 /*Stock Transfer*/
 INSERT INTO STOCK_TRANSFER
