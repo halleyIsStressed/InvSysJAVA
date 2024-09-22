@@ -71,9 +71,9 @@ public class ReportGenerate {
                     if (branchList.isEmpty())
                         System.out.println("***No branch found!***");
                     else {
-                        System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s \n\n", "Branch ID", "Branch Location", "Branch Phone Number", "Branch Manager Name", "Branch Date Created");
+                        System.out.printf("%-10s | %-25s | %-15s | %-16s | %-15s \n\n", "Branch ID", "Branch Location", "Branch Phone Number", "Branch Manager Name", "Branch Date Created");
                         for (Branch branch : branchList) {
-                            System.out.printf("%-10s | %-11s | %-10s | %-7.2s | %-12s \n",
+                            System.out.printf("%-10s | %-25s | %-19s | %-20s | %-15s \n",
                                     branch.getBranchID(),
                                     branch.getBranchLocation(),
                                     branch.getBranchPhoneNo(),
