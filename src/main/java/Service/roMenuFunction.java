@@ -36,7 +36,7 @@ public class roMenuFunction {
                     System.in.read(); // This is supposed to be unread, dw
                     System.out.print("\n\n");
             }
-        } while (roMenuOptions != 5);
+        } while (roMenuOptions != 3);
 
     }
 
