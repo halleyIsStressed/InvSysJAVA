@@ -156,7 +156,7 @@ public class BranchManagementFunction {
                         branch.setBranchMgrName(sc.nextLine());
                         break;
                     case 4:
-                        System.out.print("Enter the new Branch location");
+                        System.out.print("Enter the new Branch location :");
                         branch.setBranchLocation(sc.nextLine());
                         System.out.print("Enter the new Branch phone number: ");
                         branch.setBranchPhoneNo(sc.nextLine());
@@ -181,7 +181,7 @@ public class BranchManagementFunction {
                     } else {
                         try (SqlSession conn = Database.getInstance().openSession()) {
                             BranchMapper branchMapper = conn.getMapper(BranchMapper.class);
-                            branchMapper.updateByLocation(branch);
+                            branchMapper.updateById(branch);
                             conn.commit();
                         }
                     }

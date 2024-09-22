@@ -19,5 +19,4 @@ public interface BranchMapper {
 
      void updateById(Branch branch);
 
-     void updateByLocation(Branch branch);
 }
