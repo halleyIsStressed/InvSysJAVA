@@ -22,11 +22,9 @@ public class roMenuFunction {
             switch (roMenuOptions) {
                 case 1:
                     createReturnOrder();
-                    System.out.println("C");
                     break;
                 case 2:
                     searchReturnOrder();
-                    System.out.println("R");
                     break;
                 case 3:
                     // fuckOff();
@@ -40,7 +38,7 @@ public class roMenuFunction {
 
     }
 
-    public static void createReturnOrder() {
+    public static void createReturnOrder() throws IOException {
         ReturnOrder newReturnOrder = getNewReturnOrder();
         try (SqlSession conn = Database.getInstance().openSession()) {
             ProductReturnMapper roMapper = conn.getMapper(ProductReturnMapper.class);
@@ -49,19 +47,43 @@ public class roMenuFunction {
            }
     }
 
-    public static ReturnOrder getNewReturnOrder(){
-
+    public static ReturnOrder getNewReturnOrder() throws IOException {
+        boolean invalid;
         ReturnOrder newRo = new ReturnOrder();
         Scanner newRoScanner = new Scanner(System.in);
-        System.out.print("\nEnter product ID to return (Eg. P00001): ");
-        newRo.setProduct_id(newRoScanner.nextLine());
+        do {
+            invalid = false;
+            System.out.print("\nEnter product ID (Eg. P00001): ");
+            newRo.setProduct_id(newRoScanner.nextLine());
+            if (newRo.getProduct_id().matches("^P\\d{5}$")) {
+            } else {
+                invalid = true;
+                System.out.println("\nInvalid product ID format. Try Again.");
+                System.in.read();
+            }
+        } while (invalid);
+
+        do {
+            invalid = false;
+            System.out.print("\nEnter supplier ID to return to (Eg. SP00001): ");
+            newRo.setSupplier_id(newRoScanner.nextLine());
+            if (newRo.getSupplier_id().matches("^SP\\d{5}$")) {
+
+            } else {
+                invalid = true;
+                System.out.println("\nInvalid supplier ID format. Try Again.");
+                System.in.read();
+            }
+        } while (invalid);
+
+        System.out.print("\nEnter reason of return (Max 20 Characters): ");
+        newRo.setReturn_reason(newRoScanner.nextLine());
+
+
         System.out.print("\nEnter quantity: ");
         newRo.setQuantity(newRoScanner.nextInt());
         newRoScanner.nextLine();
-        System.out.print("\nEnter supplier ID to return to (Eg. 1,2,3): ");
-        newRo.setSupplier_id(newRoScanner.nextLine());
-        System.out.print("\nEnter reason of return (Max 20 Characters): ");
-        newRo.setReturn_reason(newRoScanner.nextLine());
+
 
         System.out.print("\n\n");
         System.out.println("Return Order Created. Quantity has been deducted.");

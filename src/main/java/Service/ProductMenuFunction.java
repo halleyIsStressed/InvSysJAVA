@@ -66,24 +66,62 @@ public class ProductMenuFunction {
         } while (productMenuOptions != 5);
     }
 
-    public static Product getaddProduct(){
-
+    public static Product getaddProduct() throws IOException {
+        int typeChoice;
+        String targetType;
         Product newProducts = new Product();
         Scanner newProductScanner = new Scanner(System.in);
-        System.out.print("\nEnter product type (Rod, Reel, Line, Lure, Accessory): ");
-        newProducts.setProduct_type(newProductScanner.nextLine());
-        System.out.print("\nEnter product name: ");
-        newProducts.setProduct_name(newProductScanner.nextLine());
-        System.out.print("\nEnter product price: ");
-        newProducts.setProduct_price(newProductScanner.nextDouble());
+        do {
+            System.out.println("Choose Product Type:");
+            System.out.println("1 > Rod");
+            System.out.println("2 > Reel");
+            System.out.println("3 > Line");
+            System.out.println("4 > Lure");
+            System.out.println("5 > Accessory");
+            typeChoice = newProductScanner.nextInt();
 
-        System.out.print("\n\n");
-        System.out.println("Product inserted into Database!");
-        return newProducts;
+            switch (typeChoice) {
+                case 1:
+                    targetType = "Rod";
+                    newProducts.setProduct_type(targetType);
+                    break;
+                case 2:
+                    targetType = "Reel";
+                    newProducts.setProduct_type(targetType);
+                    break;
+                case 3:
+                    targetType = "Line";
+                    newProducts.setProduct_type(targetType);
+                    break;
+                case 4:
+                    targetType = "Lure";
+                    newProducts.setProduct_type(targetType);
+                    break;
+                case 5:
+                    targetType = "Accessory";
+                    newProducts.setProduct_type(targetType);
+                    break;
+                default:
+                    typeChoice = -1;
+                    System.out.println("Invalid Input. Try Again.");
+                    System.in.read();
+                    break;
+            }
+        } while (typeChoice == -1);
+            newProductScanner.nextLine();
+            System.out.print("\nEnter product name: ");
+            newProducts.setProduct_name(newProductScanner.nextLine());
+            System.out.print("\nEnter product price: ");
+            newProducts.setProduct_price(newProductScanner.nextDouble());
+
+            System.out.print("\n\n");
+            System.out.println("Product inserted into Database!");
+            return newProducts;
+
     }
 
     //Database connection
-    public static  void addProduct(){
+    public static  void addProduct() throws IOException {
         Product newProducts = getaddProduct();
         try (SqlSession conn = Database.getInstance().openSession()) {
             ProductMapper productMapper = conn.getMapper( ProductMapper.class);
@@ -207,8 +245,6 @@ public class ProductMenuFunction {
         System.out.print("Enter Target Product ID: ");
         targetID = targetProductScanner.next();
 
-        // TODO Ahdan : Updating name with a space doesn't work. Eg. Spinning Rod -> Spinning
-
         try (SqlSession conn = Database.getInstance().openSession()) {
             ProductMapper productMapper = conn.getMapper( ProductMapper.class);
             targetProduct=productMapper.selectById(targetID);
@@ -228,8 +264,59 @@ public class ProductMenuFunction {
                 choiceScanner.nextLine();
                 switch (choice) {
                     case 1:
-                        System.out.print("Enter new Type (Rod, Reel, Line, Lure, Accessory): ");
-                        targetProduct.setProduct_type(choiceScanner.nextLine());
+                        Scanner typeSc = new Scanner(System.in);
+                        String targetType = "";
+                        int typeSorter;
+                        do {
+                            System.out.println("Choose Type:");
+                            System.out.println("1 > Rod");
+                            System.out.println("2 > Reel");
+                            System.out.println("3 > Line");
+                            System.out.println("4 > Lure");
+                            System.out.println("5 > Accessory");
+                            System.out.println("6 > Return");
+                            typeSorter = typeSc.nextInt();
+
+                            switch (typeSorter) {
+                                case 1:
+                                    targetType = "Rod";
+                                    targetProduct.setProduct_type(targetType);
+                                    typeSorter = 6;
+                                    System.out.println("Type Update pending!");
+                                    break;
+                                case 2:
+                                    targetType = "Reel";
+                                    targetProduct.setProduct_type(targetType);
+                                    typeSorter = 6;
+                                    System.out.println("Type Update pending!");
+                                    break;
+                                case 3:
+                                    targetType = "Line";
+                                    targetProduct.setProduct_type(targetType);
+                                    typeSorter = 6;
+                                    System.out.println("Type Update pending!");
+                                    break;
+                                case 4:
+                                    targetType = "Lure";
+                                    targetProduct.setProduct_type(targetType);
+                                    typeSorter = 6;
+                                    System.out.println("Type Update pending!");
+                                    break;
+                                case 5:
+                                    targetType = "Accessory";
+                                    targetProduct.setProduct_type(targetType);
+                                    typeSorter = 6;
+                                    System.out.println("Type Update pending!");
+                                    break;
+                                case 6:
+                                    break;
+                                default:
+                                    System.out.println("Invalid Input. Try Again.");
+                                    System.in.read();
+                                    break;
+                            }
+
+                        } while(typeSorter != 6);
                         break;
                     case 2:
                         System.out.print("Enter new Name: ");
@@ -261,14 +348,26 @@ public class ProductMenuFunction {
     }
 
 
-    public static void deleteProduct() {
+    public static void deleteProduct() throws IOException {
+        boolean invalid;
         String confirmation;
         String targetID = "";
         Scanner targetProductScanner = new Scanner(System.in);
         Scanner confirmationScanner = new Scanner(System.in);
 
-        System.out.print("Enter Product ID: ");
-        targetID = targetProductScanner.next();
+        do {
+            invalid = false;
+            System.out.print("\nEnter product ID (Eg. P00001): ");
+            targetID = targetProductScanner.next();
+            if (targetID.matches("^P\\d{5}$")) {
+            } else {
+                invalid = true;
+                System.out.println("\nInvalid product ID format. Try Again.");
+                System.in.read();
+            }
+        } while (invalid);
+        System.out.println("Exit Validation");
+
         Product targetProduct = new Product();
         try (SqlSession conn = Database.getInstance().openSession()) {
             ProductMapper productMapper = conn.getMapper( ProductMapper.class);
