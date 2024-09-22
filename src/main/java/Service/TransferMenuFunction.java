@@ -28,7 +28,7 @@ public class TransferMenuFunction {
             trList = trMapper.selectPendingTransfers();
         }
 
-        System.out.println("\nPENDING OUTWARD TRANSFER REQUESTS\n");
+        System.out.println("\nPENDING OUTWARD TRANSFER REQUESTS");
         System.out.printf("%-12s | %-11s | %-10s | %-9s | %-13s\n\n", "Transfer ID","Product ID","Branch ID","Quantity","Request Date");
         for (Stock_Transfer tr : trList) {
             System.out.printf("%-12s | %-11s | %-10s | %-9d | %-13s\n",
@@ -80,7 +80,7 @@ public class TransferMenuFunction {
 
                     System.out.println("Are you sure you want to confirm this transfer request?");
                     System.out.print("Enter 1 to cancel, enter any other key to return > ");
-                    confirmation = confirmationScanner.nextLine();
+                    confirmation = confirmationScanner.next();
 
                     if (Objects.equals(confirmation, "1")) {
                         boolean transferCompleted = false;
@@ -117,7 +117,7 @@ public class TransferMenuFunction {
                         else{
                                 System.out.println("Insufficient stock for this transfer. Transfer cannot be confirmed.");
                                 System.out.print("Do you want to retry? (Enter 1 to retry, any other key to cancel): ");
-                                confirmation = confirmationScanner.nextLine();
+                                confirmation = confirmationScanner.next();
 
                                 // If user doesn't want to retry, break the loop
                                 if (!Objects.equals(confirmation, "1")) {
@@ -159,7 +159,7 @@ public class TransferMenuFunction {
 
                     System.out.println("Are you sure you want to deny this transfer request?");
                     System.out.print("Enter 1 to cancel, enter any other key to return > ");
-                    confirmation = confirmationScanner.nextLine();
+                    confirmation = confirmationScanner.next();
                     if (Objects.equals(confirmation, "1")) {
                         try (SqlSession conn = Database.getInstance().openSession()) {
                             TransferMapper trMapper = conn.getMapper(TransferMapper.class);

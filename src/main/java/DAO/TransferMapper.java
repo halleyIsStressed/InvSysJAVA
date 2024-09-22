@@ -1,6 +1,5 @@
 package DAO;
 
-import Entity.Product;
 import Entity.Stock_Transfer;
 
 import java.util.List;
