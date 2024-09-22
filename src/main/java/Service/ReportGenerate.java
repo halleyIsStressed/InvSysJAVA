@@ -42,9 +42,9 @@ public class ReportGenerate {
                     if (suppliers.isEmpty())
                         System.out.println("***No supplier found!***");
                     else {
-                        System.out.printf("%-12s | %-25s | %-15s | %-40s | %-30s | %-12s \n\n", "Supplier ID", "Supplier Name", "Supplier Telephone Number", "Supplier Address", "Supplier Email", "Supplier Date & Time Created");
+                        System.out.printf("| %-12s | %-28s | %-15s | %-40s | %-30s | %-12s |\n\n", "Supplier ID", "Supplier Name", "Supplier Telephone Number", "Supplier Address", "Supplier Email", "Supplier Date & Time Created");
                         for (Supplier supplier : suppliers) {
-                            System.out.printf("%-12s | %-25s | %-25s | %-40s | %-30s | %-12s\n",
+                            System.out.printf("| %-12s | %-28s | %-25s | %-40s | %-30s | %-29s |\n",
                                     supplier.getSupplierID(),
                                     supplier.getSupplierName(),
                                     supplier.getSupplierTel(),
@@ -71,9 +71,9 @@ public class ReportGenerate {
                     if (branchList.isEmpty())
                         System.out.println("***No branch found!***");
                     else {
-                        System.out.printf("%-10s | %-25s | %-15s | %-16s | %-15s \n\n", "Branch ID", "Branch Location", "Branch Phone Number", "Branch Manager Name", "Branch Date Created");
+                        System.out.printf("| %-10s | %-25s | %-15s | %-16s | %-15s |\n\n", "Branch ID", "Branch Location", "Branch Phone Number", "Branch Manager Name", "Branch Date Created");
                         for (Branch branch : branchList) {
-                            System.out.printf("%-10s | %-25s | %-19s | %-20s | %-15s \n",
+                            System.out.printf("| %-10s | %-25s | %-19s | %-19s | %-20s |\n",
                                     branch.getBranchID(),
                                     branch.getBranchLocation(),
                                     branch.getBranchPhoneNo(),
@@ -98,9 +98,9 @@ public class ReportGenerate {
                     }
 
 
-                    System.out.printf("%-6s | %-10s | %-20s | %-7s | %-5s\n\n", "ID", "Type", "Name", "Price", "Qty");
+                    System.out.printf("| %-6s | %-10s | %-20s | %-7s | %-5s |\n\n", "ID", "Type", "Name", "Price", "Qty");
                     for (Product product : productList) {
-                        System.out.printf("%-6s | %-10s | %-20s | %-7.2f | %-5d\n",
+                        System.out.printf("| %-6s | %-10s | %-20s | %-7.2f | %-5d |\n",
                                 product.getProduct_id(),
                                 product.getProduct_type(),
                                 product.getProduct_name(),
@@ -123,9 +123,9 @@ public class ReportGenerate {
                         poList = poMapper.selectALLpo();
                     }
 
-                    System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID", "Status");
+                    System.out.printf("| %-10s | %-11s | %-10s | %-7s | %-12s | %-11s |\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID", "Status");
                     for (Purchase_Order po : poList) {
-                        System.out.printf("%-10s | %-11s | %-10d | %-7.2f | %-12s | %-11s\n",
+                        System.out.printf("| %-10s | %-11s | %-10d | %-7.2f | %-12s | %-11s |\n",
                                 po.getPo_number(),
                                 po.getProduct_id(),
                                 po.getPurchase_quantity(),
@@ -149,9 +149,9 @@ public class ReportGenerate {
                         TransferMapper trMapper = conn.getMapper(TransferMapper.class);
                         trList = trMapper.selectTransfers();
                     }
-                    System.out.printf("%-12s | %-11s | %-10s | %-9s | %-13s\n\n", "Transfer ID", "Product ID", "Branch ID", "Quantity", "Request Date");
+                    System.out.printf("| %-12s | %-11s | %-10s | %-9s | %-13s |\n\n", "Transfer ID", "Product ID", "Branch ID", "Quantity", "Request Date");
                     for (Stock_Transfer tr : trList) {
-                        System.out.printf("%-12s | %-11s | %-10s | %-9d | %-13s\n",
+                        System.out.printf("| %-12s | %-11s | %-10s | %-9d | %-13s |\n",
                                 tr.getTransfer_id(),
                                 tr.getProduct_id(),
                                 tr.getBranch_id(),
@@ -177,9 +177,9 @@ public class ReportGenerate {
                     if (targetList == null || targetList.isEmpty()) {
                         System.out.println("No purchase orders found for the given date range.");
                     } else {
+                        System.out.printf("| %-12s | %-10s | %-10s | %-10s | %-10s | %-20s |\n\n", "Date", "Return Id", "Product Id", "Supplier Id", "Qty","Reason");
                         for (ReturnOrder ro : targetList) {
-
-                            System.out.printf("%-12s | %-10s | %-10s | %-10s | %-10d | %-20s |\n",
+                            System.out.printf("| %-12s | %-10s | %-10s | %-10s | %-11d | %-20s |\n",
                                     ro.getReturn_date(),        // String or Date, so use %s
                                     ro.getReturn_id(),          // String, so use %s
                                     ro.getProduct_id(),         // String, so use %s
@@ -228,10 +228,9 @@ public class ReportGenerate {
                             productList = productMapper.selectALLProduct();
                         }
 
-
-                        System.out.printf("%-6s | %-10s | %-20s | %-7s | %-5s\n\n", "ID", "Type", "Name", "Price", "Qty");
+                        System.out.printf("| %-6s | %-10s | %-20s | %-7s | %-5s |\n\n", "ID", "Type", "Name", "Price", "Qty");
                         for (Product product : productList) {
-                            System.out.printf("%-6s | %-10s | %-20s | %-7.2f | %-5d\n",
+                            System.out.printf("| %-6s | %-10s | %-20s | %-7.2f | %-5d |\n",
                                     product.getProduct_id(),
                                     product.getProduct_type(),
                                     product.getProduct_name(),
@@ -249,8 +248,6 @@ public class ReportGenerate {
                         System.out.println("***Invalid selection! Please try again...***");
                         System.in.read();
                 }
-                System.out.print("Press Enter to return back to the Report Generation Menu: ");
-                sc.nextLine();
             } while (choice != 2);
         } else if (possition.equals("Warehouse Staff")) {
             Scanner sc = new Scanner(System.in);
@@ -276,9 +273,9 @@ public class ReportGenerate {
                             productList = productMapper.selectALLProduct();
                         }
 
-                        System.out.printf("%-6s | %-10s | %-20s | %-7s | %-5s\n\n", "ID", "Type", "Name", "Price", "Qty");
+                        System.out.printf("| %-6s | %-10s | %-20s | %-7s | %-5s |\n\n", "ID", "Type", "Name", "Price", "Qty");
                         for (Product product : productList) {
-                            System.out.printf("%-6s | %-10s | %-20s | %-7.2f | %-5d\n",
+                            System.out.printf("| %-6s | %-10s | %-20s | %-7.2f | %-5d |\n",
                                     product.getProduct_id(),
                                     product.getProduct_type(),
                                     product.getProduct_name(),
@@ -299,9 +296,9 @@ public class ReportGenerate {
                             poList = poMapper.selectALLpo();
                         }
 
-                        System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID", "Status");
+                        System.out.printf("| %-10s | %-11s | %-10s | %-7s | %-12s | %-11s |\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID", "Status");
                         for (Purchase_Order po : poList) {
-                            System.out.printf("%-10s | %-11s | %-10d | %-7.2f | %-12s | %-11s\n",
+                            System.out.printf("| %-10s | %-11s | %-10d | %-7.2f | %-12s | %-11s |\n",
                                     po.getPo_number(),
                                     po.getProduct_id(),
                                     po.getPurchase_quantity(),
@@ -310,7 +307,6 @@ public class ReportGenerate {
                                     po.getStatus());
                         }
                         System.out.print("Press Enter to return back to the Report Generation Menu: ");
-                        sc.nextLine();
                         sc.nextLine();
                         break;
 
@@ -327,16 +323,17 @@ public class ReportGenerate {
                         if (targetList == null || targetList.isEmpty()) {
                             System.out.println("No purchase orders found for the given date range.");
                         } else {
+                            System.out.printf("| %-12s | %-10s | %-10s | %-10s | %-10s | %-20s |\n\n", "Date", "Return Id", "Product Id", "Supplier Id", "Qty","Reason");
                             for (ReturnOrder ro : targetList) {
 
-                                System.out.printf("%-12s | %-10s | %-10s | %-10s | %-10d | %-20s |\n",
+                                System.out.printf("| %-12s | %-10s | %-10s | %-10s | %-11d | %-20s |\n",
                                         ro.getReturn_date(),        // String or Date, so use %s
                                         ro.getReturn_id(),          // String, so use %s
                                         ro.getProduct_id(),         // String, so use %s
                                         ro.getSupplier_id(),        // String, so use %s
                                         ro.getQuantity(),    // int, so use %d
                                         ro.getReturn_reason()
-                                );    // St
+                                );    // Stt
                             }
                         }
                         System.out.print("Press Enter to return back to the Report Generation Menu: ");
@@ -373,9 +370,9 @@ public class ReportGenerate {
                             poList = poMapper.selectALLpo();
                         }
 
-                        System.out.printf("%-10s | %-11s | %-10s | %-7s | %-12s | %-11s\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID", "Status");
+                        System.out.printf("| %-10s | %-11s | %-10s | %-7s | %-12s | %-11s |\n\n", "PO Number", "Product ID", "Quantity", "Cost", "Supplier ID", "Status");
                         for (Purchase_Order po : poList) {
-                            System.out.printf("%-10s | %-11s | %-10d | %-7.2f | %-12s | %-11s\n",
+                            System.out.printf("| %-10s | %-11s | %-10d | %-7.2f | %-12s | %-11s |\n",
                                     po.getPo_number(),
                                     po.getProduct_id(),
                                     po.getPurchase_quantity(),
@@ -398,9 +395,9 @@ public class ReportGenerate {
                             TransferMapper trMapper = conn.getMapper(TransferMapper.class);
                             trList = trMapper.selectTransfers();
                         }
-                        System.out.printf("%-12s | %-11s | %-10s | %-9s | %-13s\n\n", "Transfer ID", "Product ID", "Branch ID", "Quantity", "Request Date");
+                        System.out.printf("%-12s | %-11s | %-10s | %-9s | %-13s |\n\n", "Transfer ID", "Product ID", "Branch ID", "Quantity", "Request Date");
                         for (Stock_Transfer tr : trList) {
-                            System.out.printf("%-12s | %-11s | %-10s | %-9d | %-13s\n",
+                            System.out.printf("%-12s | %-11s | %-10s | %-9d | %-13s |\n",
                                     tr.getTransfer_id(),
                                     tr.getProduct_id(),
                                     tr.getBranch_id(),
@@ -424,9 +421,9 @@ public class ReportGenerate {
                         if (targetList == null || targetList.isEmpty()) {
                             System.out.println("No purchase orders found for the given date range.");
                         } else {
+                            System.out.printf("%-12s | %-10s | %-10s | %-10s | %-10s | %-20s |\n\n", "Date", "Return Id", "Product Id", "Supplier Id", "Qty","Reason");
                             for (ReturnOrder ro : targetList) {
-
-                                System.out.printf("%-12s | %-10s | %-10s | %-10s | %-10d | %-20s |\n",
+                                System.out.printf("%-12s | %-10s | %-10s | %-10s | %-11d | %-20s |\n",
                                         ro.getReturn_date(),        // String or Date, so use %s
                                         ro.getReturn_id(),          // String, so use %s
                                         ro.getProduct_id(),         // String, so use %s
