@@ -3,7 +3,6 @@ package Service;
 import DAO.InventoryManagerMapper;
 import Database.Database;
 import Design.Design;
-import Entity.User;
 import Entity.InventoryManager;
 import org.apache.ibatis.session.SqlSession;
 

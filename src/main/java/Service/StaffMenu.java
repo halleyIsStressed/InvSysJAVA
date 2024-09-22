@@ -1,14 +1,11 @@
 package Service;
 
-import DAO.InventoryManagerMapper;
 import DAO.StaffMapper;
 import Database.Database;
 import Design.Design;
 import Entity.Staff;
-import Entity.User;
 import org.apache.ibatis.session.SqlSession;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Scanner;
 
