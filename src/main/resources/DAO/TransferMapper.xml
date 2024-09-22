@@ -25,7 +25,7 @@
     </select>
     
     <delete id="deleteTransferRequest">
-        DELETE FROM STOCK_TRANSFER WHERE TRANSFER_ID=#{param1}
+        DELETE FROM STOCK_TRANSFER WHERE TRANSFER_ID=#{transfer_id}
     </delete>
 
     <select id="selectTransfers" resultType="Entity.Stock_Transfer">
