@@ -59,9 +59,8 @@ public class ProfileMenu {
                                 1) Product Listing
                                 2) Purchase Order Listing
                                 3) Return Order Listing
-                                4) Reply to Product Requests
-                                5) Generate report
-                                6) Exit
+                                4) Generate report
+                                5) Exit
                                 Enter your option:""");
                         int option = sc.nextInt();
                         switch (option) {
@@ -75,12 +74,9 @@ public class ProfileMenu {
                                 roMenuFunction.returnOrderListing();
                                 break;
                             case 4:
-                                TransferMenuFunction.confirmationMenu();
-                                break;
-                            case 5:
                                 ReportGenerate.checkPositionToGenerateReport(((Staff) currentUser).getPosition());
                                 break;
-                            case 6:
+                            case 5:
                                 System.out.println("Return to Main page...");
                                 keepRunning = false;
                                 break;
