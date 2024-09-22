@@ -262,9 +262,8 @@ public class ReportGenerate {
                 System.out.println("************************************");
                 System.out.println("1. Products Report");
                 System.out.println("2. Purchase Orders Report");
-                System.out.println("3. Stock Transfers Report");
-                System.out.println("4. Order Return Report");
-                System.out.println("5. Exit Report Generation");
+                System.out.println("3. Order Return Report");
+                System.out.println("4. Exit Report Generation");
                 choice = sc.nextInt();
                 switch (choice) {
                     case 1:
@@ -317,30 +316,6 @@ public class ReportGenerate {
 
                     case 3:
                         System.out.println("\n************************************");
-                        System.out.println("\t\t  Stock Transfers Report ");
-                        System.out.println("************************************");
-
-                        List<Stock_Transfer> trList;
-                        try (SqlSession conn = Database.getInstance().openSession()) {
-                            TransferMapper trMapper = conn.getMapper(TransferMapper.class);
-                            trList = trMapper.selectTransfers();
-                        }
-                        System.out.printf("%-12s | %-11s | %-10s | %-9s | %-13s\n\n", "Transfer ID", "Product ID", "Branch ID", "Quantity", "Request Date");
-                        for (Stock_Transfer tr : trList) {
-                            System.out.printf("%-12s | %-11s | %-10s | %-9d | %-13s\n",
-                                    tr.getTransfer_id(),
-                                    tr.getProduct_id(),
-                                    tr.getBranch_id(),
-                                    tr.getTransfer_quantity(),
-                                    tr.getRequest_date());
-                        }
-                        System.out.print("Press Enter to return back to the Report Generation Menu: ");
-                        sc.nextLine();
-                        sc.nextLine();
-                        break;
-
-                    case 4:
-                        System.out.println("\n************************************");
                         System.out.println("\t\t  Order Return Report ");
                         System.out.println("************************************");
 
@@ -369,14 +344,14 @@ public class ReportGenerate {
                         sc.nextLine();
                         break;
 
-                    case 5:
+                    case 4:
                         //Exit report generate function
                         break;
                     default:
                         System.out.println("***Invalid selection! Please try again...***");
                         System.in.read();
                 }
-            } while (choice != 5);
+            } while (choice != 4);
         } else {
             Scanner sc = new Scanner(System.in);
             int choice;
